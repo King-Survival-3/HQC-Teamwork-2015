@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Web", "KingSurvival.Web\KingSurvival.Web.csproj", "{93E2AE7E-AACE-4F7F-A5A4-0249C8E20969}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Models", "KingSurvival.Models\KingSurvival.Models.csproj", "{4EC37159-8C97-420E-AB7D-4A4A42953860}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Data", "KingSurvival.Data\KingSurvival.Data.csproj", "{EADA0F1B-B136-4634-A000-73E1C0B8BBD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93E2AE7E-AACE-4F7F-A5A4-0249C8E20969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93E2AE7E-AACE-4F7F-A5A4-0249C8E20969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93E2AE7E-AACE-4F7F-A5A4-0249C8E20969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93E2AE7E-AACE-4F7F-A5A4-0249C8E20969}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EC37159-8C97-420E-AB7D-4A4A42953860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EC37159-8C97-420E-AB7D-4A4A42953860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EC37159-8C97-420E-AB7D-4A4A42953860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EC37159-8C97-420E-AB7D-4A4A42953860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EADA0F1B-B136-4634-A000-73E1C0B8BBD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EADA0F1B-B136-4634-A000-73E1C0B8BBD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EADA0F1B-B136-4634-A000-73E1C0B8BBD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EADA0F1B-B136-4634-A000-73E1C0B8BBD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

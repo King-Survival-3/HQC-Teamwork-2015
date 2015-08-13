@@ -1,0 +1,22 @@
+{
+  "name": "KingSurvival-3",
+  "version": "0.0.0",
+  "homepage": "https://github.com/King-Survival-3/HQC-Teamwork-2015",
+  "authors": [
+    "Team KingSurvival-3"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11",
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "angular-local-storage": "~0.2.2"
+  }
+}
