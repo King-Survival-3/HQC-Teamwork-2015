@@ -1,5 +1,5 @@
 'use strict';
-app.controller('playGameController', ['$scope', 'playGameService', function ($scope, playGameService) {
+app.controller('playGameController', ['$scope', '$location', 'playGameService', function ($scope,$location, playGameService) {
     $scope.currentActiveGames = [];
 
 
@@ -16,7 +16,7 @@ app.controller('playGameController', ['$scope', 'playGameService', function ($sc
     $scope.joinGame = function (event) {
         var gameId = $(event.target).attr('data-game-id');
         playGameService.joinGame(gameId).then(function (response) {
-                console.log(response)
+                $location.path('/game');
             },
             function (response) {
                 console.log(response)
@@ -25,13 +25,12 @@ app.controller('playGameController', ['$scope', 'playGameService', function ($sc
 
     $scope.createGame = function () {
         playGameService.createGame().then(function (response) {
-                console.log(response)
+                $location.path('/game');
             },
             function (response) {
                 console.log(response)
             })
-    }
+    };
+
     $scope.activeGames();
-
-
 }]);
