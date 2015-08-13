@@ -1,7 +1,6 @@
 'use strict';
-app.controller('playGameController', ['$scope', '$location', 'playGameService', function ($scope,$location, playGameService) {
+app.controller('playGameController', ['$scope', '$location', 'playGameService', function ($scope, $location, playGameService) {
     $scope.currentActiveGames = [];
-
 
     $scope.activeGames = function () {
         playGameService.activeGames().then(function (response) {
