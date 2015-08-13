@@ -1,5 +1,5 @@
 var app = angular.module('AngularAuthApp',
-    ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
+    ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'nywton.chessboard']);
 
 app.config(function ($routeProvider) {
 
@@ -21,6 +21,10 @@ app.config(function ($routeProvider) {
   $routeProvider.when("/playgame", {
     controller: "playGameController",
     templateUrl: "/app/views/playgame.html"
+  });
+  $routeProvider.when("/game", {
+    //controller: "playGameController",
+    templateUrl: "/app/views/game.html"
   });
 
   $routeProvider.otherwise({ redirectTo: "/home" });

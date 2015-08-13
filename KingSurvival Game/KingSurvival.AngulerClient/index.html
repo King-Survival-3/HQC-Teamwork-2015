@@ -5,6 +5,7 @@
   <title>King Survival</title>
   <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
   <link href="content/css/bootstrap.css" rel="stylesheet" />
+  <link href="bower_components/chessboard.js/css/chessboard.css" rel="stylesheet" />
   <link href="content/css/app.css" rel="stylesheet" />
   <link href="content/css/loading-bar.css" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -68,8 +69,8 @@
 </div>
 <!-- 3rd party libraries -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="/bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
 <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <!--<script src="scripts/angular-local-storage.min.js"></script>-->
 <script src="scripts/loading-bar.min.js"></script>
@@ -80,6 +81,9 @@
 <script src="app/services/authInterceptorService.js"></script>
 <script src="app/services/authService.js"></script>
 <script src="app/services/playGameService.js"></script>
+<!--Load game-->
+<script src="bower_components/angular-chessboard/angular-chessboard.js"></script>
+<script src="bower_components/chessboard.js/js/chessboard.js"></script>
 <!-- Load controllers -->
 <script src="app/controllers/indexController.js"></script>
 <script src="app/controllers/homeController.js"></script>
