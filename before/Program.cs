@@ -7,51 +7,50 @@ namespace ConsoleApplication1
 {
     class Program
     {
-        struct RC {
-            public int r;
-            public int c;
+        struct Coordinate {
+            public int row;
+            public int col;
             
-            public RC(int rr, int cc) {
-                this.r = rr;
-                this.c = cc;
+            public Coordinate(int row, int col) {
+                this.row = row;
+                this.col = col;
             }
         }
         static void Main(string[] args)
         {
-            RC A = new RC(0, 0);
-            RC B = new RC(0, 2);
-            RC C = new RC(0, 4);
-            RC D = new RC(0, 6);
+            Coordinate A = new Coordinate(0, 0);
+            Coordinate B = new Coordinate(0, 2);
+            Coordinate C = new Coordinate(0, 4);
+            Coordinate D = new Coordinate(0, 6);
 
 
-            RC K = new RC(7, 3);
-            bool kraj = false;
-            int kojE_naHod = 1;
+            Coordinate K = new Coordinate(7, 3);
+            bool endGame = false;
+            int currentTurn = 1;
             do {
-                bool ok; 
+                bool validMove; 
                 do {
                     System.Console.Clear();
-                    PE4AT_DASKA(A, B, C, D, K);
+                    PrintBoard(A, B, C, D, K);
+
+                    validMove = isMoveLeft(currentTurn, ref A, ref B, ref C, ref D, ref K);
+                } while (!validMove);
+
+                endGame = proverka2(currentTurn, A, B, C, D, K);
+                currentTurn++;
 
 
-                    ok = isMoveLeft(kojE_naHod, ref A, ref B, ref C, ref D, ref K);
-                } while (!ok);
-
-                kraj = proverka2(kojE_naHod, A, B, C, D, K);
-                kojE_naHod++;
-
-
-            } while (!kraj);
+            } while (!endGame);
         }
 
-        private static bool proverka2(int turn, RC A, RC B, RC C, RC D, RC K)
+        private static bool proverka2(int turn, Coordinate A, Coordinate B, Coordinate C, Coordinate D, Coordinate K)
         {
             if (turn % 2 == 1)
             {
-                if (K.r == 0)
+                if (K.row == 0)
                 {
                     System.Console.Clear();
-                    PE4AT_DASKA(A, B, C, D, K);
+                    PrintBoard(A, B, C, D, K);
                     Console.WriteLine("King wins in {0} turns.", turn / 2 + 1);
                     return true;
                 }
@@ -66,42 +65,42 @@ namespace ConsoleApplication1
                 bool KDL = true;
                 bool KDR = true;
 
-                if (K.r == 0)
+                if (K.row == 0)
                 {
 					// tuka carya e na hod
                     KUL = false;
                     KUR = false;
                 }
-                else if (K.r == 7)
+                else if (K.row == 7)
                 {
                     KDL = false;
                     KDR = false;
                 }
 
-                if (K.c == 0)
+                if (K.col == 0)
                 {
                     KUL = false;
                     KDL = false;
                 }
-                else if (K.c == 7)
+                else if (K.col == 7)
                 {
                     KUR = false; // kur v gyzaaaaa, oh boli!
                     KDR = false;
                 }
 
-                if (proverka(K.r - 1, K.c - 1, A, B, C, D))
+                if (proverka(K.row - 1, K.col - 1, A, B, C, D))
                 {
                     KUL = false;
                 }
-                if (proverka(K.r - 1, K.c + 1, A, B, C, D))
+                if (proverka(K.row - 1, K.col + 1, A, B, C, D))
                 {
                     KUR = false; // castration... nasty
                 }
-                if (proverka(K.r + 1, K.c - 1, A, B, C, D))
+                if (proverka(K.row + 1, K.col - 1, A, B, C, D))
                 {
                    KDL = false;
                 } 
-                if (proverka(K.r + 1, K.c + 1, A, B, C, D))
+                if (proverka(K.row + 1, K.col + 1, A, B, C, D))
                 {
                     KDR = false;
                 }
@@ -109,7 +108,7 @@ namespace ConsoleApplication1
                 if (!KDR && !KDL && !KUL && !KUR)
                 {
                     System.Console.Clear();
-                    PE4AT_DASKA(A, B, C, D, K);
+                    PrintBoard(A, B, C, D, K);
                     Console.WriteLine("King loses.");
                     return true;
                 }
@@ -117,7 +116,7 @@ namespace ConsoleApplication1
                 if (!proverka1(A, B, C, D, K) && !proverka1(B, A, C, D, K) && !proverka1(C, A, B, D, K) && !proverka1(D, A, B, C, K))
                 {
                     System.Console.Clear();
-                    PE4AT_DASKA(A, B, C, D, K);
+                    PrintBoard(A, B, C, D, K);
                     Console.WriteLine("King wins in {0} turns.", turn / 2);
                     return true;
                 }
@@ -126,19 +125,19 @@ namespace ConsoleApplication1
             }
         }
 
-        private static bool proverka1(RC pawn, RC obstacle1, RC obstacle2, RC obstacle3, RC obstacle4)
+        private static bool proverka1(Coordinate pawn, Coordinate obstacle1, Coordinate obstacle2, Coordinate obstacle3, Coordinate obstacle4)
         {
-            if (pawn.r == 7)
+            if (pawn.row == 7)
             {
                 return false;
             }
-            else if (pawn.c > 0 && pawn.c < 7)
+            else if (pawn.col > 0 && pawn.col < 7)
             {
-                if (proverka(pawn.r + 1, pawn.c + 1, obstacle1, obstacle2, obstacle3, obstacle4) &&
+                if (proverka(pawn.row + 1, pawn.col + 1, obstacle1, obstacle2, obstacle3, obstacle4) &&
 
                     proverka(
-					pawn.r + 1, 
-					pawn.c - 1, 
+					pawn.row + 1, 
+					pawn.col - 1, 
 					obstacle1, 
 					obstacle2, 
 					obstacle3, 
@@ -146,16 +145,16 @@ namespace ConsoleApplication1
 
 
             }
-            else if (pawn.c == 0)
+            else if (pawn.col == 0)
             {
-                if (proverka(pawn.r + 1, pawn.c + 1, obstacle1, obstacle2, obstacle3, obstacle4))
+                if (proverka(pawn.row + 1, pawn.col + 1, obstacle1, obstacle2, obstacle3, obstacle4))
                 {
                     return false;
                 }
             }
-            else if (pawn.c == 4+3)
+            else if (pawn.col == 4+3)
             {
-                if (proverka(pawn.r + 1, pawn.c - 1, obstacle1, obstacle2, obstacle3, obstacle4))
+                if (proverka(pawn.row + 1, pawn.col - 1, obstacle1, obstacle2, obstacle3, obstacle4))
                 {
                     return false;
 
@@ -165,7 +164,7 @@ namespace ConsoleApplication1
             return true;
         }
 
-        private static bool isMoveLeft(int turn, ref RC A, ref RC B, ref RC C, ref RC D, ref RC K)
+        private static bool isMoveLeft(int turn, ref Coordinate A, ref Coordinate B, ref Coordinate C, ref Coordinate D, ref Coordinate K)
         {
             if (turn % 2 == 1)
             {
@@ -174,10 +173,10 @@ namespace ConsoleApplication1
                 switch (move)
                 {
                     case "KUL":
-                        if (K.c > 0 && K.r > 0 && !proverka(K.r - 1, K.c - 1, A, B, C, D))
+                        if (K.col > 0 && K.row > 0 && !proverka(K.row - 1, K.col - 1, A, B, C, D))
                         {
-                            K.c--;
-                            K.r--;
+                            K.col--;
+                            K.row--;
                         }
                         else
                         {
@@ -187,10 +186,10 @@ namespace ConsoleApplication1
                         }
                         break;
                     case "KUR": // if KUR... gotta love these moments
-                        if (K.c < 7 && K.r > 0 && !proverka(K.r - 1, K.c + 1, A, B, C, D))
+                        if (K.col < 7 && K.row > 0 && !proverka(K.row - 1, K.col + 1, A, B, C, D))
                         {
-                            K.c++;
-                            K.r--;
+                            K.col++;
+                            K.row--;
                         }
                         else
                         {
@@ -200,10 +199,10 @@ namespace ConsoleApplication1
                         }
                         break;
                     case "KDL":
-                        if (K.c > 0 && K.r < 7 && !proverka(K.r + 1, K.c - 1, A, B, C, D))
+                        if (K.col > 0 && K.row < 7 && !proverka(K.row + 1, K.col - 1, A, B, C, D))
                         {
-                            K.c--;
-                            K.r++;
+                            K.col--;
+                            K.row++;
                         }
                         else
                         {
@@ -217,10 +216,10 @@ namespace ConsoleApplication1
                     case "KDR":
 
 
-                        if (K.c < 7 && K.r < 7 && !proverka(K.r + 1, K.c + 1, A, B, C, D))
+                        if (K.col < 7 && K.row < 7 && !proverka(K.row + 1, K.col + 1, A, B, C, D))
                         {
-                            K.c++;
-                            K.r++;
+                            K.col++;
+                            K.row++;
                         }
                         else
                         {
@@ -246,10 +245,10 @@ namespace ConsoleApplication1
                 switch (move)
                 {
                     case "ADL":
-                        if (A.c > 0 && A.r < 7 && !proverka(A.r + 1, A.c - 1, K, B, C, D))
+                        if (A.col > 0 && A.row < 7 && !proverka(A.row + 1, A.col - 1, K, B, C, D))
                         {
-                            A.c--;
-                            A.r++;
+                            A.col--;
+                            A.row++;
                         }
                         else
                         {
@@ -259,10 +258,10 @@ namespace ConsoleApplication1
                         }
                         break;
                     case "ADR":
-                        if (A.c < 7 && A.r < 7 && !proverka(A.r + 1, A.c + 1, K, B, C, D))
+                        if (A.col < 7 && A.row < 7 && !proverka(A.row + 1, A.col + 1, K, B, C, D))
                         {
-                            A.c++;
-                            A.r++;
+                            A.col++;
+                            A.row++;
                         }
                         else
                         {
@@ -272,13 +271,13 @@ namespace ConsoleApplication1
                         }
                         break;
                     case "BDL":
-                        if (B.c > 0 && B.r < 7 && 
+                        if (B.col > 0 && B.row < 7 && 
 							
-							!proverka(B.r + 1, B.c - 1, A, K, C, D))
+							!proverka(B.row + 1, B.col - 1, A, K, C, D))
                         {
-                            B.c--;
+                            B.col--;
 
-                            B.r++;
+                            B.row++;
                         }
                         else
                         {
@@ -288,10 +287,10 @@ namespace ConsoleApplication1
                         }
                         break;
                     case "BDR":
-                        if (B.c < 7 && B.r < 7 && !proverka(B.r + 1, B.c + 1, A, K, C, D))
+                        if (B.col < 7 && B.row < 7 && !proverka(B.row + 1, B.col + 1, A, K, C, D))
                         {
-                            B.c++;
-                            B.r++;
+                            B.col++;
+                            B.row++;
                         }
                         else
                         {
@@ -301,10 +300,10 @@ namespace ConsoleApplication1
                         }
                         break;
                     case "CDL":
-                        if (C.c > 0 && C.r < 7 && !proverka(C.r + 1, C.c + 1, A, B, K, D))
+                        if (C.col > 0 && C.row < 7 && !proverka(C.row + 1, C.col + 1, A, B, K, D))
                         {
-                            C.c--;
-                            C.r++;
+                            C.col--;
+                            C.row++;
                         }
                         else
                         {
@@ -314,10 +313,10 @@ namespace ConsoleApplication1
                         }
                         break;
                     case "CDR":
-                        if (C.c < 7 && C.r < 7 && !proverka(C.r + 1, C.c + 1, A, B, K, D))
+                        if (C.col < 7 && C.row < 7 && !proverka(C.row + 1, C.col + 1, A, B, K, D))
                         {
-                            C.c++;
-                            C.r++;
+                            C.col++;
+                            C.row++;
                         }
                         else
                         {
@@ -327,10 +326,10 @@ namespace ConsoleApplication1
                         }
                         break;
                     case "DDL":
-                        if (D.c > 0 && D.r < 7 && !proverka(D.r + 1, D.c - 1, A, B, C, K))
+                        if (D.col > 0 && D.row < 7 && !proverka(D.row + 1, D.col - 1, A, B, C, K))
                         {
-                            D.c--;
-                            D.r++;
+                            D.col--;
+                            D.row++;
                         }
                         else
                         {
@@ -340,12 +339,12 @@ namespace ConsoleApplication1
                         }
                         break;
                     case "DDR":
-                        if (D.c < 7 && D.r < 7 && !proverka(D.r + 1, D.c + 1, A, B, C, K))
+                        if (D.col < 7 && D.row < 7 && !proverka(D.row + 1, D.col + 1, A, B, C, K))
                         { 
 
 
-                            D.c++;
-                            D.r++;
+                            D.col++;
+                            D.row++;
                         }
                         else
                         {
@@ -366,19 +365,19 @@ namespace ConsoleApplication1
             return true;
         }
 
-        private static bool proverka(int notOverlapedRow, int notOverlapedColumn, RC overlap1, RC overlap2, RC overlap3, RC overlap4)
+        private static bool proverka(int notOverlapedRow, int notOverlapedColumn, Coordinate overlap1, Coordinate overlap2, Coordinate overlap3, Coordinate overlap4)
         {
-            if (notOverlapedRow == overlap1.r && notOverlapedColumn == overlap1.c) return true;
-				else if (notOverlapedRow == overlap2.r && notOverlapedColumn == overlap2.c) return true;
-				     else if (notOverlapedRow == overlap3.r && notOverlapedColumn == overlap3.c) return true;
-				          else if (notOverlapedRow == overlap4.r && notOverlapedColumn == overlap4.c) return true;
+            if (notOverlapedRow == overlap1.row && notOverlapedColumn == overlap1.col) return true;
+				else if (notOverlapedRow == overlap2.row && notOverlapedColumn == overlap2.col) return true;
+				     else if (notOverlapedRow == overlap3.row && notOverlapedColumn == overlap3.col) return true;
+				          else if (notOverlapedRow == overlap4.row && notOverlapedColumn == overlap4.col) return true;
 							   else       
                 return false;
 
       
         }
 
-        private static void PE4AT_DASKA(RC A, RC B, RC C, RC D, RC K)
+        private static void PrintBoard(Coordinate A, Coordinate B, Coordinate C, Coordinate D, Coordinate K)
         {
             int row = 0;
             for (int i = 0; i < 19; i++)
@@ -386,9 +385,7 @@ namespace ConsoleApplication1
                 if (i > 3)
                 {
                     if (i % 2 == 0)
-                    {
-                        
-
+                    {                   
 						// ostaviame interval sled chisloto
 						Console.Write("{0} ", row++);
                     }
@@ -414,7 +411,7 @@ namespace ConsoleApplication1
                     char symbol;
 
 
-                    find(A, B, C, D, K, i, j, out symbol);
+                    Find(A, B, C, D, K, i, j, out symbol);
 
                     Console.Write(symbol + " ");
                 }
@@ -429,25 +426,25 @@ namespace ConsoleApplication1
             Console.WriteLine();
         }
 
-        private static void find(RC A, RC B, RC C, RC D, RC K, int i, int j, out char symbol)
+        private static void Find(Coordinate A, Coordinate B, Coordinate C, Coordinate D, Coordinate K, int i, int j, out char symbol)
         {
-            if (A.r == i && A.c == j)
+            if (A.row == i && A.col == j)
             {
                 symbol = 'A';
             }
-            else if (B.r == i && B.c == j)
+            else if (B.row == i && B.col == j)
             {
                 symbol = 'B';
             }
-            else if (C.r == i && C.c == j)
+            else if (C.row == i && C.col == j)
             {
                 symbol = 'C';
             }
-            else if (D.r == i && D.c == j)
+            else if (D.row == i && D.col == j)
             {
                 symbol = 'D';
             }
-            else if (K.r == i && K.c == j)
+            else if (K.row == i && K.col == j)
             {
                 symbol = 'K';
             }

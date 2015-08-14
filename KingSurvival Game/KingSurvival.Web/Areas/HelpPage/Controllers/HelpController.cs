@@ -1,8 +1,8 @@
+using KingSurvival.Web.Areas.HelpPage.ModelDescriptions;
+using KingSurvival.Web.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using KingSurvival.Web.Areas.HelpPage.ModelDescriptions;
-using KingSurvival.Web.Areas.HelpPage.Models;
 
 namespace KingSurvival.Web.Areas.HelpPage.Controllers
 {
