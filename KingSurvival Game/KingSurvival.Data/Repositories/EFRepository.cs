@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
+
 namespace KingSurvival.Data.Repositories
 {
     public class EFRepository<T> : IRepository<T> where T : class

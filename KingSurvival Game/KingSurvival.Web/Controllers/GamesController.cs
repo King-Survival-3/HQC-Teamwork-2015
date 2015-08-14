@@ -1,12 +1,10 @@
 ﻿namespace KingSurvival.Web.Controllers
 {
-    using System.Linq;
-    using System.Web.Http;
-
-    using Microsoft.AspNet.Identity;
-
     using KingSurvival.Data;
     using KingSurvival.Models;
+    using Microsoft.AspNet.Identity;
+    using System.Linq;
+    using System.Web.Http;
 
     [Authorize]
     public class GamesController : ApiController
@@ -16,7 +14,6 @@
         public GamesController()
             : this(new KingSurvivalData(new KingSurvivalDbContext()))
         {
-
         }
 
         public GamesController(IKingSurvivalData data)

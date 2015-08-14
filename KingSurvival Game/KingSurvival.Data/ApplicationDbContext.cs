@@ -1,10 +1,9 @@
 ﻿namespace KingSurvival.Data
 {
-    using System.Data.Entity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-
-    using KingSurvival.Models;
     using KingSurvival.Data.Migrations;
+    using KingSurvival.Models;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using System.Data.Entity;
 
     public class KingSurvivalDbContext : IdentityDbContext<KingSurvivalUser>
     {
