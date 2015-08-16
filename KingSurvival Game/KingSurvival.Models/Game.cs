@@ -9,15 +9,15 @@
         public Game()
         {
             this.Id = Guid.NewGuid();
-            this.Board = string.Join("-", new string[64]);
+            this.Board = "p1p1p1p1/8/8/8/8/8/8/3K4";
             this.State = GameState.WaitingForSecondPlayer;
+            this.CreationDate = DateTime.Now;
         }
 
         [Key]
         public Guid Id { get; set; }
 
-        [StringLength(64)]
-        [Column(TypeName = "char")]
+        [Required]
         public string Board { get; set; }
          
         public GameState State { get; set; }
@@ -30,6 +30,8 @@
         public string SecondPlayerId { get; set; }
 
         public string SecondPlayerUserName { get; set; }
+
+        public DateTime CreationDate { get; set; }
 
     }
 }

@@ -1,5 +1,5 @@
 'use strict';
-app.factory('playGameService', ['$http', '$q', function ($http, $q){
+app.factory('gameMenuService', ['$http', function ($http){
     var serviceBase = 'http://localhost:60455/';
     var playGameServiceFactory = {};
 

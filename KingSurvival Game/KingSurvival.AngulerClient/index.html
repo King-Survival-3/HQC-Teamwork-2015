@@ -31,7 +31,7 @@
             <li data-ng-hide="!authentication.isAuth">
               <a href="#">Welcome {{authentication.userName}}</a></li>
             <li data-ng-hide="!authentication.isAuth">
-              <a href="#/playgame">Play Game</a></li>
+              <a href="#/gameMenu">Play Game</a></li>
             <li data-ng-hide="!authentication.isAuth">
               <a href="" data-ng-click="logOut()">Logout</a></li>
             <li data-ng-hide="authentication.isAuth">
@@ -72,7 +72,10 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
 <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-<!--<script src="scripts/angular-local-storage.min.js"></script>-->
+<!--SignalR-->
+<script src="scripts/jquery.signalR-2.2.0.js"></script>
+<script src="scripts/signalr-hub.js"></script>
+<script src="http://localhost:60455/signalr/hubs" type="text/javascript"></script>
 <script src="scripts/loading-bar.min.js"></script>
 <script src="scripts/bootstrap.js"></script>
 <!-- Load app main script -->
@@ -80,15 +83,19 @@
 <!-- Load services -->
 <script src="app/services/authInterceptorService.js"></script>
 <script src="app/services/authService.js"></script>
-<script src="app/services/playGameService.js"></script>
+<script src="app/services/gameMenuService.js"></script>
 <!--Load game-->
 <script src="bower_components/angular-chessboard/angular-chessboard.js"></script>
 <script src="bower_components/chessboard.js/js/chessboard.js"></script>
+<!--<script src="bower_components/chess.js/chess.js"></script>-->
+<!--<script src="bower_components/angular-chess/angular-chess.js"></script>-->
+<script src="scripts/anguler-kingSurvival.js"></script>
 <!-- Load controllers -->
 <script src="app/controllers/indexController.js"></script>
 <script src="app/controllers/homeController.js"></script>
 <script src="app/controllers/loginController.js"></script>
 <script src="app/controllers/signupController.js"></script>
 <script src="app/controllers/playGameController.js"></script>
+<script src="app/controllers/gameMenuController.js"></script>
 </body>
 </html>

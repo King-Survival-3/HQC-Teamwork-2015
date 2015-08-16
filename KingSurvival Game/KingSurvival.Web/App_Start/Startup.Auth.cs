@@ -11,6 +11,7 @@ using Owin;
 using KingSurvival.Web.Providers;
 using KingSurvival.Web.Models;
 using KingSurvival.Data;
+using Microsoft.AspNet.SignalR;
 
 namespace KingSurvival.Web
 {
@@ -33,6 +34,9 @@ namespace KingSurvival.Web
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+
+            app.MapSignalR("/signalr", new HubConfiguration());
+           // GlobalHost.HubPipeline.RequireAuthentication();
 
             // Configure the application for OAuth based flow
             PublicClientId = "self";

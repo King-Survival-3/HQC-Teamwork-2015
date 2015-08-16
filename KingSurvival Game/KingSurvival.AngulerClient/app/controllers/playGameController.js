@@ -1,20 +1,21 @@
 'use strict';
-app.controller('playGameController', ['$scope', '$location', 'playGameService', function ($scope, $location, playGameService) {
+app.controller('gameMenuController', ['$rootScope', '$scope', '$location', 'gameMenuService', function ($rootScope, $scope, $location, gameMenuService) {
     $scope.currentActiveGames = [];
 
+    $rootScope.gameState = {};
+
     $scope.activeGames = function () {
-        playGameService.activeGames().then(function (response) {
-                console.log(response.data);
+        gameMenuService.activeGames().then(function (response) {
                 $scope.currentActiveGames = response.data;
             },
             function (response) {
-
             });
     };
 
     $scope.joinGame = function (event) {
-        var gameId = $(event.target).attr('data-game-id');
-        playGameService.joinGame(gameId).then(function (response) {
+        $scope.gameId = $(event.target).attr('data-game-id');
+        gameMenuService.joinGame( $scope.gameId).then(function (response) {
+                $rootScope.gameState  = response.data;
                 $location.path('/game');
             },
             function (response) {
@@ -23,7 +24,9 @@ app.controller('playGameController', ['$scope', '$location', 'playGameService', 
     };
 
     $scope.createGame = function () {
-        playGameService.createGame().then(function (response) {
+        gameMenuService.createGame().then(function (response) {
+                $rootScope.gameState  = response.data;
+                console.log($scope);
                 $location.path('/game');
             },
             function (response) {

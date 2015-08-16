@@ -46,7 +46,11 @@
             this.data.Game.Add(game);
             this.data.SaveChanges();
 
-            return Ok(game);
+            var gameState = this.data.Game.All()
+              .Select(x => new { Id = x.Id, PlayerFigure = GameState.TurnKing, playerId = x.FirstPlayerId, gameState = x.State })
+              .FirstOrDefault(x => x.Id == game.Id);
+
+            return Ok(gameState);
         }
 
         [HttpPost]
@@ -69,7 +73,11 @@
             game.State = GameState.TurnKing;
             this.data.SaveChanges();
 
-            return Ok(game);
+            var gameState = this.data.Game.All()
+                .Select(x => new{Id = x.Id, PlayerFigure = GameState.TurnPown, playerId = x.SecondPlayerId, gameState = x.State })
+                .FirstOrDefault(x => x.Id.ToString() == gameId);
+
+            return Ok(gameState);
         }
 
         [HttpGet]

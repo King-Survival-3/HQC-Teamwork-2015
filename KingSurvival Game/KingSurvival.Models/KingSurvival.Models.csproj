@@ -55,6 +55,7 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameState.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

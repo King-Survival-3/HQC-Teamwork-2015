@@ -1,5 +1,5 @@
 var app = angular.module('AngularAuthApp',
-    ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'nywton.chessboard']);
+    ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'nywton.chessboard', 'kingSurvival']);
 
 app.config(function ($routeProvider) {
 
@@ -18,12 +18,12 @@ app.config(function ($routeProvider) {
     templateUrl: "/app/views/signup.html"
   });
 
-  $routeProvider.when("/playgame", {
-    controller: "playGameController",
-    templateUrl: "/app/views/playgame.html"
+  $routeProvider.when("/gameMenu", {
+    controller: "gameMenuController",
+    templateUrl: "/app/views/gameMenu.html"
   });
   $routeProvider.when("/game", {
-    //controller: "playGameController",
+    controller: "gameController",
     templateUrl: "/app/views/game.html"
   });
 
