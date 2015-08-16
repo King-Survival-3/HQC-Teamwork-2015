@@ -19,19 +19,18 @@
 
         [Required]
         public string Board { get; set; }
-         
+
         public GameState State { get; set; }
 
         [Required]
         public string FirstPlayerId { get; set; }
 
-        public  string FirstPlayerUserName { get; set; }
+        public string FirstPlayerUserName { get; set; }
 
         public string SecondPlayerId { get; set; }
 
         public string SecondPlayerUserName { get; set; }
 
         public DateTime CreationDate { get; set; }
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using KingSurvival.Data.Repositories;
 using KingSurvival.Models;
+
 namespace KingSurvival.Data
 {
     public interface IKingSurvivalData

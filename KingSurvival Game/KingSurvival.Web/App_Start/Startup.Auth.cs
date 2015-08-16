@@ -57,7 +57,7 @@ namespace KingSurvival.Web
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
+            ////app.UseTwitterAuthentication(
             //    consumerKey: "",
             //    consumerSecret: "");
 

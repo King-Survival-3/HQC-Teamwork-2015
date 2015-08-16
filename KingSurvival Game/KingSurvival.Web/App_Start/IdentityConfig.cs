@@ -1,11 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using KingSurvival.Data;
+using KingSurvival.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using KingSurvival.Web.Models;
-using KingSurvival.Models;
-using KingSurvival.Data;
 
 namespace KingSurvival.Web
 {

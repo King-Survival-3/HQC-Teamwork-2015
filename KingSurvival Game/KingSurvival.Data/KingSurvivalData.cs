@@ -1,12 +1,10 @@
 ﻿namespace KingSurvival.Data
 {
-
+    using KingSurvival.Data.Repositories;
+    using KingSurvival.Models;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
-
-    using KingSurvival.Data.Repositories;
-    using KingSurvival.Models;
 
     public class KingSurvivalData : IKingSurvivalData
     {
@@ -14,10 +12,10 @@
         private IDictionary<Type, object> repositories;
 
         public KingSurvivalData(DbContext context)
-       {
-           this.context = context;
-           this.repositories = new Dictionary<Type, object>();
-       }
+        {
+            this.context = context;
+            this.repositories = new Dictionary<Type, object>();
+        }
 
         public IRepository<KingSurvivalUser> Users
         {
