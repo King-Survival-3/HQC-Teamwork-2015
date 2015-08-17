@@ -12,9 +12,11 @@
 </head>
 <body>
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
-      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <a class="navbar-brand" href="#/">Home</a>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -23,23 +25,18 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" data-ng-controller="indexController">
       <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#/">Home</a>
-        </div>
-        <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
-          <ul class="nav navbar-nav navbar-right">
-            <li data-ng-hide="!authentication.isAuth">
-              <a href="#">Welcome {{authentication.userName}}</a></li>
-            <li data-ng-hide="!authentication.isAuth">
-              <a href="#/gameMenu">Play Game</a></li>
-            <li data-ng-hide="!authentication.isAuth">
-              <a href="" data-ng-click="logOut()">Logout</a></li>
-            <li data-ng-hide="authentication.isAuth">
-              <a href="#/login">Login</a></li>
-            <li data-ng-hide="authentication.isAuth">
-              <a href="#/signup">Sign Up</a></li>
-          </ul>
-        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li data-ng-hide="!authentication.isAuth">
+            <a href="#">Welcome {{authentication.userName}}</a></li>
+          <li data-ng-hide="!authentication.isAuth">
+            <a href="#/gameMenu">Play Game</a></li>
+          <li data-ng-hide="!authentication.isAuth">
+            <a href="" data-ng-click="logOut()">Logout</a></li>
+          <li data-ng-hide="authentication.isAuth">
+            <a href="#/login">Login</a></li>
+          <li data-ng-hide="authentication.isAuth">
+            <a href="#/signup">Sign Up</a></li>
+        </ul>
       </div>
     </div>
   </div>
