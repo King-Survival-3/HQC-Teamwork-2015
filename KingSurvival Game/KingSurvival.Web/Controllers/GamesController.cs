@@ -81,7 +81,8 @@
         [ActionName("ActiveGames")]
         public IHttpActionResult ActiveGames()
         {
-            var games = this.data.Game.All();
+            var games = this.data.Game.All()
+                .Where(x => x.State == GameState.WaitingForSecondPlayer);
 
             return Ok(games);
         }
