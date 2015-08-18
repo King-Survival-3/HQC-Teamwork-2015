@@ -6,7 +6,14 @@ app.controller('gameMenuController', ['$rootScope', '$scope', '$location', 'game
 
     $scope.activeGames = function () {
         gameMenuService.activeGames().then(function (response) {
-                $scope.currentActiveGames = response.data;
+                var data = response.data
+                $scope.currentActiveGames = data.map(function (game) {
+                    return {
+                        id: game.Id,
+                        firstPlayerUserName: game.FirstPlayerUserName,
+                        creationDate: new Date(game.CreationDate).toUTCString()
+                    }
+                });
             },
             function (response) {
             });
@@ -14,8 +21,8 @@ app.controller('gameMenuController', ['$rootScope', '$scope', '$location', 'game
 
     $scope.joinGame = function (event) {
         $scope.gameId = $(event.target).attr('data-game-id');
-        gameMenuService.joinGame( $scope.gameId).then(function (response) {
-                $rootScope.gameState  = response.data;
+        gameMenuService.joinGame($scope.gameId).then(function (response) {
+                $rootScope.gameState = response.data;
                 $location.path('/game');
             },
             function (response) {
@@ -25,7 +32,7 @@ app.controller('gameMenuController', ['$rootScope', '$scope', '$location', 'game
 
     $scope.createGame = function () {
         gameMenuService.createGame().then(function (response) {
-                $rootScope.gameState  = response.data;
+                $rootScope.gameState = response.data;
                 console.log($scope);
                 $location.path('/game');
             },

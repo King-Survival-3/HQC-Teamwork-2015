@@ -6,7 +6,7 @@
 
 
             this.onDragStart = function (gameState, source, piece, position, orientation) {
-                $log.debug('lift piece ' + piece + ' from ' + source + ' - ' + position + ' - ' + orientation);
+              //  $log.debug('lift piece ' + piece + ' from ' + source + ' - ' + position + ' - ' + orientation);
 
                 console.log(gameState);
                 if (gameState.PlayerFigure !== gameState.gameState ||
@@ -18,10 +18,8 @@
             };
 
             this.onSnapEnd = function (callback, gameId, playerId, board, source, target, piece) {
-                var fen = board.fen();
-                console.log(fen);
-                callback(gameId, playerId, source, target, fen);
-                $log.debug('onSnapEnd ' + piece + ' from ' + source + ' to ' + target);
+                callback(gameId, playerId, source, target);
+             //   $log.debug('onSnapEnd ' + piece + ' from ' + source + ' to ' + target);
             };
 
 
@@ -42,7 +40,7 @@
 
                     $.connection.hub.stop();
 
-                    var gameEngine = $.connection.gameEngine;
+                    var kingSurvival = $.connection.kingSurvivalGame;
 
                     function move(fen) {
                         $scope.board.position(fen)
@@ -53,11 +51,11 @@
                         gameState.gameState = updatedGameState.gameState
                     }
 
-                    gameEngine.client.move = move;
-                    gameEngine.client.updateGameState = updateState;
+                    kingSurvival.client.move = move;
+                    kingSurvival.client.updateGameState = updateState;
 
                     $.connection.hub.start().done(function () {
-                        gameEngine.server.joinRoom(gameState.Id);
+                        kingSurvival.server.joinRoom(gameState.Id);
                     }).fail(function (error) {
                         console.log('Invocation of start failed. Error: ' + error)
                     });
@@ -70,7 +68,7 @@
                         return kingSurvivalGameService.onDragStart(gameState, source, piece, position, orientation);
                     };
                     $scope.onSnapEnd = function onSnapEndF(source, target, piece) {
-                        return kingSurvivalGameService.onSnapEnd(gameEngine.server.moves, gameState.Id, gameState.playerId, $scope.board, source, target, piece);
+                        return kingSurvivalGameService.onSnapEnd(kingSurvival.server.gameEngine, gameState.Id, gameState.playerId, $scope.board, source, target, piece);
                     };
                 }],
             };

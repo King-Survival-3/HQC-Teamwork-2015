@@ -1,10 +1,11 @@
 ﻿namespace KingSurvival.Web.Controllers
 {
-    using KingSurvival.Data;
-    using KingSurvival.Models;
-    using Microsoft.AspNet.Identity;
     using System.Linq;
     using System.Web.Http;
+    using Microsoft.AspNet.Identity;
+  
+    using KingSurvival.Data;
+    using KingSurvival.Models;
 
     [Authorize]
     public class GamesController : ApiController

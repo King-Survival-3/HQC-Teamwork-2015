@@ -4,8 +4,8 @@
             Active Game
         </p>
         <p class="list-group-item" ng-repeat="game in currentActiveGames">
-           <b>UserName:</b> {{game.FirstPlayerUserName}}  <b>CraationTime:</b> {{game.CreationDate}}
-            <button data-game-id ="{{game.Id}}" class="btn btn-primary  btn-info btn-xs" data-ng-click="joinGame($event)">J
+           <b>UserName:</b> {{game.firstPlayerUserName}}  <b>CraationTime:</b> {{game.creationDate}}
+            <button data-game-id ="{{game.id}}" class="btn btn-primary  btn-info btn-xs" data-ng-click="joinGame($event)">J
                 oin &raquo
             </button>
         </p>
