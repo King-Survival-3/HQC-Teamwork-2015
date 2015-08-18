@@ -54,7 +54,7 @@
             var gameBoard = BoardHelper.FenToBoard(oldFen);
             var figure = playerID == game.FirstPlayerId ? 'K' : 'p';
 
-            //if move is not in boudry of array will throw 
+            //if move is not in boundary of array will throw 
             try
             {
                 oldPosition = MoveHelper.ParceMove(moveFrom);
@@ -62,7 +62,7 @@
             }
             catch (ArgumentException)
             {
-                //return clients bords in old state
+                //return clients boards in old state
                 Clients.Group(gameId).move(oldFen);
                 return;
             }
@@ -114,7 +114,7 @@
             //check is move is legal
             if (!MoveIsLegal(gameBoard, figure, oldPosition, newPosition))
             {
-                //moove is not legal return
+                //move is not legal return
                 Clients.Group(gameId).move(oldFen);
                 return;
             }
@@ -125,7 +125,7 @@
                 //TODO: 
             }
 
-            //everithing is ok, save changes 
+            //everything is OK, save changes 
             gameBoard = this.SwapPosition(gameBoard, oldPosition, newPosition);
             game.Board = BoardHelper.BoardToFen(gameBoard);
             game.State = game.State == GameState.TurnKing ? GameState.TurnPown : GameState.TurnKing;
