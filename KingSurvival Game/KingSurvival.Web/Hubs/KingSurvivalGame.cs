@@ -43,17 +43,22 @@
             }
         }
 
-        public void GameEngine(string gaemId, string userId, string moveFrom, string moveTo)
+        public void GameEngine(string gameId, string userId, string moveFrom, string moveTo)
         {
 
-            var game = GetGame(gaemId);
+            var game = GetGame(gameId);
             var playerID = userId;
             var oldFen = game.Board;
-            var gameId = game.Id.ToString();
             var gameBoard = BoardHelper.FenToBoard(oldFen);
             var figure = playerID == game.FirstPlayerId ? King : Pown;
             var oldPosition = ParceMove(moveFrom);
             var newPosition = ParceMove(moveTo);
+
+            //game doesn't exist
+            if (game == null)
+            {
+                return;
+            }
 
             //something wrong with position 
             if (oldPosition == null || newPosition == null)
@@ -174,8 +179,9 @@
         private void UpdateState(string gameId)
         {
             var gameState = this.data.Game.All()
+                .Where(x => x.Id.ToString() == gameId)
                 .Select(x => new { Id = x.Id, gameState = x.State })
-               .FirstOrDefault(x => x.Id.ToString() == gameId);
+                .FirstOrDefault();
 
             Clients.Group(gameId).updateGameState(gameState);
         }
@@ -183,9 +189,9 @@
         private bool ISKingWon(char[,] gameBoard)
         {
             var kingPosition = GetKingPosition(gameBoard);
-            int survivalRoww = 7;
+            int survivalRow = 7;
 
-            if (kingPosition.Row == survivalRoww)
+            if (kingPosition.Row == survivalRow)
             {
                 return true;
             }

@@ -1,9 +1,7 @@
+'use strict';
 (function () {
-    'use strict';
-
     angular.module('kingSurvival', ['nywton.chessboard'])
         .service('kingSurvivalGameService', ['$log', function kingSurvivalGameService($log) {
-
 
             this.onDragStart = function (gameState, source, piece, position, orientation) {
               //  $log.debug('lift piece ' + piece + ' from ' + source + ' - ' + position + ' - ' + orientation);
@@ -70,7 +68,7 @@
                     $scope.onSnapEnd = function onSnapEndF(source, target, piece) {
                         return kingSurvivalGameService.onSnapEnd(kingSurvival.server.gameEngine, gameState.Id, gameState.playerId, $scope.board, source, target, piece);
                     };
-                }],
+                }]
             };
 
             return directive;
