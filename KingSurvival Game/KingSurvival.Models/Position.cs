@@ -4,8 +4,8 @@
 
     public class Position
     {
-        private int MaxNumberOfRow = 7;
-        private int MaxNumberOfCol = 7;
+        private const int MaxNumberOfRow = 7;
+        private const int MaxNumberOfCol = 7;
 
         private int row;
         private int col;

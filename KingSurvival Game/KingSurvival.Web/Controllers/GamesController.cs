@@ -45,8 +45,9 @@
             this.data.SaveChanges();
 
             var gameState = this.data.Game.All()
+              .Where(x => x.Id == game.Id)
               .Select(x => new { Id = x.Id, PlayerFigure = GameState.TurnKing, playerId = x.FirstPlayerId, gameState = x.State })
-              .FirstOrDefault(x => x.Id == game.Id);
+              .FirstOrDefault();
 
             return Ok(gameState);
         }
@@ -72,8 +73,9 @@
             this.data.SaveChanges();
 
             var gameState = this.data.Game.All()
+                .Where(x => x.Id.ToString() == gameId)
                 .Select(x => new{Id = x.Id, PlayerFigure = GameState.TurnPown, playerId = x.SecondPlayerId, gameState = x.State })
-                .FirstOrDefault(x => x.Id.ToString() == gameId);
+                .FirstOrDefault();
 
             return Ok(gameState);
         }
