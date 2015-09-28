@@ -1,0 +1,49 @@
+﻿Object oriented design for chess game
+http://amitcodes.com/2014/02/04/object-oriented-design-for-chess-game/
+
+http://rangerway.com/way/object-oriented-chess-game/
+
+https://tianrunhe.wordpress.com/2012/03/19/design-a-chess-game-using-oo-principles/
+
+Object Oriented design represents the real world objects in code.
+Think of how you play chess:
+
+A Board ‘is’ collection of blocks (ΣBlock)
+
+A Player ‘is’ collection of pieces ( Player = ΣPiece )
+
+A Game has :
+	one board
+	one black player
+	one white player
+
+When making a move a Player chooses a Piece
+
+Depending on type of piece, the Player checks valid moves.Which means that validity of move is :
+	tightly coupled to type of piece
+	is a property of piece
+
+When thinking about valid moves, the player ‘is aware of’
+	the board
+	location of all the pieces on the board
+
+Last point implies that the move validation routine should have access location of all the pieces on the board
+
+On the board, block ‘contains’ a piece
+
+
+
+Gameplay
+
+A Player gets a turn [ Game.play() ]
+
+Player makes a plays a turn and returns the played ‘move’ to Game [ Player.playTurn() ](selected piece, from block and to block are encapsulated in a data-type ‘Move’)
+
+Game delegates the move validation processing to the moved Piece instance, passing destination-block and board instances. ( Piece.isValidMove(...): boolean )(Board instance is required to check is a piece lies in path of the move)
+
+Piece calculates validity of the move and returns a boolean to Game
+
+If move is valid, GameController
+	updates location of Piece on board (Game.updateBoard(...))
+	checks if move has performed any kills ( Game.checkKills(...))
+	checks if any of game terminations conditions are valid ( Game.isGameOver(...))
