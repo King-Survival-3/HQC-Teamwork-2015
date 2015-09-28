@@ -27,7 +27,7 @@
             {
                 if (value > MaxNumberOfRow)
                 {
-                    throw new ArgumentException("Row cannot be bigger than 7");
+                    throw new ArgumentException("Row cannot be bigger than " + MaxNumberOfRow);
                 }
                 this.row = value;
             }
@@ -44,7 +44,7 @@
             {
                 if (value > MaxNumberOfCol)
                 {
-                    throw new ArgumentException("Col cannot be bigger than 7");
+                    throw new ArgumentException("Col cannot be bigger than " + MaxNumberOfCol);
                 }
                 this.col = value;
             }
