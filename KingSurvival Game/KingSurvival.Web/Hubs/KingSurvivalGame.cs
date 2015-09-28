@@ -11,7 +11,7 @@
     using KingSurvival.Data;
     using KingSurvival.Models;
     using KingSurvival.Web.Helpers;
-
+    using KingSurvival.Models.Patterns;
 
     public class KingSurvivalGame : Hub
     {
@@ -251,7 +251,9 @@
                 {
                     if (gameBoard[row, col] == King)
                     {
-                        return new Position(row, col);
+                        var factory = new PositionFactory();
+                        return factory.Create(row, col);
+                        // return new Position(row, col);
                     }
                 }
             }
