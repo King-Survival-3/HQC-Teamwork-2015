@@ -237,19 +237,9 @@
     </Compile>
     <Compile Include="Helpers\BoardHelper.cs" />
     <Compile Include="Helpers\MoveHelper.cs" />
-    <Compile Include="Hubs\Block.cs" />
     <Compile Include="Hubs\Chat.cs" />
-    <Compile Include="Hubs\ChessBoad.cs" />
-    <Compile Include="Hubs\PieceType.cs" />
-    <Compile Include="Hubs\ChessGame.cs" />
-    <Compile Include="Hubs\GameResult.cs" />
-    <Compile Include="Hubs\Move.cs" />
-    <Compile Include="Hubs\Piece.cs" />
-    <Compile Include="Hubs\King.cs" />
     <Compile Include="Hubs\KingSurvivalGameConstants.cs" />
     <Compile Include="Hubs\KingSurvivalGame.cs" />
-    <Compile Include="Hubs\Pawn.cs" />
-    <Compile Include="Hubs\Player.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -265,7 +255,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Hubs\OopDesignForChessGame.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
