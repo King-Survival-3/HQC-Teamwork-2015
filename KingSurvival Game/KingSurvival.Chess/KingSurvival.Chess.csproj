@@ -48,10 +48,18 @@
     <Compile Include="Common\ObjectValidator.cs" />
     <Compile Include="Common\Position.cs" />
     <Compile Include="Engine\Contracts\IChessEngine.cs" />
+    <Compile Include="Engine\Contracts\IGameInitializationStrategy.cs" />
+    <Compile Include="Engine\Initializations\StandartStartGameInitializationStrategy.cs" />
     <Compile Include="Engine\KingSurvivalEngine.cs" />
     <Compile Include="Engine\StandartTwoPlayerEngine.cs" />
+    <Compile Include="Figures\Bishop.cs" />
+    <Compile Include="Figures\Contracts\BaseFigure.cs" />
     <Compile Include="Figures\Contracts\IFigure.cs" />
+    <Compile Include="Figures\King.cs" />
+    <Compile Include="Figures\Knight.cs" />
     <Compile Include="Figures\Pawn.cs" />
+    <Compile Include="Figures\Queen.cs" />
+    <Compile Include="Figures\Rook.cs" />
     <Compile Include="Players\Contracts\IPlayer.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +67,7 @@
   <ItemGroup>
     <Content Include="OopDesignForChessGame.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
