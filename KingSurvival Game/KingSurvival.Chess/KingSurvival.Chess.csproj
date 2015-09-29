@@ -60,6 +60,8 @@
     <Compile Include="Figures\Pawn.cs" />
     <Compile Include="Figures\Queen.cs" />
     <Compile Include="Figures\Rook.cs" />
+    <Compile Include="InputProvider\ConsoleInputProvider.cs" />
+    <Compile Include="InputProvider\Contracts\IInputProvider.cs" />
     <Compile Include="Players\Contracts\IPlayer.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
