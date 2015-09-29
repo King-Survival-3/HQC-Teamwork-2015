@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KingSurvival.Chess.Engine
+﻿namespace KingSurvival.Chess.Engine
 {
+    using System;
+    using System.Collections.Generic;
+
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.Players.Contracts;
 
     public class StandartTwoPlayerEngine : IChessEngine
     {
         private readonly IEnumerable<IPlayer> players;
-
 
         public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
         {
