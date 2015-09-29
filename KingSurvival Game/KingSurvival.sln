@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Models", "King
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Data", "KingSurvival.Data\KingSurvival.Data.csproj", "{EADA0F1B-B136-4634-A000-73E1C0B8BBD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Chess", "KingSurvival.Chess\KingSurvival.Chess.csproj", "{3C204899-4633-43CD-B1FD-684FB8352713}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EADA0F1B-B136-4634-A000-73E1C0B8BBD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EADA0F1B-B136-4634-A000-73E1C0B8BBD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EADA0F1B-B136-4634-A000-73E1C0B8BBD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C204899-4633-43CD-B1FD-684FB8352713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C204899-4633-43CD-B1FD-684FB8352713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C204899-4633-43CD-B1FD-684FB8352713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C204899-4633-43CD-B1FD-684FB8352713}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

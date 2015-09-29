@@ -238,6 +238,7 @@
     <Compile Include="Helpers\BoardHelper.cs" />
     <Compile Include="Helpers\MoveHelper.cs" />
     <Compile Include="Hubs\Chat.cs" />
+    <Compile Include="Hubs\KingSurvivalGameConstants.cs" />
     <Compile Include="Hubs\KingSurvivalGame.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
