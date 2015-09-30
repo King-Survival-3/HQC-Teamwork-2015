@@ -6,6 +6,8 @@
 
         public const int StandartGameTotalBoardCols = 8;
 
+        public const int StandartGameNumberOfPlayers = 2;
+
         public const string EmptyString = "";
 
         public const int MinimumRowValueOnBoard = 1;

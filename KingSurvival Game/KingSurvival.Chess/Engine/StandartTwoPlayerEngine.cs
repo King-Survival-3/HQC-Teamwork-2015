@@ -1,21 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KingSurvival.Chess.Engine
+﻿namespace KingSurvival.Chess.Engine
 {
+    using System;
+    using System.Collections.Generic;
+
+    using KingSurvival.Chess.Board;
+    using KingSurvival.Chess.Board.Contracts;
+    using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Engine.Contracts;
+    using KingSurvival.Chess.InputProvider.Contracts;
     using KingSurvival.Chess.Players.Contracts;
+    using KingSurvival.Chess.Renderer.Contrats;
 
     public class StandartTwoPlayerEngine : IChessEngine
     {
-        private readonly IEnumerable<IPlayer> players;
+        private readonly IList<IPlayer> players;
+        private readonly IRenderer renderer;
+        private readonly IInputProvider input;
 
-        public void Initialize()
+        private readonly IBoard board;
+
+
+        public StandartTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider)
         {
-            throw new System.NotImplementedException();
+            this.renderer = renderer;
+            this.input = inputProvider;
+            this.board = new Board();
+        }
+
+        public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
+        {
+            var players = this.input.GetPlayers(GlobalConstants.StandartGameNumberOfPlayers);
+            gameInitializationStrategy.Initialize(players, this.board);
+            this.renderer.RenderBoard(this.board);
         }
 
         public void Start()

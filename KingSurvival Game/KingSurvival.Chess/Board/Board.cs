@@ -2,10 +2,11 @@
 {
     using System;
 
+    using KingSurvival.Chess.Board.Contracts;
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Figures.Contracts;
 
-    public class Board
+    public class Board : IBoard
     {
         private readonly IFigure[,] board;
 

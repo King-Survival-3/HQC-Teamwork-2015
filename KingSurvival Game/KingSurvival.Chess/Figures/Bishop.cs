@@ -3,10 +3,10 @@
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Figures.Contracts;
 
-    public class Pawn : BaseFigure, IFigure
+    public class Bishop : BaseFigure, IFigure
     {
-        public Pawn(ChessColor color)
-            :base(color)
+        public Bishop(ChessColor color)
+            : base(color)
         {
         }
     }

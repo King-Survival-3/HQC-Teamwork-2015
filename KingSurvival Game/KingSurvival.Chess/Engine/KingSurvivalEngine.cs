@@ -10,7 +10,7 @@
     {
         private readonly IEnumerable<IPlayer> players;
 
-        public void Initialize()
+        public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
         {
             throw new System.NotImplementedException();
         }
