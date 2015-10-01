@@ -18,5 +18,8 @@
 
         public const char MaximumColValueOnBoard = 'h';
 
+        public const string LogoTitle = "Just Chess";
+
+        public static int MessageDelayTime = 1500;
     }
 }
