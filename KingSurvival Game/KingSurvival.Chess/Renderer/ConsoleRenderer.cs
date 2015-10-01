@@ -12,7 +12,6 @@
     {
         private const ConsoleColor DarskSquareConsoleColor = ConsoleColor.DarkGray;
         private const ConsoleColor LightSquareConsoleColor = ConsoleColor.Gray;
-      
 
         public ConsoleRenderer()
         {
@@ -96,7 +95,6 @@
                 Console.SetCursorPosition(start + i * ConsoleConstants.CharactersPerColPerBoardSquare, startColPrint + boardTotalRows * ConsoleConstants.CharactersPerColPerBoardSquare);
                 Console.Write((char)('a' + i));
             }
-
 
             // Print numbers
             start = startColPrint + ConsoleConstants.CharactersPerColPerBoardSquare / 2;
