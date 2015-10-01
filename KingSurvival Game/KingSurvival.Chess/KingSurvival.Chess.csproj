@@ -42,9 +42,11 @@
     <Compile Include="Board\Board.cs" />
     <Compile Include="Board\Contracts\IBoard.cs" />
     <Compile Include="Common\ChessColor.cs" />
+    <Compile Include="Common\Console\ConsoleConstants.cs" />
     <Compile Include="Common\Console\ConsoleHelpers.cs" />
     <Compile Include="Common\GlobalConstants.cs" />
     <Compile Include="Common\GlobalErrorMessages.cs" />
+    <Compile Include="Common\Move.cs" />
     <Compile Include="Common\ObjectValidator.cs" />
     <Compile Include="Common\Position.cs" />
     <Compile Include="Engine\Contracts\IChessEngine.cs" />
