@@ -8,7 +8,5 @@ namespace KingSurvival.Data
         IRepository<KingSurvivalUser> Users { get; }
 
         IRepository<Game> Game { get; }
-
-        int SaveChanges();
     }
 }
