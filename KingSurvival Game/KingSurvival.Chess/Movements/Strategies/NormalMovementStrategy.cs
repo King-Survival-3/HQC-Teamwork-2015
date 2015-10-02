@@ -3,7 +3,7 @@
     using System.Collections.Generic;
 
     using KingSurvival.Chess.Movements.Contracts;
-    
+
     public class NormalMovementStrategy : IMovementStrategy
     {
         private readonly IDictionary<string, IList<IMovement>> movements = new Dictionary<string, IList<IMovement>>()

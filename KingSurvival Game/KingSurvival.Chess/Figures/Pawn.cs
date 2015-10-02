@@ -15,7 +15,9 @@
 
         public override ICollection<IMovement> Move(IMovementStrategy strategy)
         {
-            return strategy.GetMovements(this.GetType().Name);
+            var movememts = strategy.GetMovements(this.GetType().Name);
+            
+            return movememts;
         }
     }
 }

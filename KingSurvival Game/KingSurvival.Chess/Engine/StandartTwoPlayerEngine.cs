@@ -1,4 +1,6 @@
-﻿namespace KingSurvival.Chess.Engine
+﻿using KingSurvival.Chess.Movements.Strategies;
+
+namespace KingSurvival.Chess.Engine
 {
     using System;
     using System.Collections.Generic;
@@ -31,7 +33,7 @@
         public StandartTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider)
         {
             this.renderer = renderer;
-            this.renderer = renderer;
+            this.movementStrategy = new NormalMovementStrategy(); 
             this.input = inputProvider;
             this.board = new Board();
         }
