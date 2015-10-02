@@ -64,6 +64,10 @@
     <Compile Include="Figures\Rook.cs" />
     <Compile Include="InputProvider\ConsoleInputProvider.cs" />
     <Compile Include="InputProvider\Contracts\IInputProvider.cs" />
+    <Compile Include="Movements\Contracts\IMovement.cs" />
+    <Compile Include="Movements\Contracts\IMovementStrategy.cs" />
+    <Compile Include="Movements\NormalPawnMovement.cs" />
+    <Compile Include="Movements\Strategies\NormalMovementStrategy.cs" />
     <Compile Include="Players\Contracts\IPlayer.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,9 +77,7 @@
   <ItemGroup>
     <Content Include="OopDesignForChessGame.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Movements\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
