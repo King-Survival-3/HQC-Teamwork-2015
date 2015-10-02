@@ -5,5 +5,6 @@
     public interface IFigure
     {
         ChessColor Color { get; }
+
     }
 }

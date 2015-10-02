@@ -68,12 +68,14 @@
     <Compile Include="Players\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\ConsoleRenderer.cs" />
-    <Compile Include="Renderer\Contrats\IRenderer.cs" />
+    <Compile Include="Renderer\Contracts\IRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OopDesignForChessGame.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Movements\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
