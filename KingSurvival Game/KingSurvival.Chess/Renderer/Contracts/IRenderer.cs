@@ -1,4 +1,4 @@
-﻿namespace KingSurvival.Chess.Renderer.Contrats
+﻿namespace KingSurvival.Chess.Renderer.Contracts
 {
     using KingSurvival.Chess.Board.Contracts;
 
