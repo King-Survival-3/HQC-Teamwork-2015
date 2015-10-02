@@ -8,7 +8,7 @@
     using KingSurvival.Chess.InputProvider;
     using KingSurvival.Chess.InputProvider.Contracts;
     using KingSurvival.Chess.Renderer;
-    using KingSurvival.Chess.Renderer.Contrats;
+    using KingSurvival.Chess.Renderer.Contracts;
 
     public static class ChessFacade
     {

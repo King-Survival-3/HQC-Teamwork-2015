@@ -6,7 +6,7 @@
     using KingSurvival.Chess.Board.Contracts;
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Common.Console;
-    using KingSurvival.Chess.Renderer.Contrats;
+    using KingSurvival.Chess.Renderer.Contracts;
 
     public class ConsoleRenderer : IRenderer
     {

@@ -11,11 +11,14 @@
     using KingSurvival.Chess.InputProvider.Contracts;
     using KingSurvival.Chess.Players;
     using KingSurvival.Chess.Players.Contracts;
-    using KingSurvival.Chess.Renderer.Contrats;
+    using KingSurvival.Chess.Movements.Contracts;
+    using KingSurvival.Chess.Renderer.Contracts;
 
     public class StandartTwoPlayerEngine : IChessEngine
     {
         private readonly IBoard board;
+
+        private readonly IMovementStrategy movementStrategy;
 
         private IList<IPlayer> players;
 
@@ -27,6 +30,7 @@
 
         public StandartTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider)
         {
+            this.renderer = renderer;
             this.renderer = renderer;
             this.input = inputProvider;
             this.board = new Board();
@@ -62,8 +66,33 @@
                     var player = this.GetNextPlayer();
                     var move = this.input.GetNextPlayerMove(player);
                     var from = move.From;
+                    var to = move.To;
                     var figure = this.board.GetFigureAtPosition(from);
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
+                    this.CheckIfToPositionIsEmpty(figure, to);
+
+                    var availableMovements = figure.Move(this.movementStrategy);
+
+                    foreach (var movement in availableMovements)
+                    {
+                        movement.ValidateMove(figure, this.board, move);
+                    }
+
+                    this.board.MoveFigureAtPosition(figure, from, to);
+
+                    this.renderer.RenderBoard(this.board);
+
+                    // TODO: On every move check if we are in check.
+                    // TODO: Check pawn on last row
+                    // TODO: Check is when 
+                    // ПАТ -> when the last three moves are the same 
+                    //   Memento?
+                    // TODO: if not castle - move figure (Check castel (rockade) - check if castle is valid, Check pawn for An-Pasan)
+                    // TODO: Move figure
+                    // TODO: Chech check (chess)
+                    // TODO: If in check - check checkmate
+                    // TODO: if not in check - check draw
+                    // TODO: Continue
                 }
                 catch (Exception exception)
                 {
@@ -120,6 +149,16 @@
             {
                 throw new InvalidOperationException(
                     string.Format("Figure at this position {0}{1} is not yours", from.Col, from.Row));
+            }
+        }
+
+        private void CheckIfToPositionIsEmpty(IFigure figure, Position to)
+        {
+            var figureAtPosition = this.board.GetFigureAtPosition(to);
+            if (figureAtPosition != null && figureAtPosition.Color == figure.Color)
+            {
+                throw new InvalidOperationException(
+                   string.Format("You already have a figure at {0}{1}!", to.Col, to.Row));
             }
         }
     }
