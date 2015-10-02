@@ -1,6 +1,9 @@
 ﻿namespace KingSurvival.Chess.Figures.Contracts
 {
+    using System.Collections.Generic;
+
     using KingSurvival.Chess.Common;
+    using KingSurvival.Chess.Movements.Contracts;
 
     public abstract class BaseFigure
     {
@@ -10,5 +13,7 @@
         }
 
         public ChessColor Color { get; private set; }
+
+        public abstract ICollection<IMovement> Move(IMovementStrategy strategy);
     }
 }
