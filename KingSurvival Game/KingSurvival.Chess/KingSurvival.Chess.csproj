@@ -44,6 +44,7 @@
     <Compile Include="Common\ChessColor.cs" />
     <Compile Include="Common\Console\ConsoleConstants.cs" />
     <Compile Include="Common\Console\ConsoleHelpers.cs" />
+    <Compile Include="Common\GameType.cs" />
     <Compile Include="Common\GlobalConstants.cs" />
     <Compile Include="Common\GlobalErrorMessages.cs" />
     <Compile Include="Common\Move.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Common\Position.cs" />
     <Compile Include="Engine\Contracts\IChessEngine.cs" />
     <Compile Include="Engine\Contracts\IGameInitializationStrategy.cs" />
+    <Compile Include="Engine\Initializations\InitializationStrategyProvider.cs" />
     <Compile Include="Engine\Initializations\KingSurvivalGameInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\StandartStartGameInitializationStrategy.cs" />
     <Compile Include="Engine\KingSurvivalEngine.cs" />

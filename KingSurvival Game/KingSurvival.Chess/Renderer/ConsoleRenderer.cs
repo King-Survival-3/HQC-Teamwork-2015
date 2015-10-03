@@ -1,4 +1,6 @@
-﻿namespace KingSurvival.Chess.Renderer
+﻿using System.Linq;
+
+namespace KingSurvival.Chess.Renderer
 {
     using System;
     using System.Threading;
@@ -32,6 +34,20 @@
         }
 
         public void RenderMainMenu()
+        {
+            PrintWelcomeMessage();
+
+            PrintSelectGameMenu();
+        }
+
+        private static void PrintSelectGameMenu()
+        {
+            Console.Clear();
+            string[] message = new[] { "Select game", " 1 : for Chess", "2 : for King Survival" };
+            ConsoleHelpers.PrintTextAtCenter(message);
+        }
+
+        private static void PrintWelcomeMessage()
         {
             // TODO: Add main menu
             ConsoleHelpers.SetCursorAtCenter(GlobalConstants.LogoTitle.Length);

@@ -29,6 +29,18 @@
             return players;
         }
 
+        public GameType GetGameType()
+        {
+            // TODO: Fix magic [5] number
+            int top = (Console.WindowHeight / 2) + 5;
+            int left = Console.WindowWidth / 2;
+            Console.SetCursorPosition(left, top);
+            
+            GameType userGameChoice = (GameType) Enum.Parse(typeof (GameType), Console.ReadLine());
+
+            return userGameChoice;
+        }
+
         /// <summary>
         /// Command is in format 
         ///     a5-c5

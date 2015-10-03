@@ -18,11 +18,15 @@
             renderer.RenderMainMenu();
 
             IInputProvider inputProvider = new ConsoleInputProvider();
+            var gameType = inputProvider.GetGameType();
 
             IChessEngine chessEngine = new StandartTwoPlayerEngine(renderer, inputProvider);
 
             //IGameInitializationStrategy gameInitializationStrategy = new StandartStartGameInitializationStrategy();
-            IGameInitializationStrategy gameInitializationStrategy = new KingSurvivalGameInitializationStrategy();
+            //IGameInitializationStrategy gameInitializationStrategy = new KingSurvivalGameInitializationStrategy();
+           
+            var initGame = new InitializationStrategyProvider();
+            IGameInitializationStrategy gameInitializationStrategy = initGame.GetGameType(gameType);
 
             chessEngine.Initialize(gameInitializationStrategy);
 

@@ -1,4 +1,6 @@
-﻿namespace KingSurvival.Chess.Common.Console
+﻿using System.Linq;
+
+namespace KingSurvival.Chess.Common.Console
 {
     using System;
     using System.Collections.Generic;
@@ -111,6 +113,20 @@
             int centerCol = Console.WindowWidth / 2 - lenghtOfMessage / 2;
 
             Console.SetCursorPosition(centerCol, centerRow);
+        }
+
+        public static void PrintTextAtCenter(string[] text)
+        {
+            for (int i = 0; i < text.Count(); i++)
+            {
+                int centerRow = (Console.WindowHeight / 2)  + i;
+
+                int centerCol = Console.WindowWidth / 2 - text[i].Length / 2;
+
+                Console.SetCursorPosition(centerCol, centerRow);
+
+                Console.WriteLine(text[i]);
+            }
         }
 
         public static void SetCursorTopCenter(int lenghtOfMessage)
