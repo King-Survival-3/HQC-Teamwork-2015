@@ -51,6 +51,7 @@
     <Compile Include="Common\Position.cs" />
     <Compile Include="Engine\Contracts\IChessEngine.cs" />
     <Compile Include="Engine\Contracts\IGameInitializationStrategy.cs" />
+    <Compile Include="Engine\Initializations\KingSurvivalGameInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\StandartStartGameInitializationStrategy.cs" />
     <Compile Include="Engine\KingSurvivalEngine.cs" />
     <Compile Include="Engine\StandartTwoPlayerEngine.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="InputProvider\Contracts\IInputProvider.cs" />
     <Compile Include="Movements\Contracts\IMovement.cs" />
     <Compile Include="Movements\Contracts\IMovementStrategy.cs" />
+    <Compile Include="Movements\NormalKingMovement.cs" />
     <Compile Include="Movements\NormalPawnMovement.cs" />
     <Compile Include="Movements\Strategies\NormalMovementStrategy.cs" />
     <Compile Include="Players\Contracts\IPlayer.cs" />

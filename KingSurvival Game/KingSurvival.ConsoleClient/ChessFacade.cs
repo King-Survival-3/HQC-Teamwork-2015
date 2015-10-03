@@ -21,7 +21,8 @@
 
             IChessEngine chessEngine = new StandartTwoPlayerEngine(renderer, inputProvider);
 
-            IGameInitializationStrategy gameInitializationStrategy = new StandartStartGameInitializationStrategy();
+            //IGameInitializationStrategy gameInitializationStrategy = new StandartStartGameInitializationStrategy();
+            IGameInitializationStrategy gameInitializationStrategy = new KingSurvivalGameInitializationStrategy();
 
             chessEngine.Initialize(gameInitializationStrategy);
 

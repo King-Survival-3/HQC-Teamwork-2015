@@ -7,12 +7,16 @@
     public class NormalMovementStrategy : IMovementStrategy
     {
         private readonly IDictionary<string, IList<IMovement>> movements = new Dictionary<string, IList<IMovement>>()
-                                                                      {
-                                                                          {"Pawn", new List<IMovement>()
-                                                                                       {
-                                                                                           new NormalPawnMovement()
-                                                                                       }}
-                                                                      };
+        {
+            {"Pawn", new List<IMovement>()
+                        {
+                            new NormalPawnMovement()
+                        }},
+            {"King", new List<IMovement>()
+                        {
+                            new NormalKingMovement()
+                        }},
+        };
         public IList<IMovement> GetMovements(string figure)
         {
             return this.movements[figure];
