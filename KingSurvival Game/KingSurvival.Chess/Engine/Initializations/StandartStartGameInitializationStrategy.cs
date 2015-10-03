@@ -13,10 +13,7 @@
 
     public class StandartStartGameInitializationStrategy : IGameInitializationStrategy
     {
-        private const int StandartGameTotalRows = 8;
-        private const int StandartGameTotalCols = 8;
-
-        private readonly IList<Type> figureTypes;
+       private readonly IList<Type> figureTypes;
 
         public StandartStartGameInitializationStrategy()
         {
@@ -44,12 +41,12 @@
             this.AddPawnsToBoardRow(firstPlayer, board, 7);
 
             this.AddPawnsToBoardRow(secondPlayer, board, 2);
-            this.AddPawnsToBoardRow(secondPlayer, board, 1);
+            this.AddArmyToBoardRow(secondPlayer, board, 1);
         }
 
         private void AddPawnsToBoardRow(IPlayer player, IBoard board, int chessRow)
         {
-            for (int i = 0; i < StandartGameTotalCols; i++)
+            for (int i = 0; i < GlobalConstants.StandartGameTotalBoardCols; i++)
             {
                 var pawn = new Pawn(player.Color);
                 player.AddFigure(pawn);
@@ -60,7 +57,7 @@
 
         private void AddArmyToBoardRow(IPlayer player, IBoard board, int chessRow)
         {
-            for (int i = 0; i < StandartGameTotalCols; i++)
+            for (int i = 0; i < GlobalConstants.StandartGameTotalBoardCols; i++)
             {
                 var figureType = this.figureTypes[i];
                 var figureInstance = (IFigure)Activator.CreateInstance(figureType, player.Color);
@@ -77,8 +74,8 @@
                 throw new InvalidOperationException("Standart Start Game Initialization Strategy needs exactly two players!");
             }
 
-            if (board.TotalRows != StandartGameTotalRows ||
-                board.TotalCols != StandartGameTotalCols)
+            if (board.TotalRows != GlobalConstants.StandartGameTotalBoardRows ||
+                board.TotalCols != GlobalConstants.StandartGameTotalBoardCols)
             {
                 throw new InvalidOperationException("Standart Start Game Initialization Strategy needs 8x8 board!");
             }

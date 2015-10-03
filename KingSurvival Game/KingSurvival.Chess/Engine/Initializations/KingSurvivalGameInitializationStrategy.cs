@@ -1,28 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KingSurvival.Chess.Board.Contracts;
-using KingSurvival.Chess.Common;
-using KingSurvival.Chess.Engine.Contracts;
-using KingSurvival.Chess.Figures;
-using KingSurvival.Chess.Figures.Contracts;
-using KingSurvival.Chess.Players.Contracts;
-
-namespace KingSurvival.Chess.Engine.Initializations
+﻿namespace KingSurvival.Chess.Engine.Initializations
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using KingSurvival.Chess.Board.Contracts;
+    using KingSurvival.Chess.Common;
+    using KingSurvival.Chess.Engine.Contracts;
+    using KingSurvival.Chess.Figures;
+    using KingSurvival.Chess.Players.Contracts;
+
+
     public class KingSurvivalGameInitializationStrategy : IGameInitializationStrategy
     {
-        private const int StandartGameTotalRows = 8;
-        private const int StandartGameTotalCols = 8;
-
         private readonly IList<Type> figureTypes;
-
-        public KingSurvivalGameInitializationStrategy()
-        {
-          
-        }
 
         public void Initialize(IList<IPlayer> players, IBoard board)
         {
@@ -38,7 +29,7 @@ namespace KingSurvival.Chess.Engine.Initializations
 
         private void AddPawnsToBoardRow(IPlayer player, IBoard board, int chessRow)
         {
-            for (int i = 0; i < StandartGameTotalCols; i+=2)
+            for (int i = 0; i < GlobalConstants.StandartGameTotalBoardCols; i+=2)
             {
                 var pawn = new Pawn(player.Color);
                 player.AddFigure(pawn);
@@ -62,8 +53,8 @@ namespace KingSurvival.Chess.Engine.Initializations
                 throw new InvalidOperationException("King Survival Start Game Initialization Strategy needs exactly two players!");
             }
 
-            if (board.TotalRows != StandartGameTotalRows ||
-                board.TotalCols != StandartGameTotalCols)
+            if (board.TotalRows != GlobalConstants.StandartGameTotalBoardRows ||
+                board.TotalCols != GlobalConstants.StandartGameTotalBoardCols)
             {
                 throw new InvalidOperationException("King Survival Start Game Initialization Strategy needs 8x8 board!");
             }
