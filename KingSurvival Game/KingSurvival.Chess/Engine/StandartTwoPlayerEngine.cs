@@ -30,12 +30,12 @@ namespace KingSurvival.Chess.Engine
 
         private int currentPlayerIndex;
 
-        public StandartTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider, IBoard board = new Board())
+        public StandartTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider)
         {
             this.renderer = renderer;
             this.movementStrategy = new NormalMovementStrategy(); 
             this.input = inputProvider;
-            this.board = board;
+            this.board = new Board();
         }
 
         public void Initialize(IGameInitializationStrategy gameInitializationStrategy)

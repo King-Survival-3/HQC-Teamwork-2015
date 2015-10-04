@@ -320,6 +320,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KingSurvival.Chess\KingSurvival.Chess.csproj">
+      <Project>{3c204899-4633-43cd-b1fd-684fb8352713}</Project>
+      <Name>KingSurvival.Chess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KingSurvival.Data\KingSurvival.Data.csproj">
       <Project>{eada0f1b-b136-4634-a000-73e1c0b8bbd9}</Project>
       <Name>KingSurvival.Data</Name>

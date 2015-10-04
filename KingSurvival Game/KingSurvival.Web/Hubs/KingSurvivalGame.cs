@@ -3,19 +3,22 @@
     using System;
     using System.Linq;
 
+    using Microsoft.AspNet.SignalR;
+    
     using KingSurvival.Data;
     using KingSurvival.Models;
     using KingSurvival.Web.Helpers;
+    using KingSurvival.Chess.Board.Contracts;
+    using KingSurvival.Chess.Renderer.Contracts;
 
-    using Microsoft.AspNet.SignalR;
-
-    public class KingSurvivalGame : Hub
+    public class KingSurvivalGame : Hub , IRenderer
     {
         private readonly IKingSurvivalData data;
 
         public KingSurvivalGame()
             : this(new KingSurvivalData(new KingSurvivalDbContext()))
         {
+
         }
 
         public KingSurvivalGame(IKingSurvivalData data)
@@ -23,12 +26,25 @@
             this.data = data;
         }
 
+        public void RenderMainMenu()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RenderBoard(IBoard board)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PrintErrorMessage(string errorMessage)
+        {
+            
+        }
+
         // Name of the room is same like the game Id
-        // NOT USED!!!
-        // TODO: Remove
         public void JoinRoom(string room)
         {
-            if (string.IsNullOrEmpty(room))
+            if (!string.IsNullOrEmpty(room))
             {
                 this.Groups.Add(this.Context.ConnectionId, room);
                 this.Clients.Caller.joinRoom(room);
@@ -288,5 +304,7 @@
 
             return position;
         }
+
+       
     }
 }

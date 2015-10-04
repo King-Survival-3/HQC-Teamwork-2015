@@ -68,6 +68,7 @@
     <Compile Include="Figures\Rook.cs" />
     <Compile Include="InputProvider\ConsoleInputProvider.cs" />
     <Compile Include="InputProvider\Contracts\IInputProvider.cs" />
+    <Compile Include="InputProvider\WebInputProvider.cs" />
     <Compile Include="Movements\Contracts\IMovement.cs" />
     <Compile Include="Movements\Contracts\IMovementStrategy.cs" />
     <Compile Include="Movements\NormalKingMovement.cs" />
