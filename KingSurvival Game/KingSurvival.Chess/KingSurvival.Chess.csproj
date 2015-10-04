@@ -54,6 +54,7 @@
     <Compile Include="Engine\Contracts\IGameInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\InitializationStrategyProvider.cs" />
     <Compile Include="Engine\Initializations\KingSurvivalGameInitializationStrategy.cs" />
+    <Compile Include="Engine\Initializations\KingSurvivalGameWebInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\StandartStartGameInitializationStrategy.cs" />
     <Compile Include="Engine\KingSurvivalEngine.cs" />
     <Compile Include="Engine\StandartTwoPlayerEngine.cs" />
