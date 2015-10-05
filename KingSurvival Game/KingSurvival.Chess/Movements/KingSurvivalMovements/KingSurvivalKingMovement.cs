@@ -11,7 +11,7 @@
     {
         public override void ValidateMove(IFigure figure, IBoard board, Move move)
         {
-            var other = figure.Color == ChessColor.White ? ChessColor.White : ChessColor.Black;
+            var otherFigureColor = figure.Color == ChessColor.White ? ChessColor.White : ChessColor.Black;
             var from = move.From;
             var to = move.To;
 
@@ -20,7 +20,7 @@
                 (from.Row - 1 == to.Row && from.Col + 1 == to.Col) || // bottom right) 
                 (from.Row - 1 == to.Row && from.Col - 1 == to.Col)) // bottom left
             {
-                if (this.CheckOtherFigureIfValid(board, to, other))
+                if (this.CheckOtherFigureIfValid(board, to, otherFigureColor))
                 {
                     return;
                 }

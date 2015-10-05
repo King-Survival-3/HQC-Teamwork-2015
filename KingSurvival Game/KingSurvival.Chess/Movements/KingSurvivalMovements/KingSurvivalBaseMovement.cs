@@ -11,10 +11,10 @@
 
         public abstract void ValidateMove(IFigure figure, IBoard board, Move move);
 
-        protected bool CheckOtherFigureIfValid(IBoard board, Position to, ChessColor color)
+        protected bool CheckOtherFigureIfValid(IBoard board, Position to, ChessColor otherFigurColor)
         {
             var otherFigure = board.GetFigureAtPosition(to);
-            if (otherFigure != null && otherFigure.Color == color)
+            if (otherFigure != null && otherFigure.Color == otherFigurColor)
             {
                 return false;
             }
