@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using KingSurvival.Chess.Common;
+    using KingSurvival.Chess.Movements.Contracts;
     using KingSurvival.Chess.Players.Contracts;
 
     public interface IInputProvider

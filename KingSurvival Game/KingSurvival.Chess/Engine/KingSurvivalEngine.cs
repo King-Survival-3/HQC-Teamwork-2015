@@ -6,6 +6,7 @@
     
     using KingSurvival.Chess.Players.Contracts;
 
+    // TODO: Revemo class?
     class KingSurvivalEngine : IChessEngine
     {
         private readonly IEnumerable<IPlayer> players;

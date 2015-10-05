@@ -35,10 +35,17 @@
             int top = (Console.WindowHeight / 2) + 5;
             int left = Console.WindowWidth / 2;
             Console.SetCursorPosition(left, top);
-            
-            GameType userGameChoice = (GameType) Enum.Parse(typeof (GameType), Console.ReadLine());
 
-            return userGameChoice;
+            var userGameChoice = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(userGameChoice))
+            {
+                throw new ArgumentException("Invalid choice");
+            }
+
+            GameType userGameTypeChoice = (GameType)Enum.Parse(typeof(GameType), userGameChoice);
+
+            return userGameTypeChoice;   
         }
 
         /// <summary>
@@ -50,6 +57,7 @@
         public Move GetNextPlayerMove(IPlayer player)
         {
             Console.BackgroundColor = ConsoleColor.Black;
+            ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForPlayerMessagesAndIO);
             var message = string.Format("{0} is next: ", player.Name);
 
             ConsoleHelpers.SetCursorTopCenter(message.Length);
