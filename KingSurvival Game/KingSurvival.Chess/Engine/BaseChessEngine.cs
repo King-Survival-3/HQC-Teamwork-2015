@@ -28,12 +28,16 @@
 
         protected int currentPlayerIndex;
 
+        protected GameState gameState;
+
         protected BaseChessEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
         {
             this.renderer = renderer;
             this.movementStrategy = movementStrategy; 
             this.input = inputProvider;
             this.board = new Board();
+
+            this.gameState = GameState.Playing;
         }
 
         public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
@@ -57,7 +61,7 @@
             this.renderer.RenderBoard(this.board);
         }
 
-        public void Start()
+        public void Play()
         {
             while (true)
             {
@@ -93,6 +97,12 @@
                     // TODO: If in check - check checkmate
                     // TODO: if not in check - check draw
                     // TODO: Continue
+                    this.WinnginConditions();
+
+                    if (this.gameState != GameState.Playing)
+                    {
+                        break;
+                    }
                 }
                 catch (Exception exception)
                 {

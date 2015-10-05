@@ -24,12 +24,15 @@
 
             this.AddPawnsToBoardRow(firstPlayer, board, 8);
 
-            this.AddKingToBoardRow(secondPlayer, board, 1, 'd');
+            //this.AddKingToBoardRow(secondPlayer, board, 1, 'd');
+            // TODO: remove below. Added only for testing purposes
+            this.AddKingToBoardRow(secondPlayer, board, 7, 'h');
         }
 
         private void AddPawnsToBoardRow(IPlayer player, IBoard board, int chessRow)
         {
-            for (int i = 0; i < GlobalConstants.StandartGameTotalBoardCols; i+=2)
+            // TODO : remove (-2) added for testing purposes
+            for (int i = 0; i < GlobalConstants.StandartGameTotalBoardCols - 2; i+=2)
             {
                 var pawn = new Pawn(player.Color);
                 player.AddFigure(pawn);
@@ -50,13 +53,13 @@
         {
             if (players.Count() != GlobalConstants.StandartGameNumberOfPlayers)
             {
-                throw new InvalidOperationException("King Survival Start Game Initialization Strategy needs exactly two players!");
+                throw new InvalidOperationException("King Survival Play Game Initialization Strategy needs exactly two players!");
             }
 
             if (board.TotalRows != GlobalConstants.StandartGameTotalBoardRows ||
                 board.TotalCols != GlobalConstants.StandartGameTotalBoardCols)
             {
-                throw new InvalidOperationException("King Survival Start Game Initialization Strategy needs 8x8 board!");
+                throw new InvalidOperationException("King Survival Play Game Initialization Strategy needs 8x8 board!");
             }
         }
     }

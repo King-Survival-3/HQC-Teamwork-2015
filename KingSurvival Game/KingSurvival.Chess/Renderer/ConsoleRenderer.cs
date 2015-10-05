@@ -177,5 +177,13 @@ namespace KingSurvival.Chess.Renderer
             Thread.Sleep(GlobalConstants.MessageDelayTime);
             ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForPlayerMessagesAndIO);
         }
+
+        public void RenderWinningScreen(string message)
+        {
+            Console.Clear();
+            ConsoleHelpers.SetCursorAtCenter(message.Length);
+            Console.WriteLine(message);
+            Thread.Sleep(1000);
+        }
     }
 }

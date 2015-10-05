@@ -71,13 +71,13 @@
         {
             if (players.Count() != GlobalConstants.StandartGameNumberOfPlayers)
             {
-                throw new InvalidOperationException("Standart Start Game Initialization Strategy needs exactly two players!");
+                throw new InvalidOperationException("Standart Play Game Initialization Strategy needs exactly two players!");
             }
 
             if (board.TotalRows != GlobalConstants.StandartGameTotalBoardRows ||
                 board.TotalCols != GlobalConstants.StandartGameTotalBoardCols)
             {
-                throw new InvalidOperationException("Standart Start Game Initialization Strategy needs 8x8 board!");
+                throw new InvalidOperationException("Standart Play Game Initialization Strategy needs 8x8 board!");
             }
         }
     }

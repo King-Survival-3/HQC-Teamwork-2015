@@ -9,5 +9,7 @@
         void RenderBoard(IBoard board);
 
         void PrintErrorMessage(string errorMessage);
+
+        void RenderWinningScreen(string message);
     }
 }

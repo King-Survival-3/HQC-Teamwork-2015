@@ -27,13 +27,13 @@
 
             IMovementStrategy movementStrategy = initializationGameProvider.GetMovementStrategy(gameType);
 
-            IChessEngine chessEngine = new StandartTwoPlayerEngine(renderer, inputProvider, movementStrategy);
+            IChessEngine chessEngine = initializationGameProvider.GetEngine(gameType, renderer, inputProvider, movementStrategy);
 
             IGameInitializationStrategy gameInitializationStrategy = initializationGameProvider.GetGameType(gameType);
 
             chessEngine.Initialize(gameInitializationStrategy);
 
-            chessEngine.Start();
+            chessEngine.Play();
 
             Console.ReadLine();
         }
