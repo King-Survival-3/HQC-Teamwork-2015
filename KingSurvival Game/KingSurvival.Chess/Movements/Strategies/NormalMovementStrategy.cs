@@ -16,6 +16,10 @@
                         {
                             new NormalKingMovement()
                         }},
+            {"Bishop", new List<IMovement>()
+                        {
+                            new NormalBishopMovement()
+                        }},
         };
         public IList<IMovement> GetMovements(string figure)
         {

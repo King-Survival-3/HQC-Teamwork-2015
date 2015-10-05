@@ -15,7 +15,9 @@
 
         public override ICollection<IMovement> Move(IMovementStrategy strategy)
         {
-            throw new System.NotImplementedException();
+            var movememts = strategy.GetMovements(this.GetType().Name);
+
+            return movememts;
         }
     }
 }
