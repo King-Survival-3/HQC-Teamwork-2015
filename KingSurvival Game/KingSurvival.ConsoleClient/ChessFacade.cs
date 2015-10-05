@@ -2,6 +2,7 @@
 {
     using System;
 
+    using KingSurvival.Chess.Board;
     using KingSurvival.Chess.Engine;
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.Engine.Initializations;

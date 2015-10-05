@@ -50,6 +50,7 @@
     <Compile Include="Common\Move.cs" />
     <Compile Include="Common\ObjectValidator.cs" />
     <Compile Include="Common\Position.cs" />
+    <Compile Include="Engine\BaseChessEngine.cs" />
     <Compile Include="Engine\Contracts\IChessEngine.cs" />
     <Compile Include="Engine\Contracts\IGameInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\InitializationGameProvider.cs" />
