@@ -183,7 +183,7 @@ namespace KingSurvival.Chess.Renderer
             Console.Clear();
             ConsoleHelpers.SetCursorAtCenter(message.Length);
             Console.WriteLine(message);
-            Thread.Sleep(1000);
+            Thread.Sleep(GlobalConstants.MessageDelayTime);
         }
     }
 }
