@@ -10,7 +10,7 @@
 
         void Initialize(IGameInitializationStrategy gameInitializationStrategy);
 
-        void Start();
+        void Play();
 
         void WinnginConditions();
     }

@@ -2,11 +2,14 @@
 {
     using System;
 
+    using KingSurvival.Chess.Board;
     using KingSurvival.Chess.Engine;
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.Engine.Initializations;
     using KingSurvival.Chess.InputProvider;
     using KingSurvival.Chess.InputProvider.Contracts;
+    using KingSurvival.Chess.Movements.Contracts;
+    using KingSurvival.Chess.Movements.Strategies;
     using KingSurvival.Chess.Renderer;
     using KingSurvival.Chess.Renderer.Contracts;
 
@@ -20,17 +23,17 @@
             IInputProvider inputProvider = new ConsoleInputProvider();
             var gameType = inputProvider.GetGameType();
 
-            IChessEngine chessEngine = new StandartTwoPlayerEngine(renderer, inputProvider);
+            InitializationGameProvider initializationGameProvider = new InitializationGameProvider();
 
-            //IGameInitializationStrategy gameInitializationStrategy = new StandartStartGameInitializationStrategy();
-            //IGameInitializationStrategy gameInitializationStrategy = new KingSurvivalGameInitializationStrategy();
-           
-            var initGame = new InitializationStrategyProvider();
-            IGameInitializationStrategy gameInitializationStrategy = initGame.GetGameType(gameType);
+            IMovementStrategy movementStrategy = initializationGameProvider.GetMovementStrategy(gameType);
+
+            IChessEngine chessEngine = initializationGameProvider.GetEngine(gameType, renderer, inputProvider, movementStrategy);
+
+            IGameInitializationStrategy gameInitializationStrategy = initializationGameProvider.GetGameType(gameType);
 
             chessEngine.Initialize(gameInitializationStrategy);
 
-            chessEngine.Start();
+            chessEngine.Play();
 
             Console.ReadLine();
         }

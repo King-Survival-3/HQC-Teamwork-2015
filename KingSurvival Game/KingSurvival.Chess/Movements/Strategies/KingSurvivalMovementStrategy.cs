@@ -4,22 +4,21 @@
 
     using KingSurvival.Chess.Movements.Contracts;
 
-    public class NormalMovementStrategy : IMovementStrategy
+    using KingSurvival.Chess.Movements.KingSurvivalMovements;
+
+    public class KingSurvivalMovementStrategy : IMovementStrategy
     {
         private readonly IDictionary<string, IList<IMovement>> movements = new Dictionary<string, IList<IMovement>>()
         {
             {"Pawn", new List<IMovement>()
                         {
-                            new NormalPawnMovement()
+                            new KingSurvivalPawnMovement()
                         }},
             {"King", new List<IMovement>()
                         {
-                            new NormalKingMovement()
-                        }},
-            {"Bishop", new List<IMovement>()
-                        {
-                            new NormalBishopMovement()
-                        }},
+                            new KingSurvivalKingMovement(),
+                        }}
+            
         };
         public IList<IMovement> GetMovements(string figure)
         {
