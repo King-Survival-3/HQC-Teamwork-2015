@@ -9,7 +9,7 @@
     using KingSurvival.Chess.Players;
     using KingSurvival.Chess.Players.Contracts;
 
-    class WebInputProvider : IInputProvider
+    public class WebInputProvider : IInputProvider
     {
         private Move move;
 

@@ -4,14 +4,20 @@
     using System.Linq;
 
     using Microsoft.AspNet.SignalR;
-    
+
     using KingSurvival.Data;
     using KingSurvival.Models;
     using KingSurvival.Web.Helpers;
     using KingSurvival.Chess.Board.Contracts;
     using KingSurvival.Chess.Renderer.Contracts;
+    using KingSurvival.Chess.Engine.Initializations;
+    using KingSurvival.Chess.Players;
+    using KingSurvival.Chess.Common;
+    using KingSurvival.Chess.InputProvider;
+    using KingSurvival.Chess.Movements.Strategies;
+    using KingSurvival.Chess.Engine;
 
-    public class KingSurvivalGame : Hub , IRenderer
+    public class KingSurvivalGame : Hub, IRenderer
     {
         private readonly IKingSurvivalData data;
 
@@ -21,24 +27,50 @@
 
         }
 
+        private Game Game { get; set; }
+
         public KingSurvivalGame(IKingSurvivalData data)
         {
             this.data = data;
         }
 
-        public void RenderMainMenu()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void RenderBoard(IBoard board)
         {
-            throw new NotImplementedException();
+            //TODO: board to fen
+            var gameId = Game.Id.ToString();
+
+           // Game.Board = BoardHelper.BoardToFen(board);
+            Game.State = Game.State == KingSurvivalGameState.TurnKing ? KingSurvivalGameState.TurnPown : KingSurvivalGameState.TurnKing;
+
+            // just updating the state
+            this.data.SaveChanges();
+
+            // move 
+            this.Clients.Group(gameId).move(Game.Board);
+
+            // update state 
+            this.UpdateState(gameId);
         }
 
         public void PrintErrorMessage(string errorMessage)
         {
-            
+            var gameId = Game.Id.ToString();
+            var oldFen = Game.Board;
+            this.Clients.Group(gameId).move(oldFen);
+            return;
+        }
+
+        public void RenderWinningScreen(string message)
+        {
+            //Win WIn Win
+            throw new NotImplementedException();
+        }
+
+        public void RenderMainMenu()
+        {
+            throw new NotImplementedException();
         }
 
         // Name of the room is same like the game Id
@@ -55,26 +87,19 @@
 
         public void GameEngine(string gameId, string userId, string moveFrom, string moveTo)
         {
-            var game = this.GetGame(gameId);
+            this.Game = this.GetGame(gameId);
+
             // if game doesn't exist
-            if (game == null)
+            if (Game == null)
             {
                 return;
             }
 
             var playerID = userId;
-            var oldFen = game.Board;
+            var oldFen = Game.Board;
             var gameBoard = BoardHelper.FenToBoard(oldFen);
-            var figure = playerID == game.FirstPlayerId ? KingSurvivalGameConstants.King : KingSurvivalGameConstants.Pawn;
-            var oldPosition = this.ParceMove(moveFrom);
-            var newPosition = this.ParceMove(moveTo);
-
-            // something wrong with position 
-            if (oldPosition == null || newPosition == null)
-            {
-                this.Clients.Group(gameId).move(oldFen);
-            }
-
+            var figure = playerID == Game.FirstPlayerId ? KingSurvivalGameConstants.King : KingSurvivalGameConstants.Pawn;
+            
             // nothing to move
             if (moveFrom == moveTo)
             {
@@ -82,107 +107,42 @@
             }
 
             // check If player is 1 or 2 
-            if (playerID != game.FirstPlayerId && playerID != game.SecondPlayerId)
+            if (playerID != Game.FirstPlayerId && playerID != Game.SecondPlayerId)
             {
                 //return you are not part of this game
                 this.Clients.Group(gameId).move(oldFen);
                 return;
             }
 
-            if (playerID == game.FirstPlayerId && game.State != GameState.TurnKing)
+            if (playerID == Game.FirstPlayerId && Game.State != KingSurvivalGameState.TurnKing)
             {
                 // this is not your turn
                 this.Clients.Group(gameId).move(oldFen);
                 return;
             }
 
-            if (playerID == game.SecondPlayerId && game.State != GameState.TurnPown)
+            if (playerID == Game.SecondPlayerId && Game.State != KingSurvivalGameState.TurnPown)
             {
                 // this is not your turn
                 this.Clients.Group(gameId).move(oldFen);
                 return;
             }
 
-            // check for correct figure
-            if (playerID == game.FirstPlayerId && gameBoard[oldPosition.Row, oldPosition.Col] != KingSurvivalGameConstants.King)
-            {
-                // you move wrong figure
-                this.Clients.Group(gameId).move(oldFen);
-                return;
-            }
+            var furstPlayer = new Player("pesho", ChessColor.White);
+            var secondPlayer = new Player("Gosho", Chess.Common.ChessColor.White);
+            var kingSurvivalInitilizeStrategy = new KingSurvivalGameWebInitializationStrategy(oldFen, furstPlayer, secondPlayer);
+            var move = new Move(new Position(moveFrom[1] - '0', moveFrom[0]), new Position(moveTo[1] - '0', moveTo[0]));
+            var inputProvider = new WebInputProvider(move);
+            var movementStrategy = new KingSurvivalMovementStrategy();
 
-            if (playerID == game.SecondPlayerId && gameBoard[oldPosition.Row, oldPosition.Col] != KingSurvivalGameConstants.Pawn)
-            {
-                // you move wrong figure
-                this.Clients.Group(gameId).move(oldFen);
-                return;
-            }
+            var kingSurvivalGameEngine = new KingSurvivalEngine(this, inputProvider, movementStrategy);
 
-            //check is move is legal
-            if (!this.IsLegalMove(gameBoard, figure, oldPosition, newPosition))
-            {
-                //move is not legal return
-                this.Clients.Group(gameId).move(oldFen);
-                return;
-            }
+            kingSurvivalGameEngine.Initialize(kingSurvivalInitilizeStrategy);
+            kingSurvivalGameEngine.Play();
 
             // everything is OK, save changes 
-            gameBoard = this.SwapPosition(gameBoard, oldPosition, newPosition);
-            game.Board = BoardHelper.BoardToFen(gameBoard);
-            game.State = game.State == GameState.TurnKing ? GameState.TurnPown : GameState.TurnKing;
+            // gameBoard = this.SwapPosition(gameBoard, oldPosition, newPosition);
 
-            // just updating the state
-            if (this.HasKingWon(gameBoard))
-            {
-                game.State = GameState.GameWonByKing;
-            }
-
-            if (this.HasKingLost(gameBoard))
-            {
-                game.State = GameState.GameWonByPown;
-            }
-
-            this.data.SaveChanges();
-
-            // move 
-            this.Clients.Group(gameId).move(game.Board);
-
-            // update state 
-            this.UpdateState(gameId);
-        }
-
-        private bool IsLegalMove(char[,] gameBoard, char figure, Position oldPosition, Position newPosition)
-        {
-            var emptySpace = this.IsSpaceEmpty(gameBoard, newPosition);
-
-            // check if king can move up left, and the position is empty
-            if (figure == KingSurvivalGameConstants.King && oldPosition.Row + 1 == newPosition.Row && oldPosition.Col - 1 == newPosition.Col
-                && emptySpace)
-            {
-                return true;
-            }
-
-            // check if king can move up right, and the position is empty
-            if (figure == KingSurvivalGameConstants.King && oldPosition.Row + 1 == newPosition.Row && oldPosition.Col + 1 == newPosition.Col
-                && emptySpace)
-            {
-                return true;
-            }
-
-            // check if figure can move down left, and the position is empty
-            if (oldPosition.Row - 1 == newPosition.Row && oldPosition.Col - 1 == newPosition.Col && emptySpace)
-            {
-                return true;
-            }
-
-            // check if figure can move down right, and the position is empty
-            if (oldPosition.Row - 1 == newPosition.Row && oldPosition.Col + 1 == newPosition.Col && emptySpace)
-            {
-                return true;
-            }
-
-            // Illegal move 
-            return false;
         }
 
         private void UpdateState(string gameId)
@@ -196,89 +156,11 @@
             this.Clients.Group(gameId).updateGameState(gameState);
         }
 
-        private bool HasKingWon(char[,] gameBoard)
-        {
-            var kingPosition = this.GetKingPosition(gameBoard);
-            var survivalRow = KingSurvivalGameConstants.SurvivalRow;
-
-            if (kingPosition.Row == survivalRow)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool HasKingLost(char[,] gameBoard)
-        {
-            var kingPosition = this.GetKingPosition(gameBoard);
-            var up = kingPosition.Row + 1;
-            var down = kingPosition.Row - 1;
-            var left = kingPosition.Col - 1;
-            var right = kingPosition.Col + 1;
-            var maxRow = gameBoard.GetLength(0);
-            var maxCol = gameBoard.GetLength(1);
-
-            // up left
-            if (up < maxRow && left >= 0 && gameBoard[up, left] == KingSurvivalGameConstants.EmptySpace)
-            {
-                return false;
-            }
-
-            // up right 
-            if (up < maxRow && right < maxCol && gameBoard[up, right] == KingSurvivalGameConstants.EmptySpace)
-            {
-                return false;
-            }
-
-            // down left
-            if (down >= 0 && left >= 0 && gameBoard[down, left] == KingSurvivalGameConstants.EmptySpace)
-            {
-                return false;
-            }
-
-            // down right
-            if (down >= 0 && right < maxCol && gameBoard[down, right] == KingSurvivalGameConstants.EmptySpace)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        private Position GetKingPosition(char[,] gameBoard)
-        {
-            var lastRow = KingSurvivalGameConstants.LastRow;
-            var lastCol = KingSurvivalGameConstants.LastCol;
-
-            // check if king is on last row
-            for (var row = 0; row < lastRow; row++)
-            {
-                for (var col = 0; col <= lastCol; col++)
-                {
-                    if (gameBoard[row, col] == KingSurvivalGameConstants.King)
-                    {
-                        return new Position(row, col);
-                    }
-                }
-            }
-
-            return null;
-        }
-
         private bool IsSpaceEmpty(char[,] gameBoard, Position position)
         {
             return gameBoard[position.Row, position.Col] == KingSurvivalGameConstants.EmptySpace;
         }
 
-        private char[,] SwapPosition(char[,] board, Position oldPosition, Position newPosition)
-        {
-            var figure = board[oldPosition.Row, oldPosition.Col];
-            board[oldPosition.Row, oldPosition.Col] = KingSurvivalGameConstants.EmptySpace;
-            board[newPosition.Row, newPosition.Col] = figure;
-
-            return board;
-        }
 
         private Game GetGame(string gameId)
         {
@@ -287,24 +169,27 @@
             return game;
         }
 
-        private Position ParceMove(string move)
-        {
-            Position position;
+        //private Position ParceMove(string move)
+        //{
+        //    Position position;
 
-            // if move is not in boundary of array will throw 
-            try
-            {
-                position = MoveHelper.ParceMove(move);
-            }
-            catch (ArgumentException)
-            {
-                // return clients boards in old state
-                return null;
-            }
+        //    // if move is not in boundary of array will throw 
+        //    try
+        //    {
+        //        position = MoveHelper.ParceMove(move);
+        //    }
+        //    catch (ArgumentException)
+        //    {
+        //        // return clients boards in old state
+        //        return null;
+        //    }
 
-            return position;
-        }
+        //    return position;
+        //}
 
-       
+
+
+
+
     }
 }

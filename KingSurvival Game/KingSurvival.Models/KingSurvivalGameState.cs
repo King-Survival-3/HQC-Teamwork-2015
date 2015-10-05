@@ -1,6 +1,6 @@
 ﻿namespace KingSurvival.Models
 {
-    public enum GameState
+    public enum KingSurvivalGameState
     {
         WaitingForSecondPlayer = 0,
         TurnKing = 1,

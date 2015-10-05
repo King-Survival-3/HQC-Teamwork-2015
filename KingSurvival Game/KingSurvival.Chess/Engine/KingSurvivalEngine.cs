@@ -6,7 +6,7 @@
     using KingSurvival.Chess.Movements.Contracts;
     using KingSurvival.Chess.Renderer.Contracts;
 
-    class KingSurvivalEngine : BaseChessEngine, IChessEngine
+    public class KingSurvivalEngine : BaseChessEngine, IChessEngine
     {
 
         public KingSurvivalEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
@@ -22,7 +22,7 @@
                 var col = (char)(i + 'а');
 
                 var figure = this.board.GetFigureAtPosition(new Position(row, col));
-                
+
                 if (figure is Figures.King)
                 {
                     this.gameState = GameState.WhiteWon;

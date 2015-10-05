@@ -46,7 +46,7 @@
 
             var gameState = this.data.Game.All()
               .Where(x => x.Id == game.Id)
-              .Select(x => new { Id = x.Id, PlayerFigure = GameState.TurnKing, playerId = x.FirstPlayerId, gameState = x.State })
+              .Select(x => new { Id = x.Id, PlayerFigure = KingSurvivalGameState.TurnKing, playerId = x.FirstPlayerId, gameState = x.State })
               .FirstOrDefault();
 
             return Ok(gameState);
@@ -69,12 +69,12 @@
 
             game.SecondPlayerId = userId;
             game.SecondPlayerUserName = userName;
-            game.State = GameState.TurnKing;
+            game.State = KingSurvivalGameState.TurnKing;
             this.data.SaveChanges();
 
             var gameState = this.data.Game.All()
                 .Where(x => x.Id.ToString() == gameId)
-                .Select(x => new{Id = x.Id, PlayerFigure = GameState.TurnPown, playerId = x.SecondPlayerId, gameState = x.State })
+                .Select(x => new{Id = x.Id, PlayerFigure = KingSurvivalGameState.TurnPown, playerId = x.SecondPlayerId, gameState = x.State })
                 .FirstOrDefault();
 
             return Ok(gameState);
@@ -85,7 +85,7 @@
         public IHttpActionResult ActiveGames()
         {
             var games = this.data.Game.All()
-                .Where(x => x.State == GameState.WaitingForSecondPlayer);
+                .Where(x => x.State == KingSurvivalGameState.WaitingForSecondPlayer);
 
             return Ok(games);
         }

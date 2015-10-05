@@ -10,7 +10,7 @@
         {
             this.Id = Guid.NewGuid();
             this.Board = "p1p1p1p1/8/8/8/8/8/8/3K4";
-            this.State = GameState.WaitingForSecondPlayer;
+            this.State = KingSurvivalGameState.WaitingForSecondPlayer;
             this.CreationDate = DateTime.Now;
         }
 
@@ -20,7 +20,7 @@
         [Required]
         public string Board { get; set; }
 
-        public GameState State { get; set; }
+        public KingSurvivalGameState State { get; set; }
 
         [Required]
         public string FirstPlayerId { get; set; }

@@ -11,7 +11,7 @@
     using KingSurvival.Chess.Players.Contracts;
     using System.Text;
 
-    class KingSurvivalGameWebInitializationStrategy : IGameInitializationStrategy
+    public class KingSurvivalGameWebInitializationStrategy : IGameInitializationStrategy
     {
         private const char Pown = 'p';
         private const char King = 'K';
@@ -54,14 +54,14 @@
                     {
                         var pawn = new Pawn(secondPlayer.Color);
                         secondPlayer.AddFigure(pawn);
-                        var position = new Position(index, (char)(col + 'a'));
+                        var position = new Position(index + 1, (char)(col + 'a'));
                         board.AddFigure(pawn, position);
                     }
                     else if (currentRow[col] == KingSurvivalGameWebInitializationStrategy.King)
                     {
                         var figureInstance = new King(firstPlayser.Color);
                         firstPlayser.AddFigure(figureInstance);
-                        var position = new Position(index, (char)(col + 'a'));
+                        var position = new Position(index + 1, (char)(col + 'a'));
                         board.AddFigure(figureInstance, position);
                     }
                 }
