@@ -1,17 +1,13 @@
 ﻿namespace KingSurvival.ConsoleClient
 {
-    using System;
-
-    using KingSurvival.Chess.Board;
-    using KingSurvival.Chess.Engine;
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.Engine.Initializations;
     using KingSurvival.Chess.InputProvider;
     using KingSurvival.Chess.InputProvider.Contracts;
     using KingSurvival.Chess.Movements.Contracts;
-    using KingSurvival.Chess.Movements.Strategies;
     using KingSurvival.Chess.Renderer;
     using KingSurvival.Chess.Renderer.Contracts;
+    using KingSurvival.Chess.Formatter;
 
     public static class ChessFacade
     {
@@ -19,10 +15,12 @@
         {
             while (true)
             {
-                IRenderer renderer = new ConsoleRenderer();
+                var formatter = new FancyFormatter(); // new FancyFormatter(); new StandardFormatter();
+
+                IRenderer renderer = new ConsoleRenderer(formatter);
                 renderer.RenderMainMenu();
 
-                IInputProvider inputProvider = new ConsoleInputProvider();
+                IInputProvider inputProvider = new ConsoleInputProvider(formatter);
                 var gameType = inputProvider.GetGameType();
 
                 InitializationGameProvider initializationGameProvider = new InitializationGameProvider();
