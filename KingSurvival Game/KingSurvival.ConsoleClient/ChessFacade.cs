@@ -17,25 +17,26 @@
     {
         public static void Start()
         {
-            IRenderer renderer = new ConsoleRenderer();
-            renderer.RenderMainMenu();
+            while (true)
+            {
+                IRenderer renderer = new ConsoleRenderer();
+                renderer.RenderMainMenu();
 
-            IInputProvider inputProvider = new ConsoleInputProvider();
-            var gameType = inputProvider.GetGameType();
+                IInputProvider inputProvider = new ConsoleInputProvider();
+                var gameType = inputProvider.GetGameType();
 
-            InitializationGameProvider initializationGameProvider = new InitializationGameProvider();
+                InitializationGameProvider initializationGameProvider = new InitializationGameProvider();
 
-            IMovementStrategy movementStrategy = initializationGameProvider.GetMovementStrategy(gameType);
+                IMovementStrategy movementStrategy = initializationGameProvider.GetMovementStrategy(gameType);
 
-            IChessEngine chessEngine = initializationGameProvider.GetEngine(gameType, renderer, inputProvider, movementStrategy);
+                IChessEngine chessEngine = initializationGameProvider.GetEngine(gameType, renderer, inputProvider, movementStrategy);
 
-            IGameInitializationStrategy gameInitializationStrategy = initializationGameProvider.GetGameType(gameType);
+                IGameInitializationStrategy gameInitializationStrategy = initializationGameProvider.GetGameType(gameType);
 
-            chessEngine.Initialize(gameInitializationStrategy);
+                chessEngine.Initialize(gameInitializationStrategy);
 
-            chessEngine.Play();
-
-            Console.ReadLine();
+                chessEngine.Play();
+            }
         }
     }
 }

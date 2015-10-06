@@ -41,13 +41,12 @@
         private static void PrintSelectGameMenu()
         {
             Console.Clear();
-            string[] message = new[] { "Select game", " 1 : for Chess", "2 : for King Survival" };
+            string[] message = new[] { "Select game by typing the number", "\n", " 1 : Chess", "\n", "2 : King Survival" };
             ConsoleHelpers.PrintTextAtCenter(message);
         }
 
         private static void PrintWelcomeMessage()
         {
-            // TODO: Add main menu
             ConsoleHelpers.SetCursorAtCenter(GlobalConstants.LogoTitle.Length);
             Console.WriteLine(GlobalConstants.LogoTitle);
             Thread.Sleep(1000);
