@@ -1,41 +1,40 @@
 ﻿namespace KingSurvival.ConsoleClient
 {
-    using System;
-
-    using KingSurvival.Chess.Board;
-    using KingSurvival.Chess.Engine;
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.Engine.Initializations;
     using KingSurvival.Chess.InputProvider;
     using KingSurvival.Chess.InputProvider.Contracts;
     using KingSurvival.Chess.Movements.Contracts;
-    using KingSurvival.Chess.Movements.Strategies;
     using KingSurvival.Chess.Renderer;
     using KingSurvival.Chess.Renderer.Contracts;
+    using KingSurvival.Chess.Formatter;
 
     public static class ChessFacade
     {
         public static void Start()
         {
-            IRenderer renderer = new ConsoleRenderer();
-            renderer.RenderMainMenu();
+            while (true)
+            {
+                var formatter = new FancyFormatter(); // new FancyFormatter(); new StandardFormatter();
 
-            IInputProvider inputProvider = new ConsoleInputProvider();
-            var gameType = inputProvider.GetGameType();
+                IRenderer renderer = new ConsoleRenderer(formatter);
+                renderer.RenderMainMenu();
 
-            InitializationGameProvider initializationGameProvider = new InitializationGameProvider();
+                IInputProvider inputProvider = new ConsoleInputProvider(formatter);
+                var gameType = inputProvider.GetGameType();
 
-            IMovementStrategy movementStrategy = initializationGameProvider.GetMovementStrategy(gameType);
+                InitializationGameProvider initializationGameProvider = new InitializationGameProvider();
 
-            IChessEngine chessEngine = initializationGameProvider.GetEngine(gameType, renderer, inputProvider, movementStrategy);
+                IMovementStrategy movementStrategy = initializationGameProvider.GetMovementStrategy(gameType);
 
-            IGameInitializationStrategy gameInitializationStrategy = initializationGameProvider.GetGameType(gameType);
+                IChessEngine chessEngine = initializationGameProvider.GetEngine(gameType, renderer, inputProvider, movementStrategy);
 
-            chessEngine.Initialize(gameInitializationStrategy);
+                IGameInitializationStrategy gameInitializationStrategy = initializationGameProvider.GetGameType(gameType);
 
-            chessEngine.Play();
+                chessEngine.Initialize(gameInitializationStrategy);
 
-            Console.ReadLine();
+                chessEngine.Play();
+            }
         }
     }
 }

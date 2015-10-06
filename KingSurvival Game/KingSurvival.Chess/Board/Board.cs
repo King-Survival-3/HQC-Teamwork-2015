@@ -1,5 +1,7 @@
 ﻿namespace KingSurvival.Chess.Board
 {
+    using System.Collections.Generic;
+
     using KingSurvival.Chess.Board.Contracts;
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Figures.Contracts;

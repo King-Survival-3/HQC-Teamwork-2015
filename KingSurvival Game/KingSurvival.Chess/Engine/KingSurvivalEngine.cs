@@ -1,5 +1,8 @@
 ﻿namespace KingSurvival.Chess.Engine
 {
+    using System;
+    using System.Linq;
+
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.InputProvider.Contracts;
@@ -18,14 +21,17 @@
         {
             for (int i = 0; i < this.board.TotalCols; i++)
             {
-                var row = this.board.TotalRows;
-                var col = (char)(i + 'а');
-
-                var figure = this.board.GetFigureAtPosition(new Position(row, col));
-
-                if (figure is Figures.King)
+                try
                 {
-                    this.gameState = GameState.WhiteWon;
+                    var figure = this.board.GetFigureAtPosition(new Position(this.board.TotalRows, (char)('a' + i)));
+                    if (figure is Figures.King)
+                    {
+                        this.GameState = GameState.WhiteWon;
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
                 }
             }
         }

@@ -68,6 +68,9 @@
     <Compile Include="Figures\Pawn.cs" />
     <Compile Include="Figures\Queen.cs" />
     <Compile Include="Figures\Rook.cs" />
+    <Compile Include="Formatter\Contracts\IFormatter.cs" />
+    <Compile Include="Formatter\FancyFormatter.cs" />
+    <Compile Include="Formatter\StandartFormatter.cs" />
     <Compile Include="InputProvider\ConsoleInputProvider.cs" />
     <Compile Include="InputProvider\Contracts\IInputProvider.cs" />
     <Compile Include="InputProvider\WebInputProvider.cs" />

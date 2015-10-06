@@ -14,6 +14,10 @@
 	
 - Repository pattern (sort of facade?)
 
+- Bridge pattern
+	+ used for Console client
+	+ based on provided IFormatter implementation otput strings are formated in different ways;
+	
 ## Creational patterns:
 - Simple factory
 

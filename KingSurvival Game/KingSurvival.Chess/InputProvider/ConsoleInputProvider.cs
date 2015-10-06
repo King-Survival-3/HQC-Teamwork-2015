@@ -5,6 +5,7 @@
 
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Common.Console;
+    using KingSurvival.Chess.Formatter.Contracts;
     using KingSurvival.Chess.InputProvider.Contracts;
     using KingSurvival.Chess.Players;
     using KingSurvival.Chess.Players.Contracts;
@@ -13,6 +14,13 @@
     {
         private const string PlayerNameText = "Enter player {0} name: ";
 
+        private IFormatter formatter;
+
+        public ConsoleInputProvider(IFormatter formatter)
+        {
+            this.formatter = formatter;
+        }
+
         public IList<IPlayer> GetPlayers(int numberOfPlayers)
         {
             var players = new List<IPlayer>();
@@ -20,7 +28,7 @@
             {
                 Console.Clear();
                 ConsoleHelpers.SetCursorAtCenter(PlayerNameText.Length);
-                Console.Write(PlayerNameText, i);
+                Console.Write(this.formatter.Format(String.Format(PlayerNameText, i)));
                 string name = Console.ReadLine();
                 var player = new Player(name, (ChessColor)i - 1);
                 players.Add(player);
@@ -40,7 +48,8 @@
 
             if (string.IsNullOrEmpty(userGameChoice))
             {
-                throw new ArgumentException("Invalid choice");
+                var message = this.formatter.Format("Invalid choice");
+                throw new ArgumentException(message);
             }
 
             GameType userGameTypeChoice = (GameType)Enum.Parse(typeof(GameType), userGameChoice);
@@ -58,7 +67,7 @@
         {
             Console.BackgroundColor = ConsoleColor.Black;
             ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForPlayerMessagesAndIO);
-            var message = string.Format("{0} is next: ", player.Name);
+            var message = this.formatter.Format(string.Format("{0} is next: ", player.Name));
 
             ConsoleHelpers.SetCursorTopCenter(message.Length);
             Console.WriteLine(message);

@@ -1,13 +1,13 @@
-﻿using System.Linq;
-
-namespace KingSurvival.Chess.Renderer
+﻿namespace KingSurvival.Chess.Renderer
 {
     using System;
+    using System.ComponentModel;
     using System.Threading;
 
     using KingSurvival.Chess.Board.Contracts;
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Common.Console;
+    using KingSurvival.Chess.Formatter.Contracts;
     using KingSurvival.Chess.Renderer.Contracts;
 
     public class ConsoleRenderer : IRenderer
@@ -15,8 +15,11 @@ namespace KingSurvival.Chess.Renderer
         private const ConsoleColor DarskSquareConsoleColor = ConsoleColor.DarkGray;
         private const ConsoleColor LightSquareConsoleColor = ConsoleColor.Gray;
 
-        public ConsoleRenderer()
+        private IFormatter formatter;
+
+        public ConsoleRenderer(IFormatter formatter)
         {
+            this.formatter = formatter;
             InitializeConsoleSettings();
         }
 
@@ -35,23 +38,32 @@ namespace KingSurvival.Chess.Renderer
 
         public void RenderMainMenu()
         {
-            PrintWelcomeMessage();
+            this.PrintWelcomeMessage();
 
             PrintSelectGameMenu();
         }
 
-        private static void PrintSelectGameMenu()
+        private void PrintSelectGameMenu()
         {
             Console.Clear();
-            string[] message = new[] { "Select game", " 1 : for Chess", "2 : for King Survival" };
-            ConsoleHelpers.PrintTextAtCenter(message);
+            string[] messages = new[] { "Select game by typing the number", "\n", " 1 : Chess", "\n", "2 : King Survival" };
+
+            for (int i = 0; i < messages.Length; i++)
+            {
+                if (messages[i] != "\n")
+                {
+                    messages[i] = this.formatter.Format(messages[i]);
+                }
+            }
+
+            ConsoleHelpers.PrintTextAtCenter(messages);
         }
 
-        private static void PrintWelcomeMessage()
+        private void PrintWelcomeMessage()
         {
-            // TODO: Add main menu
             ConsoleHelpers.SetCursorAtCenter(GlobalConstants.LogoTitle.Length);
-            Console.WriteLine(GlobalConstants.LogoTitle);
+            var message = this.formatter.Format(GlobalConstants.LogoTitle);
+            Console.WriteLine(message);
             Thread.Sleep(1000);
         }
 
@@ -173,16 +185,17 @@ namespace KingSurvival.Chess.Renderer
         {
             ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForPlayerMessagesAndIO);
             ConsoleHelpers.SetCursorTopCenter(errorMessage.Length);
-            Console.Write(errorMessage);
+            Console.Write(this.formatter.Format(errorMessage));
             Thread.Sleep(GlobalConstants.MessageDelayTime);
             ConsoleHelpers.ClearRow(ConsoleConstants.ConsoleRowForPlayerMessagesAndIO);
         }
 
         public void RenderWinningScreen(string message)
         {
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
             ConsoleHelpers.SetCursorAtCenter(message.Length);
-            Console.WriteLine(message);
+            Console.WriteLine(this.formatter.Format(message));
             Thread.Sleep(GlobalConstants.MessageDelayTime);
         }
     }

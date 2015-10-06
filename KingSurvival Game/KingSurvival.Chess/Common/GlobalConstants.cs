@@ -18,7 +18,7 @@
 
         public const char MaximumColValueOnBoard = 'h';
 
-        public const string LogoTitle = "Just Chess";
+        public const string LogoTitle = "King Survival 3 Team work";
 
         public static int MessageDelayTime = 1500;
     }

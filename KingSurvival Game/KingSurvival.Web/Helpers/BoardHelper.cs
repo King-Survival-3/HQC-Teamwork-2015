@@ -1,5 +1,6 @@
 ﻿namespace KingSurvival.Web.Helpers
 {
+    using KingSurvival.Chess.Figures.Contracts;
     using System;
     using System.Text;
 
@@ -26,16 +27,16 @@
             return board;
         }
 
-        public static string BoardToFen(char[,] board)
+        public static string BoardToFen(IFigure[,] board)
         {
             var fen = new StringBuilder();
             var reversedRow = board.GetLength(0) - 1;
-            for (int row = 0; row < board.GetLength(0); row++)
+            for (int row = 1; row < board.GetLength(0); row++)
             {
                 var empySpace = 0;
                 for (int col = 0; col < board.GetLength(1); col++)
                 {
-                    if (board[reversedRow, col] == '-')
+                    if (board[reversedRow, col] == null)
                     {
                         empySpace++;
                     }
