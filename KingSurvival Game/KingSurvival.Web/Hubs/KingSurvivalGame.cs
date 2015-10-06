@@ -34,14 +34,13 @@
             this.data = data;
         }
 
-
-
         public void RenderBoard(IBoard board)
         {
             //TODO: board to fen
             var gameId = Game.Id.ToString();
 
-           // Game.Board = BoardHelper.BoardToFen(board);
+            Game.Board = BoardHelper.BoardToFen(board);
+
             Game.State = Game.State == KingSurvivalGameState.TurnKing ? KingSurvivalGameState.TurnPown : KingSurvivalGameState.TurnKing;
 
             // just updating the state
@@ -97,7 +96,7 @@
 
             var playerID = userId;
             var oldFen = Game.Board;
-            var gameBoard = BoardHelper.FenToBoard(oldFen);
+          //  var gameBoard = BoardHelper.FenToBoard(oldFen);
             var figure = playerID == Game.FirstPlayerId ? KingSurvivalGameConstants.King : KingSurvivalGameConstants.Pawn;
             
             // nothing to move
@@ -156,40 +155,11 @@
             this.Clients.Group(gameId).updateGameState(gameState);
         }
 
-        private bool IsSpaceEmpty(char[,] gameBoard, Position position)
-        {
-            return gameBoard[position.Row, position.Col] == KingSurvivalGameConstants.EmptySpace;
-        }
-
-
         private Game GetGame(string gameId)
         {
             var game = this.data.Game.All().FirstOrDefault(x => x.Id.ToString() == gameId);
 
             return game;
         }
-
-        //private Position ParceMove(string move)
-        //{
-        //    Position position;
-
-        //    // if move is not in boundary of array will throw 
-        //    try
-        //    {
-        //        position = MoveHelper.ParceMove(move);
-        //    }
-        //    catch (ArgumentException)
-        //    {
-        //        // return clients boards in old state
-        //        return null;
-        //    }
-
-        //    return position;
-        //}
-
-
-
-
-
     }
 }
