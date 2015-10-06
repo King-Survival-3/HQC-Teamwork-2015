@@ -28,7 +28,7 @@
 
         protected int currentPlayerIndex;
 
-        protected GameState gameState;
+        protected GameState GameState;
 
         protected BaseChessEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
         {
@@ -37,7 +37,7 @@
             this.input = inputProvider;
             this.board = new Board();
 
-            this.gameState = GameState.Playing;
+            this.GameState = GameState.Playing;
         }
 
         public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
@@ -99,8 +99,9 @@
                     // TODO: Continue
                     this.WinnginConditions();
 
-                    if (this.gameState != GameState.Playing)
+                    if (this.GameState != GameState.Playing)
                     {
+                        this.renderer.RenderWinningScreen(this.GameState.ToString());
                         break;
                     }
                 }

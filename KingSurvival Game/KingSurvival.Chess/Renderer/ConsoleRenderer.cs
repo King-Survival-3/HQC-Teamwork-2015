@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace KingSurvival.Chess.Renderer
+﻿namespace KingSurvival.Chess.Renderer
 {
     using System;
     using System.Threading;
@@ -180,6 +178,7 @@ namespace KingSurvival.Chess.Renderer
 
         public void RenderWinningScreen(string message)
         {
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
             ConsoleHelpers.SetCursorAtCenter(message.Length);
             Console.WriteLine(message);
