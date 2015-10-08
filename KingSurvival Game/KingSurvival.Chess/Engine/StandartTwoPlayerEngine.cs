@@ -1,55 +1,22 @@
 ﻿namespace KingSurvival.Chess.Engine
 {
-    using System;
-    using System.Collections.Generic;
-
     using KingSurvival.Chess.Board;
-    using KingSurvival.Chess.Board.Contracts;
-    using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.InputProvider.Contracts;
-    using KingSurvival.Chess.Players.Contracts;
-    using KingSurvival.Chess.Renderer.Contrats;
+    using KingSurvival.Chess.Movements.Contracts;
+    using KingSurvival.Chess.Renderer.Contracts;
 
-    public class StandartTwoPlayerEngine : IChessEngine
+    public class StandartTwoPlayerEngine : BaseChessEngine, IChessEngine
     {
-        private readonly IList<IPlayer> players;
-        private readonly IRenderer renderer;
-        private readonly IInputProvider input;
 
-        private readonly IBoard board;
-
-
-        public StandartTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider)
+        public StandartTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
+            : base(renderer, inputProvider, movementStrategy)
         {
-            this.renderer = renderer;
-            this.input = inputProvider;
-            this.board = new Board();
         }
 
-        public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
-        {
-            var players = this.input.GetPlayers(GlobalConstants.StandartGameNumberOfPlayers);
-            gameInitializationStrategy.Initialize(players, this.board);
-            this.renderer.RenderBoard(this.board);
-        }
-
-        public void Start()
+        public override void WinnginConditions()
         {
             throw new System.NotImplementedException();
-        }
-
-        public void WinnginConditions()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerable<IPlayer> Players
-        {
-            get
-            {
-                return new List<IPlayer>(this.players);
-            }
         }
     }
 }

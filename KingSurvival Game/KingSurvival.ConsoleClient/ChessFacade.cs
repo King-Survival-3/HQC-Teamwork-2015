@@ -1,33 +1,40 @@
 ﻿namespace KingSurvival.ConsoleClient
 {
-    using System;
-
-    using KingSurvival.Chess.Engine;
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.Engine.Initializations;
     using KingSurvival.Chess.InputProvider;
     using KingSurvival.Chess.InputProvider.Contracts;
+    using KingSurvival.Chess.Movements.Contracts;
     using KingSurvival.Chess.Renderer;
-    using KingSurvival.Chess.Renderer.Contrats;
+    using KingSurvival.Chess.Renderer.Contracts;
+    using KingSurvival.Chess.Formatter;
 
     public static class ChessFacade
     {
         public static void Start()
         {
-            IRenderer renderer = new ConsoleRenderer();
-            renderer.RenderMainMenu();
+            while (true)
+            {
+                var formatter = new FancyFormatter(); // new FancyFormatter(); new StandardFormatter();
 
-            IInputProvider inputProvider = new ConsoleInputProvider();
+                IRenderer renderer = new ConsoleRenderer(formatter);
+                renderer.RenderMainMenu();
 
-            IChessEngine chessEngine = new StandartTwoPlayerEngine(renderer, inputProvider);
+                IInputProvider inputProvider = new ConsoleInputProvider(formatter);
+                var gameType = inputProvider.GetGameType();
 
-            IGameInitializationStrategy gameInitializationStrategy = new StandartStartGameInitializationStrategy();
+                InitializationGameProvider initializationGameProvider = new InitializationGameProvider();
 
-            chessEngine.Initialize(gameInitializationStrategy);
+                IMovementStrategy movementStrategy = initializationGameProvider.GetMovementStrategy(gameType);
 
-            chessEngine.Start();
+                IChessEngine chessEngine = initializationGameProvider.GetEngine(gameType, renderer, inputProvider, movementStrategy);
 
-            Console.ReadLine();
+                IGameInitializationStrategy gameInitializationStrategy = initializationGameProvider.GetGameType(gameType);
+
+                chessEngine.Initialize(gameInitializationStrategy);
+
+                chessEngine.Play();
+            }
         }
     }
 }

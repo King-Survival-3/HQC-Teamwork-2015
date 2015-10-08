@@ -1,5 +1,7 @@
 ﻿namespace KingSurvival.Chess.Board.Contracts
 {
+    using System.Collections.Generic;
+
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Figures.Contracts;
 
@@ -12,5 +14,9 @@
         void AddFigure(IFigure figure, Position position);
 
         void RemoveFigure(Position position);
+
+        void MoveFigureAtPosition(IFigure figure, Position from, Position to);
+
+        IFigure GetFigureAtPosition(Position position);
     }
 }

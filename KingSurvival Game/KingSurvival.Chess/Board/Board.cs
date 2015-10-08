@@ -1,6 +1,6 @@
 ﻿namespace KingSurvival.Chess.Board
 {
-    using System;
+    using System.Collections.Generic;
 
     using KingSurvival.Chess.Board.Contracts;
     using KingSurvival.Chess.Common;
@@ -27,7 +27,7 @@
         {
             ObjectValidator.CheckIfObjectIsNull(figure, GlobalErrorMessages.NullFigureErrorMessage);
 
-            this.CheckIfPositionIsValid(position);
+            Position.ChechIfValid(position);
 
             int arrRow = this.GetArrayRow(position.Row);
             int arrCol = this.GetArrayCol(position.Col);
@@ -36,11 +36,30 @@
 
         public void RemoveFigure(Position position)
         {
-            this.CheckIfPositionIsValid(position);
+            Position.ChechIfValid(position);
 
             int arrRow = this.GetArrayRow(position.Row);
             int arrCol = this.GetArrayCol(position.Col);
             this.board[arrRow, arrCol] = null;
+        }
+
+        public IFigure GetFigureAtPosition(Position position)
+        {
+            int arrRow = this.GetArrayRow(position.Row);
+            int arrCol = this.GetArrayCol(position.Col);
+
+            return this.board[arrRow, arrCol];
+        }
+
+        public void MoveFigureAtPosition(IFigure figure, Position from, Position to)
+        {
+            int arrFromRow = this.GetArrayRow(from.Row);
+            int arrFromCol = this.GetArrayCol(from.Col);
+            this.board[arrFromRow, arrFromCol] = null;
+
+            int arrToRow = this.GetArrayRow(to.Row);
+            int arrToCol = this.GetArrayCol(to.Col);
+            this.board[arrToRow, arrToCol] = figure;
         }
 
         private int GetArrayRow(int chessRow)
@@ -52,21 +71,6 @@
         {
             // TODO: lower & uppercase
             return chessCol - 'a';
-        }
-
-        private void CheckIfPositionIsValid(Position position)
-        {
-            if (position.Row < GlobalConstants.MinimumRowValueOnBoard ||
-                position.Row > GlobalConstants.MaximumRowValueOnBoard)
-            {
-                throw new IndexOutOfRangeException("Selected row position is not valid");
-            }
-
-            if (position.Col < GlobalConstants.MinimumColValueOnBoard ||
-                position.Col > GlobalConstants.MaximumColValueOnBoard)
-            {
-                throw new IndexOutOfRangeException("Selected col position is not valid");
-            }
         }
     }
 }

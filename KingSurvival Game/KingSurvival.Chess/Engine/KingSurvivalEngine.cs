@@ -1,35 +1,38 @@
 ﻿namespace KingSurvival.Chess.Engine
 {
-    using System.Collections.Generic;
+    using System;
+    using System.Linq;
 
+    using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Engine.Contracts;
-    
-    using KingSurvival.Chess.Players.Contracts;
+    using KingSurvival.Chess.InputProvider.Contracts;
+    using KingSurvival.Chess.Movements.Contracts;
+    using KingSurvival.Chess.Renderer.Contracts;
 
-    class KingSurvivalEngine : IChessEngine
+    class KingSurvivalEngine : BaseChessEngine, IChessEngine
     {
-        private readonly IEnumerable<IPlayer> players;
 
-        public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
+        public KingSurvivalEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
+            : base(renderer, inputProvider, movementStrategy)
         {
-            throw new System.NotImplementedException();
         }
 
-        public void Start()
+        public override void WinnginConditions()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void WinnginConditions()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IEnumerable<IPlayer> Players
-        {
-            get
+            for (int i = 0; i < this.board.TotalCols; i++)
             {
-                return new List<IPlayer>(this.players);
+                try
+                {
+                    var figure = this.board.GetFigureAtPosition(new Position(this.board.TotalRows, (char)('a' + i)));
+                    if (figure is Figures.King)
+                    {
+                        this.GameState = GameState.WhiteWon;
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+                }
             }
         }
     }
