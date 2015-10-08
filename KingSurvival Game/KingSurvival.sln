@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Web", "KingSurvival.Web\KingSurvival.Web.csproj", "{93E2AE7E-AACE-4F7F-A5A4-0249C8E20969}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Chess", "KingSurvival.Chess\KingSurvival.Chess.csproj", "{3C204899-4633-43CD-B1FD-684FB8352713}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.ConsoleClient", "KingSurvival.ConsoleClient\KingSurvival.ConsoleClient.csproj", "{57D09245-D392-4FD4-BA2C-1A6D6A72C1B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Chess.Test", "KingSurvival.Chess.Test\KingSurvival.Chess.Test.csproj", "{53EC0AE1-FD6D-4C30-B66C-94A01E38C8F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{57D09245-D392-4FD4-BA2C-1A6D6A72C1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57D09245-D392-4FD4-BA2C-1A6D6A72C1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57D09245-D392-4FD4-BA2C-1A6D6A72C1B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53EC0AE1-FD6D-4C30-B66C-94A01E38C8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53EC0AE1-FD6D-4C30-B66C-94A01E38C8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53EC0AE1-FD6D-4C30-B66C-94A01E38C8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53EC0AE1-FD6D-4C30-B66C-94A01E38C8F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

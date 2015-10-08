@@ -34,6 +34,7 @@
         public void RemoveFigure(IFigure figure)
         {
             ObjectValidator.CheckIfObjectIsNull(figure, GlobalErrorMessages.NullFigureErrorMessage);
+
             //TODO: chech figure and player color
             this.CheckIfFigureDoesNotExists(figure);
             this.figures.Remove(figure);
