@@ -58,7 +58,7 @@ namespace KingSurvival.Chess.Test
         }
 
         [TestMethod]
-        public void CheckPlayerFigure()
+        public void CheckIfPlayersAreNotEqual()
         {
             var playerList = new List<IPlayer> { new Player("[Black]Gosho", ChessColor.Black), new Player("[White]Pesho", ChessColor.White) };
             var board = new Board.Board(GlobalConstants.StandartGameTotalBoardRows, GlobalConstants.StandartGameTotalBoardCols);
