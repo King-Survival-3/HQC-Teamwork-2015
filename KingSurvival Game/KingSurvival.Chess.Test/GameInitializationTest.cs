@@ -57,5 +57,17 @@ namespace KingSurvival.Chess.Test
             strategy.Initialize(playerList, board);
         }
 
+        [TestMethod]
+        public void CheckPlayerFigure()
+        {
+            var playerList = new List<IPlayer> { new Player("[Black]Gosho", ChessColor.Black), new Player("[White]Pesho", ChessColor.White) };
+            var board = new Board.Board(GlobalConstants.StandartGameTotalBoardRows, GlobalConstants.StandartGameTotalBoardCols);
+
+            var strategy = new KingSurvivalGameInitializationStrategy();
+            strategy.Initialize(playerList, board);
+
+            Assert.AreNotEqual(playerList[0], playerList[1]);
+        }
+
     }
 }
