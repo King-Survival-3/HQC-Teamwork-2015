@@ -1,8 +1,8 @@
-﻿using System.Data.Entity;
-using System.Linq;
-
-namespace KingSurvival.Data.Repositories
+﻿namespace KingSurvival.Data.Repositories
 {
+    using System.Data.Entity;
+    using System.Linq;
+
     public class EFRepository<T> : IRepository<T> where T : class
     {
         private DbContext context;

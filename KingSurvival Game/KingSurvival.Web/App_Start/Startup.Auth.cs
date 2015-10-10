@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
-using Microsoft.Owin.Security.OAuth;
-using Owin;
-using KingSurvival.Web.Providers;
-using KingSurvival.Web.Models;
-using KingSurvival.Data;
-using Microsoft.AspNet.SignalR;
-
-namespace KingSurvival.Web
+﻿namespace KingSurvival.Web
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using KingSurvival.Data;
+    using KingSurvival.Web.Models;
+    using KingSurvival.Web.Providers;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.SignalR;
+    using Microsoft.Owin;
+    using Microsoft.Owin.Security.Cookies;
+    using Microsoft.Owin.Security.Google;
+    using Microsoft.Owin.Security.OAuth;   
+    using Owin;
+
     public partial class Startup
     {
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
@@ -36,7 +36,8 @@ namespace KingSurvival.Web
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
             app.MapSignalR("/signalr", new HubConfiguration());
-           // GlobalHost.HubPipeline.RequireAuthentication();
+
+            // GlobalHost.HubPipeline.RequireAuthentication();
 
             // Configure the application for OAuth based flow
             PublicClientId = "self";
@@ -53,23 +54,23 @@ namespace KingSurvival.Web
             app.UseOAuthBearerTokens(OAuthOptions);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
+            // app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
             //    clientSecret: "");
 
-            ////app.UseTwitterAuthentication(
+            //// app.UseTwitterAuthentication(
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
+            //// app.UseFacebookAuthentication(
             //    appId: "",
             //    appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            //// app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //// {
+            ////    ClientId = "",
+            ////    ClientSecret = ""
+            //// });
         }
     }
 }

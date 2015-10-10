@@ -2,16 +2,16 @@
 // package to your project.
 ////#define Handle_PageResultOfT
 
-using System.Diagnostics.CodeAnalysis;
-using System.Net.Http.Headers;
-using System.Web.Http;
-
 #if Handle_PageResultOfT
 using System.Web.Http.OData;
 #endif
 
 namespace KingSurvival.Web.Areas.HelpPage
 {
+    using System.Diagnostics.CodeAnalysis;
+    using System.Net.Http.Headers;
+    using System.Web.Http;
+
     /// <summary>
     /// Use this class to customize the Help Page.
     /// For example you can set a custom <see cref="System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
@@ -34,13 +34,13 @@ namespace KingSurvival.Web.Areas.HelpPage
             //// Also, the string arrays will be used for IEnumerable<string>. The sample objects will be serialized into different media type
             //// formats by the available formatters.
             ////config.SetSampleObjects(new Dictionary<Type, object>
-            //{
-            //    {typeof(string), "sample string"},
-            //    {typeof(IEnumerable<string>), new string[]{"sample 1", "sample 2"}}
-            //});
+            ////{
+            ////    {typeof(string), "sample string"},
+            ////    {typeof(IEnumerable<string>), new string[]{"sample 1", "sample 2"}}
+            ////});
 
-            // Extend the following to provide factories for types not handled automatically (those lacking parameterless
-            // constructors) or for which you prefer to use non-default property values. Line below provides a fallback
+            //// Extend the following to provide factories for types not handled automatically (those lacking parameterless
+            //// constructors) or for which you prefer to use non-default property values. Line below provides a fallback
             // since automatic handling will fail and GeneratePageResult handles only a single type.
 #if Handle_PageResultOfT
             config.GetHelpPageSampleGenerator().SampleObjectFactories.Add(GeneratePageResult);
@@ -63,7 +63,7 @@ namespace KingSurvival.Web.Areas.HelpPage
 
             //// Uncomment the following to use the image on "../images/aspNetHome.png" directly as the response sample for media type "image/png"
             //// on the controller named "Values" and action named "Get" with parameter "id".
-            //config.SetSampleResponse(new ImageSample("../images/aspNetHome.png"), new MediaTypeHeaderValue("image/png"), "Values", "Get", "id");
+            ////config.SetSampleResponse(new ImageSample("../images/aspNetHome.png"), new MediaTypeHeaderValue("image/png"), "Values", "Get", "id");
 
             //// Uncomment the following to correct the sample request when the action expects an HttpRequestMessage with ObjectContent<string>.
             //// The sample will be generated as if the controller named "Values" and action named "Get" were having string as the body parameter.

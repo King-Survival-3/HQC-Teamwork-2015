@@ -4,8 +4,8 @@
 
     public class Position
     {
-        private int MaxNumberOfRow = 7;
-        private int MaxNumberOfCol = 7;
+        private const int MaxNumberOfRow = 7;
+        private const int MaxNumberOfCol = 7;
 
         private int row;
         private int col;
@@ -29,6 +29,7 @@
                 {
                     throw new ArgumentException("Row cannot be bigger than 7");
                 }
+
                 this.row = value;
             }
         }
@@ -46,6 +47,7 @@
                 {
                     throw new ArgumentException("Col cannot be bigger than 7");
                 }
+
                 this.col = value;
             }
         }

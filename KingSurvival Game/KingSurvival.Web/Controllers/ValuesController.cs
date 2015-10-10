@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-
-namespace KingSurvival.Web.Controllers
+﻿namespace KingSurvival.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Http;
+
     [Authorize]
     public class ValuesController : ApiController
     {

@@ -1,10 +1,10 @@
 ﻿namespace KingSurvival.Data
 {
-    using KingSurvival.Data.Repositories;
-    using KingSurvival.Models;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using KingSurvival.Data.Repositories;
+    using KingSurvival.Models;
 
     public class KingSurvivalData : IKingSurvivalData
     {
@@ -43,7 +43,7 @@
             var typeOfRepository = typeof(T);
             if (!this.repositories.ContainsKey(typeOfRepository))
             {
-                var newRepository = Activator.CreateInstance(typeof(EFRepository<T>), context);
+                var newRepository = Activator.CreateInstance(typeof(EFRepository<T>), this.context);
                 this.repositories[typeOfRepository] = newRepository;
             }
 

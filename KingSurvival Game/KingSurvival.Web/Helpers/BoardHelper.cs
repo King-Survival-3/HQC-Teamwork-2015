@@ -74,10 +74,10 @@
             for (int index = 0; index < fenRow.Length; index++)
             {
                 var currentSymbol = fenRow[index];
-                if (Char.IsDigit(currentSymbol))
+                if (char.IsDigit(currentSymbol))
                 {
                     var number = int.Parse(currentSymbol.ToString());
-                    row.Append(new String('-', number));
+                    row.Append(new string('-', number));
                 }
                 else
                 {

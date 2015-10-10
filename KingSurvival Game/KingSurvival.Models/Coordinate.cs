@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KingSurvival.Models
+﻿namespace KingSurvival.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public struct Coordinate
     {
-        public int row;
-        public int col;
+        private int row;
+        private int col;
 
         public Coordinate(int row, int col)
             : this()
