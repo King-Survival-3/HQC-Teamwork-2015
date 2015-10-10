@@ -1,10 +1,9 @@
 ﻿namespace KingSurvival.Chess.Figures
 {
     using System.Collections.Generic;
-    
-    using KingSurvival.Chess.Movements.Contracts;
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Figures.Contracts;
+    using KingSurvival.Chess.Movements.Contracts;
 
     public class King : BaseFigure, IFigure
     {

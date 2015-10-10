@@ -16,28 +16,35 @@
 
     public abstract class BaseChessEngine : IChessEngine
     {
-        protected IBoard board;
+        protected readonly IMovementStrategy MovementStrategy;
 
-        protected readonly IMovementStrategy movementStrategy;
+        protected readonly IRenderer Renderer;
+
+        protected readonly IInputProvider Input;
+
+        protected IBoard board;
 
         protected IList<IPlayer> players;
 
-        protected readonly IRenderer renderer;
-
-        protected readonly IInputProvider input;
-
         protected int currentPlayerIndex;
 
-        protected GameState GameState;
+        protected GameState gameState;
 
         protected BaseChessEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
         {
-            this.renderer = renderer;
-            this.movementStrategy = movementStrategy; 
-            this.input = inputProvider;
+            this.Renderer = renderer;
+            this.MovementStrategy = movementStrategy; 
+            this.Input = inputProvider;
             this.board = new Board();
+            this.gameState = GameState.Playing;
+        }
 
-            this.GameState = GameState.Playing;
+        public IEnumerable<IPlayer> Players
+        {
+            get
+            {
+                return new List<IPlayer>(this.players);
+            }
         }
 
         public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
@@ -56,9 +63,9 @@
             this.SetFirstPlayerIndex();
 
             // Use this
-            //var players = this.input.GetPlayers(GlobalConstants.StandartGameNumberOfPlayers);
-            gameInitializationStrategy.Initialize(players, this.board);
-            this.renderer.RenderBoard(this.board);
+            // var players = this.input.GetPlayers(GlobalConstants.StandartGameNumberOfPlayers);
+            gameInitializationStrategy.Initialize(this.players, this.board);
+            this.Renderer.RenderBoard(this.board);
         }
 
         public void Play()
@@ -68,14 +75,14 @@
                 try
                 {
                     var player = this.GetNextPlayer();
-                    var move = this.input.GetNextPlayerMove(player);
+                    var move = this.Input.GetNextPlayerMove(player);
                     var from = move.From;
                     var to = move.To;
                     var figure = this.board.GetFigureAtPosition(from);
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
                     this.CheckIfToPositionIsEmpty(figure, to);
 
-                    var availableMovements = figure.Move(this.movementStrategy);
+                    var availableMovements = figure.Move(this.MovementStrategy);
 
                     foreach (var movement in availableMovements)
                     {
@@ -84,7 +91,7 @@
 
                     this.board.MoveFigureAtPosition(figure, from, to);
 
-                    this.renderer.RenderBoard(this.board);
+                    this.Renderer.RenderBoard(this.board);
 
                     // TODO: On every move check if we are in check.
                     // TODO: Check pawn on last row
@@ -99,29 +106,21 @@
                     // TODO: Continue
                     this.WinnginConditions();
 
-                    if (this.GameState != GameState.Playing)
+                    if (this.gameState != GameState.Playing)
                     {
-                        this.renderer.RenderWinningScreen(this.GameState.ToString());
+                        this.Renderer.RenderWinningScreen(this.gameState.ToString());
                         break;
                     }
                 }
                 catch (Exception exception)
                 {
                     this.currentPlayerIndex--;
-                    this.renderer.PrintErrorMessage(exception.Message);
+                    this.Renderer.PrintErrorMessage(exception.Message);
                 }
             }
         }
 
         public abstract void WinnginConditions();
-
-        public IEnumerable<IPlayer> Players
-        {
-            get
-            {
-                return new List<IPlayer>(this.players);
-            }
-        }
 
         protected void SetFirstPlayerIndex()
         {

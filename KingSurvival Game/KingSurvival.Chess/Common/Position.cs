@@ -4,6 +4,17 @@
 
     public struct Position
     {
+        public Position(int row, char col)
+            : this()
+        {
+            this.Row = row;
+            this.Col = col;
+        }
+
+        public int Row { get; private set; }
+
+        public char Col { get; private set; }
+
         public static Position FromArrayCoordinates(int arrRow, int arrCol, int totalRows)
         {
             return new Position(totalRows - arrRow, (char)(arrCol + 'a'));
@@ -15,13 +26,6 @@
             ChechIfValid(newPosition);
 
             return newPosition;
-        }
-
-        public Position(int row, char col)
-            : this()
-        {
-            this.Row = row;
-            this.Col = col;
         }
 
         public static void ChechIfValid(Position position)
@@ -38,9 +42,5 @@
                 throw new IndexOutOfRangeException("Selected col position is not valid");
             }
         }
-
-        public int Row { get; private set; }
-
-        public char Col { get; private set; }
     }
 }

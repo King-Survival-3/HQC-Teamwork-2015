@@ -9,9 +9,8 @@
     using KingSurvival.Chess.Movements.Contracts;
     using KingSurvival.Chess.Renderer.Contracts;
 
-    class KingSurvivalEngine : BaseChessEngine, IChessEngine
+    public class KingSurvivalEngine : BaseChessEngine, IChessEngine
     {
-
         public KingSurvivalEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
             : base(renderer, inputProvider, movementStrategy)
         {
@@ -26,7 +25,7 @@
                     var figure = this.board.GetFigureAtPosition(new Position(this.board.TotalRows, (char)('a' + i)));
                     if (figure is Figures.King)
                     {
-                        this.GameState = GameState.WhiteWon;
+                        this.gameState = GameState.WhiteWon;
                         break;
                     }
                 }

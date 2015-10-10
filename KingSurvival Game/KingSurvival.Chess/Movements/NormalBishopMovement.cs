@@ -53,7 +53,6 @@
                     throw new InvalidOperationException("There is a figure on the way!");
                 }
             }
-
         }
     }
 }

@@ -2,10 +2,9 @@
 {
     using System.Linq;
     using System.Web.Http;
-    using Microsoft.AspNet.Identity;
-  
     using KingSurvival.Data;
     using KingSurvival.Models;
+    using Microsoft.AspNet.Identity;
 
     [Authorize]
     public class GamesController : ApiController
@@ -26,7 +25,7 @@
         public IHttpActionResult GetUsersCount()
         {
             var count = this.data.Users.All().Count();
-            return Ok(count);
+            return this.Ok(count);
         }
 
         [HttpPost]
@@ -49,7 +48,7 @@
               .Select(x => new { Id = x.Id, PlayerFigure = GameState.TurnKing, playerId = x.FirstPlayerId, gameState = x.State })
               .FirstOrDefault();
 
-            return Ok(gameState);
+            return this.Ok(gameState);
         }
 
         [HttpPost]
@@ -74,10 +73,10 @@
 
             var gameState = this.data.Game.All()
                 .Where(x => x.Id.ToString() == gameId)
-                .Select(x => new{Id = x.Id, PlayerFigure = GameState.TurnPown, playerId = x.SecondPlayerId, gameState = x.State })
+                .Select(x => new { Id = x.Id, PlayerFigure = GameState.TurnPown, playerId = x.SecondPlayerId, gameState = x.State })
                 .FirstOrDefault();
 
-            return Ok(gameState);
+            return this.Ok(gameState);
         }
 
         [HttpGet]
@@ -87,7 +86,7 @@
             var games = this.data.Game.All()
                 .Where(x => x.State == GameState.WaitingForSecondPlayer);
 
-            return Ok(games);
+            return this.Ok(games);
         }
     }
 }

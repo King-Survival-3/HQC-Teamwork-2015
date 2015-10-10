@@ -36,10 +36,10 @@
             }
         }
 
-
         public void GameEngine(string gameId, string userId, string moveFrom, string moveTo)
         {
             var game = this.GetGame(gameId);
+
             // if game doesn't exist
             if (game == null)
             {
@@ -68,7 +68,7 @@
             // check If player is 1 or 2 
             if (playerID != game.FirstPlayerId && playerID != game.SecondPlayerId)
             {
-                //return you are not part of this game
+                // return you are not part of this game
                 this.Clients.Group(gameId).move(oldFen);
                 return;
             }
@@ -102,10 +102,10 @@
                 return;
             }
 
-            //check is move is legal
+            // check is move is legal
             if (!this.IsLegalMove(gameBoard, figure, oldPosition, newPosition))
             {
-                //move is not legal return
+                // move is not legal return
                 this.Clients.Group(gameId).move(oldFen);
                 return;
             }

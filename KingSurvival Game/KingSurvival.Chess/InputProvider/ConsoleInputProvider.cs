@@ -28,7 +28,7 @@
             {
                 Console.Clear();
                 ConsoleHelpers.SetCursorAtCenter(PlayerNameText.Length);
-                Console.Write(this.formatter.Format(String.Format(PlayerNameText, i)));
+                Console.Write(this.formatter.Format(string.Format(PlayerNameText, i)));
                 string name = Console.ReadLine();
                 var player = new Player(name, (ChessColor)i - 1);
                 players.Add(player);

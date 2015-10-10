@@ -1,8 +1,8 @@
 ﻿namespace KingSurvival.ConsoleClient
 {
-    class EntryPoint
+    public class EntryPoint
     {
-        static void Main()
+        public static void Main()
         {
             // Settings for the console
             // Width 80 : Height 100
