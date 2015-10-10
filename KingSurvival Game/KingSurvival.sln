@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.ConsoleClient"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Chess.Test", "KingSurvival.Chess.Test\KingSurvival.Chess.Test.csproj", "{53EC0AE1-FD6D-4C30-B66C-94A01E38C8F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renderer.Test.Mock", "ChessEngine.Test.Mock\Renderer.Test.Mock.csproj", "{7CBB3274-4B36-4F1F-A83D-722019BE6281}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{53EC0AE1-FD6D-4C30-B66C-94A01E38C8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53EC0AE1-FD6D-4C30-B66C-94A01E38C8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53EC0AE1-FD6D-4C30-B66C-94A01E38C8F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CBB3274-4B36-4F1F-A83D-722019BE6281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CBB3274-4B36-4F1F-A83D-722019BE6281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CBB3274-4B36-4F1F-A83D-722019BE6281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CBB3274-4B36-4F1F-A83D-722019BE6281}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
