@@ -1,0 +1,9 @@
+﻿namespace KingSurvival.Chess.Movements.Contracts
+{
+    using System.Collections.Generic;
+
+    public interface IMovementStrategy
+    {
+        IList<IMovement> GetMovements(string figure);
+    }
+}

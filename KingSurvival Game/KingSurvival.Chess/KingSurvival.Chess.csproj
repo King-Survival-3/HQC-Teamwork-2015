@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3C204899-4633-43CD-B1FD-684FB8352713}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KingSurvival.Chess</RootNamespace>
+    <AssemblyName>KingSurvival.Chess</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Board\Board.cs" />
+    <Compile Include="Board\Contracts\IBoard.cs" />
+    <Compile Include="Common\ChessColor.cs" />
+    <Compile Include="Common\Console\ConsoleConstants.cs" />
+    <Compile Include="Common\Console\ConsoleHelpers.cs" />
+    <Compile Include="Common\GameState.cs" />
+    <Compile Include="Common\GameType.cs" />
+    <Compile Include="Common\GlobalConstants.cs" />
+    <Compile Include="Common\GlobalErrorMessages.cs" />
+    <Compile Include="Common\Move.cs" />
+    <Compile Include="Common\ObjectValidator.cs" />
+    <Compile Include="Common\Position.cs" />
+    <Compile Include="Engine\BaseChessEngine.cs" />
+    <Compile Include="Engine\Contracts\IChessEngine.cs" />
+    <Compile Include="Engine\Contracts\IGameInitializationStrategy.cs" />
+    <Compile Include="Engine\Initializations\InitializationGameProvider.cs" />
+    <Compile Include="Engine\Initializations\KingSurvivalGameInitializationStrategy.cs" />
+    <Compile Include="Engine\Initializations\StandartStartGameInitializationStrategy.cs" />
+    <Compile Include="Engine\KingSurvivalEngine.cs" />
+    <Compile Include="Engine\StandartTwoPlayerEngine.cs" />
+    <Compile Include="Figures\Bishop.cs" />
+    <Compile Include="Figures\Contracts\BaseFigure.cs" />
+    <Compile Include="Figures\Contracts\IFigure.cs" />
+    <Compile Include="Figures\King.cs" />
+    <Compile Include="Figures\Knight.cs" />
+    <Compile Include="Figures\Pawn.cs" />
+    <Compile Include="Figures\Queen.cs" />
+    <Compile Include="Figures\Rook.cs" />
+    <Compile Include="Formatter\Contracts\IFormatter.cs" />
+    <Compile Include="Formatter\FancyFormatter.cs" />
+    <Compile Include="Formatter\StandartFormatter.cs" />
+    <Compile Include="InputProvider\ConsoleInputProvider.cs" />
+    <Compile Include="InputProvider\Contracts\IInputProvider.cs" />
+    <Compile Include="Movements\Contracts\IMovement.cs" />
+    <Compile Include="Movements\Contracts\IMovementStrategy.cs" />
+    <Compile Include="Movements\KingSurvivalMovements\KingSurvivalBaseMovement.cs" />
+    <Compile Include="Movements\KingSurvivalMovements\KingSurvivalPawnMovement.cs" />
+    <Compile Include="Movements\KingSurvivalMovements\KingSurvivalKingMovement.cs" />
+    <Compile Include="Movements\NormalBishopMovement.cs" />
+    <Compile Include="Movements\NormalKingMovement.cs" />
+    <Compile Include="Movements\NormalPawnMovement.cs" />
+    <Compile Include="Movements\Strategies\KingSurvivalMovementStrategy.cs" />
+    <Compile Include="Movements\Strategies\NormalMovementStrategy.cs" />
+    <Compile Include="Players\Contracts\IPlayer.cs" />
+    <Compile Include="Players\Player.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\ConsoleRenderer.cs" />
+    <Compile Include="Renderer\Contracts\IRenderer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OopDesignForChessGame.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

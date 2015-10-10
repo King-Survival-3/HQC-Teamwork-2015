@@ -2,9 +2,10 @@
 {
     using System.Linq;
     using System.Web.Http;
+    using Microsoft.AspNet.Identity;
+  
     using KingSurvival.Data;
     using KingSurvival.Models;
-    using Microsoft.AspNet.Identity;
 
     [Authorize]
     public class GamesController : ApiController
@@ -25,7 +26,7 @@
         public IHttpActionResult GetUsersCount()
         {
             var count = this.data.Users.All().Count();
-            return this.Ok(count);
+            return Ok(count);
         }
 
         [HttpPost]
@@ -44,10 +45,11 @@
             this.data.SaveChanges();
 
             var gameState = this.data.Game.All()
+              .Where(x => x.Id == game.Id)
               .Select(x => new { Id = x.Id, PlayerFigure = GameState.TurnKing, playerId = x.FirstPlayerId, gameState = x.State })
-              .FirstOrDefault(x => x.Id == game.Id);
+              .FirstOrDefault();
 
-            return this.Ok(gameState);
+            return Ok(gameState);
         }
 
         [HttpPost]
@@ -71,10 +73,11 @@
             this.data.SaveChanges();
 
             var gameState = this.data.Game.All()
-                .Select(x => new { Id = x.Id, PlayerFigure = GameState.TurnPown, playerId = x.SecondPlayerId, gameState = x.State })
-                .FirstOrDefault(x => x.Id.ToString() == gameId);
+                .Where(x => x.Id.ToString() == gameId)
+                .Select(x => new{Id = x.Id, PlayerFigure = GameState.TurnPown, playerId = x.SecondPlayerId, gameState = x.State })
+                .FirstOrDefault();
 
-            return this.Ok(gameState);
+            return Ok(gameState);
         }
 
         [HttpGet]
@@ -84,7 +87,7 @@
             var games = this.data.Game.All()
                 .Where(x => x.State == GameState.WaitingForSecondPlayer);
 
-            return this.Ok(games);
+            return Ok(games);
         }
     }
 }
