@@ -73,7 +73,8 @@
 
             var gameState = this.data.Game.All()
                 .Where(x => x.Id.ToString() == gameId)
-                .Select(x => new{
+                .Select(x => new 
+                {
                     Id = x.Id, PlayerFigure = KingSurvivalGameState.TurnPown,
                     playerId = x.SecondPlayerId,
                     gameState = x.State 

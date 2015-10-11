@@ -30,7 +30,7 @@
 
             this.SetFirstPlayerIndex();
 
-            gameInitializationStrategy.Initialize(players, this.board);
+            gameInitializationStrategy.Initialize(this.players, this.board);
         }
 
         public override void Play()
@@ -68,8 +68,6 @@
                 this.currentPlayerIndex--;
                 this.Renderer.PrintErrorMessage(exception.Message);
             }
-
         }
-             
     }
 }

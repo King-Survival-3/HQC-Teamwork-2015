@@ -16,13 +16,13 @@
         private IHubCallerConnectionContext<dynamic> hubCallerConnectionContext;
         private IKingSurvivalData data;
 
-              public WebRenderer(IHubCallerConnectionContext<dynamic> hubCallerConnectionContext, Game game, IKingSurvivalData kingSurvivalData)
+        public WebRenderer(IHubCallerConnectionContext<dynamic> hubCallerConnectionContext, Game game, IKingSurvivalData kingSurvivalData)
         {
-            // TODO: Complete member initialization
             this.hubCallerConnectionContext = hubCallerConnectionContext;
             this.game = game;
             this.data = kingSurvivalData;
         }
+
         public void RenderBoard(IBoard board)
         {
             var gameId = this.game.Id.ToString();
@@ -51,7 +51,7 @@
 
         public void RenderWinningScreen(string message)
         {
-            //Win WIn Win
+            // Win WIn Win
             throw new NotImplementedException();
         }
 

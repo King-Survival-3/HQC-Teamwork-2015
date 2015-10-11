@@ -3,13 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
 
     using KingSurvival.Chess.Board.Contracts;
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.Figures;
     using KingSurvival.Chess.Players.Contracts;
-    using System.Text;
 
     public class KingSurvivalGameWebInitializationStrategy : IGameInitializationStrategy
     {
@@ -32,7 +32,6 @@
         {
             this.ValidateStrategy(players, board);
 
-            //TODO: Change players turn
             players[0] = this.firstPlayer;
             players[1] = this.secondPlayer;
 
@@ -46,7 +45,7 @@
 
             for (int row = splitedFen.Length - 1; row >= 0; row--)
             {
-                var currentRow = MakeRow(splitedFen[row]);
+                var currentRow = this.MakeRow(splitedFen[row]);
 
                 for (int col = 0; col < currentRow.Length; col++)
                 {
@@ -68,7 +67,6 @@
 
                 index++;
             }
-
         }
 
         private string MakeRow(string fenRow)
@@ -78,10 +76,10 @@
             for (int index = 0; index < fenRow.Length; index++)
             {
                 var currentSymbol = fenRow[index];
-                if (Char.IsDigit(currentSymbol))
+                if (char.IsDigit(currentSymbol))
                 {
                     var number = int.Parse(currentSymbol.ToString());
-                    row.Append(new String(EmptySpace, number));
+                    row.Append(new string(EmptySpace, number));
                 }
                 else
                 {

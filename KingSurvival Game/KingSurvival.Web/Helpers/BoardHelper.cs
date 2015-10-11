@@ -1,11 +1,10 @@
 ﻿namespace KingSurvival.Web.Helpers
 {
-    using KingSurvival.Chess.Board.Contracts;
-    using KingSurvival.Chess;
-    using KingSurvival.Chess.Common;
-    using KingSurvival.Chess.Figures.Contracts;
     using System;
     using System.Text;
+
+    using KingSurvival.Chess.Board.Contracts;
+    using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Figures;
 
     public static class BoardHelper
@@ -13,7 +12,7 @@
         public static string BoardToFen(IBoard board)
         {
             var fen = new StringBuilder();
-            var reversedRow = board.TotalRows ;
+            var reversedRow = board.TotalRows;
             for (int row = 1; row <= board.TotalRows; row++)
             {
                 var empySpace = 0;
@@ -33,7 +32,6 @@
                             empySpace = 0;
                         }
 
-                        //fen.Append(board[reversedRow, col]);
                         if (figure is King)
                         {
                             fen.Append('K');

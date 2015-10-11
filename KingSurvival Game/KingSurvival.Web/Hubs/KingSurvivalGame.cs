@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Microsoft.AspNet.SignalR;
-
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.Movements.Strategies;
@@ -17,11 +15,11 @@
     using KingSurvival.Web.Hubs.InputProvider;
     using KingSurvival.Web.Hubs.Renderer;
 
+    using Microsoft.AspNet.SignalR;
+
     public class KingSurvivalGame : Hub
     {
         private readonly IKingSurvivalData data;
-
-        private IChessEngine gameEngine;
 
         public KingSurvivalGame()
             : this(new KingSurvivalData(new KingSurvivalDbContext()))
@@ -104,11 +102,10 @@
             var inputProvider = new WebInputProvider(move);
             var movementStrategy = new KingSurvivalMovementStrategy();
 
-            this.gameEngine = new KingSurvivalEngineWeb(renderer, inputProvider, movementStrategy);
+            var gameEngine = new KingSurvivalEngineWeb(renderer, inputProvider, movementStrategy);
 
             gameEngine.Initialize(kingSurvivalInitilizeStrategy);
             gameEngine.Play();
-
         }
 
         private void UpdateState(string gameId)
