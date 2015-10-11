@@ -26,7 +26,6 @@
 
         public IMovementStrategy GetMovementStrategy(GameType gameType)
         {
-
             switch (gameType)
             {
                 case GameType.Chess:
@@ -36,7 +35,6 @@
                 default:
                     throw new ArgumentException();
             }
-
         }
 
         public IChessEngine GetEngine(GameType gameType, IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)

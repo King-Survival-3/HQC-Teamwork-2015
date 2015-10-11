@@ -4,7 +4,9 @@
     using KingSurvival.Chess.Figures.Contracts;
     using KingSurvival.Chess.Players;
     using KingSurvival.Chess.Players.Contracts;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using Moq;
 
     [TestClass]

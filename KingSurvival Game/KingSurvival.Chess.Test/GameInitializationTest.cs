@@ -1,13 +1,13 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using KingSurvival.Chess.Engine.Initializations;
-using System.Collections.Generic;
-using KingSurvival.Chess.Players;
-using KingSurvival.Chess.Common;
-using KingSurvival.Chess.Players.Contracts;
-
-namespace KingSurvival.Chess.Test
+﻿namespace KingSurvival.Chess.Test
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using KingSurvival.Chess.Engine.Initializations;
+    using System.Collections.Generic;
+    using KingSurvival.Chess.Players;
+    using KingSurvival.Chess.Common;
+    using KingSurvival.Chess.Players.Contracts;
+
     [TestClass]
     public class GameInitializationTest
     {

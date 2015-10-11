@@ -14,10 +14,10 @@
             var from = move.From;
             var to = move.To;
 
-            if ((from.Row + 1 == to.Row && from.Col + 1 == to.Col) || // top right
-                (from.Row + 1 == to.Row && from.Col - 1 == to.Col) || // top left
-                (from.Row - 1 == to.Row && from.Col + 1 == to.Col) || // bottom right) 
-                (from.Row - 1 == to.Row && from.Col - 1 == to.Col)) // bottom left
+            if ((from.Row + 1 == to.Row && from.Col + 1 == to.Col) ||
+                (from.Row + 1 == to.Row && from.Col - 1 == to.Col) || 
+                (from.Row - 1 == to.Row && from.Col + 1 == to.Col) ||
+                (from.Row - 1 == to.Row && from.Col - 1 == to.Col)) 
             {
                 var otherFigure = board.GetFigureAtPosition(to);
 

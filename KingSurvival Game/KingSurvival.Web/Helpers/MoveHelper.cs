@@ -2,6 +2,7 @@
 {
     using System;
 
+<<<<<<< HEAD
     using KingSurvival.Models;
     using KingSurvival.Models.Patterns;
 
@@ -15,5 +16,9 @@
             var factory = new PositionFactory();
             return factory.Create(row, col); // return new Position(row, col); 
         }
+=======
+    public static class MoveHelper
+    {
+>>>>>>> master
     }
 }

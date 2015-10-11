@@ -1,12 +1,11 @@
 ﻿namespace KingSurvival.Chess.Movements
 {
     using System;
-
-    using KingSurvival.Chess.Movements.Contracts;
     using KingSurvival.Chess.Board.Contracts;
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Figures.Contracts;
-
+    using KingSurvival.Chess.Movements.Contracts;
+    
     public class NormalPawnMovement : IMovement
     {
         private const string PawnBackwardsErrorMessage = "Pawns cannot move backwards!";
@@ -18,7 +17,6 @@
             var other = figure.Color == ChessColor.White ? ChessColor.White : ChessColor.Black;
             var from = move.From;
             var to = move.To;
-
 
             if (color == ChessColor.White &&
                 to.Row < from.Row)
@@ -101,7 +99,7 @@
 
         private bool CheckDiagonalMove(Position from, Position to)
         {
-            return (from.Col + 1 == to.Col || from.Col - 1 == to.Col);
+            return from.Col + 1 == to.Col || from.Col - 1 == to.Col;
         }
     }
 }

@@ -9,9 +9,8 @@
     using KingSurvival.Chess.Movements.Contracts;
     using KingSurvival.Chess.Renderer.Contracts;
 
-    class KingSurvivalEngine : BaseChessEngine, IChessEngine
+    public class KingSurvivalEngine : BaseChessEngine, IChessEngine
     {
-
         public KingSurvivalEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
             : base(renderer, inputProvider, movementStrategy)
         {

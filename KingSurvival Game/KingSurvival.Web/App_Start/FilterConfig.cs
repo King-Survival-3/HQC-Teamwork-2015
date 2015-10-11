@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace KingSurvival.Web
+﻿namespace KingSurvival.Web
 {
+    using System.Web.Mvc;
+
     public class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

@@ -7,7 +7,9 @@
             foreach (char c in value)
             {
                 if (!char.IsLetter(c))
+                {
                     return false;
+                }    
             }
 
             return true;

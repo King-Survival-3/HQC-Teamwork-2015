@@ -8,19 +8,23 @@
     {
         private readonly IDictionary<string, IList<IMovement>> movements = new Dictionary<string, IList<IMovement>>()
         {
-            {"Pawn", new List<IMovement>()
+            { "Pawn", new List<IMovement>()
                         {
                             new NormalPawnMovement()
-                        }},
-            {"King", new List<IMovement>()
+                        }
+            },
+            { "King", new List<IMovement>()
                         {
                             new NormalKingMovement()
-                        }},
-            {"Bishop", new List<IMovement>()
+                        }
+            },
+            { "Bishop", new List<IMovement>()
                         {
                             new NormalBishopMovement()
-                        }},
+                        }
+            },
         };
+
         public IList<IMovement> GetMovements(string figure)
         {
             return this.movements[figure];

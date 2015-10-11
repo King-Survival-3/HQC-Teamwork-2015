@@ -1,6 +1,7 @@
-﻿using System.Linq;
-namespace KingSurvival.Data.Repositories
+﻿namespace KingSurvival.Data.Repositories
 {
+    using System.Linq;
+
     public interface IRepository<T> where T : class
     {
         IQueryable<T> All();

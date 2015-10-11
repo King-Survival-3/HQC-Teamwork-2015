@@ -8,7 +8,6 @@
 
     public class StandartTwoPlayerEngine : BaseChessEngine, IChessEngine
     {
-
         public StandartTwoPlayerEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
             : base(renderer, inputProvider, movementStrategy)
         {

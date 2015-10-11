@@ -29,6 +29,7 @@
                 {
                     throw new ArgumentException("Row cannot be bigger than " + MaxNumberOfRow);
                 }
+
                 this.row = value;
             }
         }
@@ -46,6 +47,7 @@
                 {
                     throw new ArgumentException("Col cannot be bigger than " + MaxNumberOfCol);
                 }
+
                 this.col = value;
             }
         }

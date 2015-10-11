@@ -2,12 +2,12 @@
 {
     using KingSurvival.Chess.Engine.Contracts;
     using KingSurvival.Chess.Engine.Initializations;
+    using KingSurvival.Chess.Formatter;
     using KingSurvival.Chess.InputProvider;
     using KingSurvival.Chess.InputProvider.Contracts;
     using KingSurvival.Chess.Movements.Contracts;
     using KingSurvival.Chess.Renderer;
     using KingSurvival.Chess.Renderer.Contracts;
-    using KingSurvival.Chess.Formatter;
 
     public static class ChessFacade
     {

@@ -1,92 +1,90 @@
-﻿using System.Linq;
-
-namespace KingSurvival.Chess.Common.Console
+﻿namespace KingSurvival.Chess.Common.Console
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
     using KingSurvival.Chess.Figures.Contracts;
 
     public static class ConsoleHelpers
     {
-        private static readonly IDictionary<string, bool[,]> patterns = new Dictionary<string, bool[,]>
+        private static readonly IDictionary<string, bool[,]> Patterns = new Dictionary<string, bool[,]>
         {
-            {"Pawn" , new bool[,] 
+            { "Pawn", new bool[,]
                 {
-                    {false, false, false, false, false, false, false, false, false},
-                    {false, false, false, false, false, false, false, false, false},
-                    {false, false, false, false, true, false, false, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, false, false, false, true, false, false, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, false, true, true, true, true, true, false, false},
-                    {false, false, false, false, false, false, false, false, false},
+                    { false, false, false, false, false, false, false, false, false },
+                    { false, false, false, false, false, false, false, false, false },
+                    { false, false, false, false, true, false, false, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, false, false, false, true, false, false, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, false, true, true, true, true, true, false, false },
+                    { false, false, false, false, false, false, false, false, false },
                 }
             },
-            {"Rook" , new bool[,] 
+            { "Rook", new bool[,]
                 {
-                    {false, false, false, false, false, false, false, false, false},
-                    {false, false, true, false, true, false, true, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, false, true, true, true, true, true, false, false},
-                    {false, false, true, true, true, true, true, false, false},
-                    {false, false, false, false, false, false, false, false, false},
+                    { false, false, false, false, false, false, false, false, false },
+                    { false, false, true, false, true, false, true, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, false, true, true, true, true, true, false, false },
+                    { false, false, true, true, true, true, true, false, false },
+                    { false, false, false, false, false, false, false, false, false },
                 }
             },
-            {"Knight" , new bool[,] 
+            { "Knight", new bool[,]
                 {
-                    {false, false, false, false, false, false, false, false, false},
-                    {false, false, false, false, true, true, false, false, false},
-                    {false, false, false, true, true, true, true, false, false},
-                    {false, false, true, true, true, false, true, false, false},
-                    {false, false, false, true, false, true, true, false, false},
-                    {false, false, false, false, true, true, true, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, false, true, true, true, true, true, false, false},
-                    {false, false, false, false, false, false, false, false, false},
+                    { false, false, false, false, false, false, false, false, false },
+                    { false, false, false, false, true, true, false, false, false },
+                    { false, false, false, true, true, true, true, false, false },
+                    { false, false, true, true, true, false, true, false, false },
+                    { false, false, false, true, false, true, true, false, false },
+                    { false, false, false, false, true, true, true, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, false, true, true, true, true, true, false, false },
+                    { false, false, false, false, false, false, false, false, false },
                 }
             },
-            {"Bishop" , new bool[,] 
+            { "Bishop", new bool[,]
                 {
-                    {false, false, false, false, false, false, false, false, false},
-                    {false, false, false, false, true, false, false, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, false, true, true, false, true, true, false, false},
-                    {false, false, true, false, false, false, true, false, false},
-                    {false, false, false, true, false, true, false, false, false},
-                    {false, false, false, false, true, false, false, false, false},
-                    {false, true, true, true, false, true, true, true, false},
-                    {false, false, false, false, false, false, false, false, false},
+                    { false, false, false, false, false, false, false, false, false },
+                    { false, false, false, false, true, false, false, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, false, true, true, false, true, true, false, false },
+                    { false, false, true, false, false, false, true, false, false },
+                    { false, false, false, true, false, true, false, false, false },
+                    { false, false, false, false, true, false, false, false, false },
+                    { false, true, true, true, false, true, true, true, false },
+                    { false, false, false, false, false, false, false, false, false },
                 }
             },
-            {"Queen" , new bool[,] 
+            { "Queen", new bool[,]
                 {
-                    {false, false, false, false, false, false, false, false, false},
-                    {false, false, false, false, true, false, false, false, false},
-                    {false, false, true, false, true, false, true, false, false},
-                    {false, false, false, true, false, true, false, false, false},
-                    {false, true, false, true, true, true, false, true, false},
-                    {false, false, true, false, true, false, true, false, false},
-                    {false, false, true, true, false, true, true, false, false},
-                    {false, false, true, true, true, true, true, false, false},
-                    {false, false, false, false, false, false, false, false, false},
+                    { false, false, false, false, false, false, false, false, false },
+                    { false, false, false, false, true, false, false, false, false },
+                    { false, false, true, false, true, false, true, false, false },
+                    { false, false, false, true, false, true, false, false, false },
+                    { false, true, false, true, true, true, false, true, false },
+                    { false, false, true, false, true, false, true, false, false },
+                    { false, false, true, true, false, true, true, false, false },
+                    { false, false, true, true, true, true, true, false, false },
+                    { false, false, false, false, false, false, false, false, false },
                 }
             },
-            {"King" , new bool[,] 
+            { "King", new bool[,]
                 {
-                    {false, false, false, false, false, false, false, false, false},
-                    {false, false, false, false, true, false, false, false, false},
-                    {false, false, false, true, true, true, false, false, false},
-                    {false, true, true, false, true, false, true, true, false},
-                    {false, true, true, true, false, true, true, true, false},
-                    {false, true, true, true, true, true, true, true, false},
-                    {false, false, true, true, true, true, true, false, false},
-                    {false, false, true, true, true, true, true, false, false},
-                    {false, false, false, false, false, false, false, false, false},
+                    { false, false, false, false, false, false, false, false, false },
+                    { false, false, false, false, true, false, false, false, false },
+                    { false, false, false, true, true, true, false, false, false },
+                    { false, true, true, false, true, false, true, true, false },
+                    { false, true, true, true, false, true, true, true, false },
+                    { false, true, true, true, true, true, true, true, false },
+                    { false, false, true, true, true, true, true, false, false },
+                    { false, false, true, true, true, true, true, false, false },
+                    { false, false, false, false, false, false, false, false, false },
                 }
             },
         };
@@ -110,7 +108,7 @@ namespace KingSurvival.Chess.Common.Console
         {
             int centerRow = Console.WindowHeight / 2;
 
-            int centerCol = Console.WindowWidth / 2 - lenghtOfMessage / 2;
+            int centerCol = (Console.WindowWidth / 2) - (lenghtOfMessage / 2);
 
             Console.SetCursorPosition(centerCol, centerRow);
         }
@@ -119,9 +117,9 @@ namespace KingSurvival.Chess.Common.Console
         {
             for (int i = 0; i < text.Count(); i++)
             {
-                int centerRow = (Console.WindowHeight / 2)  + i;
+                int centerRow = (Console.WindowHeight / 2) + i;
 
-                int centerCol = Console.WindowWidth / 2 - text[i].Length / 2;
+                int centerCol = (Console.WindowWidth / 2) - (text[i].Length / 2);
 
                 Console.SetCursorPosition(centerCol, centerRow);
 
@@ -133,7 +131,7 @@ namespace KingSurvival.Chess.Common.Console
         {
             int centerRow = ConsoleConstants.ConsoleRowForPlayerMessagesAndIO;
 
-            int centerCol = Console.WindowWidth / 2 - lenghtOfMessage / 2;
+            int centerCol = (Console.WindowWidth / 2) - (lenghtOfMessage / 2);
 
             Console.SetCursorPosition(centerCol, centerRow);
         }
@@ -142,13 +140,16 @@ namespace KingSurvival.Chess.Common.Console
         {
             int centerRow = ConsoleConstants.ConsoleRowForPlayerMessagesAndIO;
 
-            int centerCol = Console.WindowWidth / 2 + lenghtOfMessage / 2 + 1;
+            int centerCol = (Console.WindowWidth / 2) + ((lenghtOfMessage / 2) + 1);
 
             Console.SetCursorPosition(centerCol, centerRow);
         }
 
-        public static void PrintFigure(IFigure figure, ConsoleColor backgroundColor,
-             int top, int left)
+        public static void PrintFigure(
+            IFigure figure, 
+            ConsoleColor backgroundColor,
+            int top, 
+            int left)
         {
             if (figure == null)
             {
@@ -156,13 +157,12 @@ namespace KingSurvival.Chess.Common.Console
                 return;
             }
 
-            if (!patterns.ContainsKey(figure.GetType().Name))
+            if (!Patterns.ContainsKey(figure.GetType().Name))
             {
                 return;
             }
 
-            var figurePattern = patterns[figure.GetType().Name];
-
+            var figurePattern = Patterns[figure.GetType().Name];
 
             for (int i = 0; i < figurePattern.GetLength(0); i++)
             {

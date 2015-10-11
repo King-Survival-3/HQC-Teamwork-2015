@@ -239,13 +239,23 @@
     <Compile Include="Helpers\BoardHelper.cs" />
     <Compile Include="Helpers\MoveHelper.cs" />
     <Compile Include="Hubs\Chat.cs" />
+    <Compile Include="Hubs\Engine\Initializations\KingSurvivalGameWebInitializationStrategy.cs" />
+    <Compile Include="Hubs\Engine\KingSurvivalEngineWeb.cs" />
+    <Compile Include="Hubs\InputProvider\WebInputProvider.cs" />
     <Compile Include="Hubs\KingSurvivalGameConstants.cs" />
     <Compile Include="Hubs\KingSurvivalGame.cs" />
+<<<<<<< HEAD
     <Compile Include="Hubs\Patterns\IVisitor.cs" />
     <Compile Include="Hubs\Patterns\Visitor.cs" />
+=======
+    <Compile Include="Hubs\Renderer\WebRenderer.cs" />
+>>>>>>> master
     <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ExternalLoginViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageInfoViewModel.cs" />
+    <Compile Include="Models\UserInfoViewModel.cs" />
+    <Compile Include="Models\UserLoginInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -323,6 +333,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KingSurvival.Chess\KingSurvival.Chess.csproj">
+      <Project>{3c204899-4633-43cd-b1fd-684fb8352713}</Project>
+      <Name>KingSurvival.Chess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KingSurvival.Data\KingSurvival.Data.csproj">
       <Project>{eada0f1b-b136-4634-a000-73e1c0b8bbd9}</Project>
       <Name>KingSurvival.Data</Name>

@@ -2,6 +2,8 @@
 {
     public class GlobalConstants
     {
+        public const int MessageDelayTime = 1500;
+
         public const int StandartGameTotalBoardRows = 8;
 
         public const int StandartGameTotalBoardCols = 8;
@@ -18,8 +20,6 @@
 
         public const char MaximumColValueOnBoard = 'h';
 
-        public const string LogoTitle = "King Survival 3 Team work";
-
-        public static int MessageDelayTime = 1500;
+        public const string LogoTitle = "King Survival 3 Team work";    
     }
 }

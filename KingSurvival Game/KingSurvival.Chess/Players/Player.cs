@@ -26,7 +26,8 @@
         public void AddFigure(IFigure figure)
         {
             ObjectValidator.CheckIfObjectIsNull(figure, GlobalErrorMessages.NullFigureErrorMessage);
-            //TODO: chech figure and player color
+
+            // TODO: chech figure and player color
             this.CheckIfFigureExists(figure);
             this.figures.Add(figure);
         }
@@ -35,7 +36,6 @@
         {
             ObjectValidator.CheckIfObjectIsNull(figure, GlobalErrorMessages.NullFigureErrorMessage);
 
-            //TODO: chech figure and player color
             this.CheckIfFigureDoesNotExists(figure);
             this.figures.Remove(figure);
         }

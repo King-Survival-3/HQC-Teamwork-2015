@@ -1,12 +1,12 @@
-using System.Collections.ObjectModel;
-
 namespace KingSurvival.Web.Areas.HelpPage.ModelDescriptions
 {
+    using System.Collections.ObjectModel;
+
     public class EnumTypeModelDescription : ModelDescription
     {
         public EnumTypeModelDescription()
         {
-            Values = new Collection<EnumValueDescription>();
+            this.Values = new Collection<EnumValueDescription>();
         }
 
         public Collection<EnumValueDescription> Values { get; private set; }
