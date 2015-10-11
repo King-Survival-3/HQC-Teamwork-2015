@@ -25,7 +25,7 @@
                     var figure = this.board.GetFigureAtPosition(new Position(this.board.TotalRows, (char)('a' + i)));
                     if (figure is Figures.King)
                     {
-                        this.gameState = GameState.WhiteWon;
+                        this.GameState = GameState.WhiteWon;
                         break;
                     }
                 }

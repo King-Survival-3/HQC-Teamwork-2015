@@ -28,7 +28,7 @@
 
         protected int currentPlayerIndex;
 
-        protected GameState gameState;
+        protected GameState GameState;
 
         protected BaseChessEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
         {
@@ -36,7 +36,7 @@
             this.MovementStrategy = movementStrategy; 
             this.Input = inputProvider;
             this.board = new Board();
-            this.gameState = GameState.Playing;
+            this.GameState = GameState.Playing;
         }
 
         public IEnumerable<IPlayer> Players
@@ -47,7 +47,7 @@
             }
         }
 
-        public void Initialize(IGameInitializationStrategy gameInitializationStrategy)
+        public virtual void Initialize(IGameInitializationStrategy gameInitializationStrategy)
         {
             // TODO: Remove
             // using Chess.Players;
@@ -68,7 +68,7 @@
             this.Renderer.RenderBoard(this.board);
         }
 
-        public void Play()
+        public virtual void Play()
         {
             while (true)
             {
@@ -106,9 +106,10 @@
                     // TODO: Continue
                     this.WinnginConditions();
 
-                    if (this.gameState != GameState.Playing)
+                    if (this.GameState != GameState.Playing)
                     {
-                        this.Renderer.RenderWinningScreen(this.gameState.ToString());
+                        this.Renderer.RenderWinningScreen(this.GameState.ToString());
+
                         break;
                     }
                 }

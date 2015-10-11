@@ -1,41 +1,27 @@
 ﻿namespace KingSurvival.Web.Helpers
 {
+    using KingSurvival.Chess.Board.Contracts;
+    using KingSurvival.Chess;
+    using KingSurvival.Chess.Common;
+    using KingSurvival.Chess.Figures.Contracts;
     using System;
     using System.Text;
+    using KingSurvival.Chess.Figures;
 
     public static class BoardHelper
     {
-        public static char[,] FenToBoard(string fen)
-        {
-            var splitedFen = fen.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            var board = new char[8, 8];
-            var index = 0;
-
-            for (int row = splitedFen.Length - 1; row >= 0; row--)
-            {
-                var currentRow = MakeRow(splitedFen[row]);
-
-                for (int col = 0; col < currentRow.Length; col++)
-                {
-                    board[index, col] = currentRow[col];
-                }
-
-                index++;
-            }
-
-            return board;
-        }
-
-        public static string BoardToFen(char[,] board)
+        public static string BoardToFen(IBoard board)
         {
             var fen = new StringBuilder();
-            var reversedRow = board.GetLength(0) - 1;
-            for (int row = 0; row < board.GetLength(0); row++)
+            var reversedRow = board.TotalRows ;
+            for (int row = 1; row <= board.TotalRows; row++)
             {
                 var empySpace = 0;
-                for (int col = 0; col < board.GetLength(1); col++)
+                for (int col = 0; col < board.TotalCols; col++)
                 {
-                    if (board[reversedRow, col] == '-')
+                    var figure = board.GetFigureAtPosition(new Position(reversedRow, (char)('a' + col)));
+
+                    if (figure == null)
                     {
                         empySpace++;
                     }
@@ -47,16 +33,24 @@
                             empySpace = 0;
                         }
 
-                        fen.Append(board[reversedRow, col]);
+                        //fen.Append(board[reversedRow, col]);
+                        if (figure is King)
+                        {
+                            fen.Append('K');
+                        }
+                        else
+                        {
+                            fen.Append('p');
+                        }
                     }
 
-                    if (col == (board.GetLength(1) - 1) && empySpace != 0)
+                    if (col == (board.TotalCols - 1) && empySpace != 0)
                     {
                         fen.Append(empySpace);
                     }
                 }
 
-                if (row != board.GetLength(0) - 1)
+                if (row != board.TotalRows)
                 {
                     fen.Append('/');
                 }

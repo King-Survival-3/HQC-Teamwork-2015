@@ -238,8 +238,12 @@
     <Compile Include="Helpers\BoardHelper.cs" />
     <Compile Include="Helpers\MoveHelper.cs" />
     <Compile Include="Hubs\Chat.cs" />
+    <Compile Include="Hubs\Engine\Initializations\KingSurvivalGameWebInitializationStrategy.cs" />
+    <Compile Include="Hubs\Engine\KingSurvivalEngineWeb.cs" />
+    <Compile Include="Hubs\InputProvider\WebInputProvider.cs" />
     <Compile Include="Hubs\KingSurvivalGameConstants.cs" />
     <Compile Include="Hubs\KingSurvivalGame.cs" />
+    <Compile Include="Hubs\Renderer\WebRenderer.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -320,6 +324,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KingSurvival.Chess\KingSurvival.Chess.csproj">
+      <Project>{3c204899-4633-43cd-b1fd-684fb8352713}</Project>
+      <Name>KingSurvival.Chess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KingSurvival.Data\KingSurvival.Data.csproj">
       <Project>{eada0f1b-b136-4634-a000-73e1c0b8bbd9}</Project>
       <Name>KingSurvival.Data</Name>
