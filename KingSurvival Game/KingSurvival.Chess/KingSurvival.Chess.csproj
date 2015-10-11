@@ -55,9 +55,7 @@
     <Compile Include="Engine\Contracts\IChessEngine.cs" />
     <Compile Include="Engine\Contracts\IGameInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\InitializationGameProvider.cs" />
-    <Compile Include="Engine\KingSurvivalEngineWeb.cs" />
     <Compile Include="Engine\Initializations\KingSurvivalGameInitializationStrategy.cs" />
-    <Compile Include="Engine\Initializations\KingSurvivalGameWebInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\StandartStartGameInitializationStrategy.cs" />
     <Compile Include="Engine\KingSurvivalEngine.cs" />
     <Compile Include="Engine\StandartTwoPlayerEngine.cs" />
@@ -74,7 +72,6 @@
     <Compile Include="Formatter\StandartFormatter.cs" />
     <Compile Include="InputProvider\ConsoleInputProvider.cs" />
     <Compile Include="InputProvider\Contracts\IInputProvider.cs" />
-    <Compile Include="InputProvider\WebInputProvider.cs" />
     <Compile Include="Movements\Contracts\IMovement.cs" />
     <Compile Include="Movements\Contracts\IMovementStrategy.cs" />
     <Compile Include="Movements\KingSurvivalMovements\KingSurvivalBaseMovement.cs" />

@@ -1,4 +1,4 @@
-﻿namespace KingSurvival.Chess.Engine.Initializations
+﻿namespace KingSurvival.Web.Hubs.Engine.Initializations
 {
     using System;
     using System.Collections.Generic;
@@ -17,9 +17,9 @@
         private const char King = 'K';
         private const char EmptySpace = '-';
 
-        private string fen;
-        private IPlayer firstPlayer;
-        private IPlayer secondPlayer;
+        private readonly string fen;
+        private readonly IPlayer firstPlayer;
+        private readonly IPlayer secondPlayer;
 
         public KingSurvivalGameWebInitializationStrategy(string fen, IPlayer firstPlayer, IPlayer secondPlayer)
         {
@@ -50,14 +50,14 @@
 
                 for (int col = 0; col < currentRow.Length; col++)
                 {
-                    if (currentRow[col] == KingSurvivalGameWebInitializationStrategy.Pown)
+                    if (currentRow[col] == Pown)
                     {
                         var pawn = new Pawn(secondPlayer.Color);
                         secondPlayer.AddFigure(pawn);
                         var position = new Position(index + 1, (char)(col + 'a'));
                         board.AddFigure(pawn, position);
                     }
-                    else if (currentRow[col] == KingSurvivalGameWebInitializationStrategy.King)
+                    else if (currentRow[col] == King)
                     {
                         var figureInstance = new King(firstPlayser.Color);
                         firstPlayser.AddFigure(figureInstance);
@@ -81,7 +81,7 @@
                 if (Char.IsDigit(currentSymbol))
                 {
                     var number = int.Parse(currentSymbol.ToString());
-                    row.Append(new String(KingSurvivalGameWebInitializationStrategy.EmptySpace, number));
+                    row.Append(new String(EmptySpace, number));
                 }
                 else
                 {

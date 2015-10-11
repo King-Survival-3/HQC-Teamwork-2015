@@ -1,25 +1,23 @@
 ﻿namespace KingSurvival.Web.Hubs
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using Microsoft.AspNet.SignalR;
 
+    using KingSurvival.Chess.Common;
+    using KingSurvival.Chess.Engine.Contracts;
+    using KingSurvival.Chess.Movements.Strategies;
+    using KingSurvival.Chess.Players;
     using KingSurvival.Data;
     using KingSurvival.Models;
-    using KingSurvival.Web.Helpers;
-    using KingSurvival.Chess.Board.Contracts;
-    using KingSurvival.Chess.Renderer.Contracts;
-    using KingSurvival.Chess.Engine.Initializations;
-    using KingSurvival.Chess.Players;
-    using KingSurvival.Chess.Common;
-    using KingSurvival.Chess.InputProvider;
-    using KingSurvival.Chess.Movements.Strategies;
-    using KingSurvival.Chess.Engine;
-    using KingSurvival.Chess.Engine.Contracts;
-    using System.Collections.Generic;
+    using KingSurvival.Web.Hubs.Engine;
+    using KingSurvival.Web.Hubs.Engine.Initializations;
+    using KingSurvival.Web.Hubs.InputProvider;
+    using KingSurvival.Web.Hubs.Renderer;
 
-    public class KingSurvivalGame : Hub, IRenderer
+    public class KingSurvivalGame : Hub
     {
         private readonly IKingSurvivalData data;
 
@@ -28,52 +26,11 @@
         public KingSurvivalGame()
             : this(new KingSurvivalData(new KingSurvivalDbContext()))
         {
-
         }
-
-        private Game Game { get; set; }
 
         public KingSurvivalGame(IKingSurvivalData data)
         {
             this.data = data;
-        }
-
-        public void RenderBoard(IBoard board)
-        {
-            //TODO: board to fen
-            var gameId = Game.Id.ToString();
-            var oldBord = Game.Board;
-            var newBoard = BoardHelper.BoardToFen(board);
-
-            Game.Board = newBoard;
-
-            Game.State = Game.State == KingSurvivalGameState.TurnKing ? KingSurvivalGameState.TurnPown : KingSurvivalGameState.TurnKing;
-
-            this.data.SaveChanges();
-
-            // move 
-            this.Clients.Group(gameId).move(Game.Board);
-
-            // update state 
-            this.UpdateState(gameId);
-        }
-
-        public void PrintErrorMessage(string errorMessage)
-        {
-            var gameId = Game.Id.ToString();
-            var oldFen = Game.Board;
-            this.Clients.Group(gameId).move(oldFen);
-        }
-
-        public void RenderWinningScreen(string message)
-        {
-            //Win WIn Win
-            throw new NotImplementedException();
-        }
-
-        public void RenderMainMenu()
-        {
-            throw new NotImplementedException();
         }
 
         // Name of the room is same like the game Id
@@ -90,17 +47,17 @@
 
         public void GameEngine(string gameId, string userId, string moveFrom, string moveTo)
         {
-            this.Game = this.GetGame(gameId);
+            var game = this.GetGame(gameId);
             var playerID = userId;
             var players = this.GetPlayers();
             var firstPlayer = players
-                .FirstOrDefault(x => x.Id == this.Game.FirstPlayerId);
+                .FirstOrDefault(x => x.Id == game.FirstPlayerId);
             var secondPlayer = players
-                .FirstOrDefault(x => x.Id == this.Game.SecondPlayerId);
-            var oldFen = Game.Board;
+                .FirstOrDefault(x => x.Id == game.SecondPlayerId);
+            var oldFen = game.Board;
 
             // if game doesn't exist
-            if (Game == null)
+            if (game == null)
             {
                 return;
             }
@@ -109,7 +66,7 @@
             {
                 return;
             }
-          
+
             // nothing to move
             if (moveFrom == moveTo)
             {
@@ -117,27 +74,28 @@
             }
 
             // check If player is 1 or 2 
-            if (playerID != Game.FirstPlayerId && playerID != Game.SecondPlayerId)
+            if (playerID != game.FirstPlayerId && playerID != game.SecondPlayerId)
             {
                 //return you are not part of this game
                 this.Clients.Group(gameId).move(oldFen);
                 return;
             }
 
-            if (playerID == Game.FirstPlayerId && Game.State != KingSurvivalGameState.TurnKing)
+            if (playerID == game.FirstPlayerId && game.State != KingSurvivalGameState.TurnKing)
             {
                 // this is not your turn
                 this.Clients.Group(gameId).move(oldFen);
                 return;
             }
 
-            if (playerID == Game.SecondPlayerId && Game.State != KingSurvivalGameState.TurnPown)
+            if (playerID == game.SecondPlayerId && game.State != KingSurvivalGameState.TurnPown)
             {
                 // this is not your turn
                 this.Clients.Group(gameId).move(oldFen);
                 return;
             }
 
+            var renderer = new WebRenderer(this.Clients, game, this.data);
             var furstPlayer = new Player(firstPlayer.UserName, ChessColor.White);
             var scondPlayer = new Player(secondPlayer.UserName, Chess.Common.ChessColor.White);
             var kingSurvivalInitilizeStrategy = new KingSurvivalGameWebInitializationStrategy(oldFen, furstPlayer, scondPlayer);
@@ -147,7 +105,7 @@
             var inputProvider = new WebInputProvider(move);
             var movementStrategy = new KingSurvivalMovementStrategy();
 
-            this.gameEngine = new KingSurvivalEngineWeb(this, inputProvider, movementStrategy);
+            this.gameEngine = new KingSurvivalEngineWeb(renderer, inputProvider, movementStrategy);
 
             gameEngine.Initialize(kingSurvivalInitilizeStrategy);
             gameEngine.Play();

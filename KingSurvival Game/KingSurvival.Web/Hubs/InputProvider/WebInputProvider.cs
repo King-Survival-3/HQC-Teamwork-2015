@@ -1,14 +1,11 @@
-﻿namespace KingSurvival.Chess.InputProvider
+﻿namespace KingSurvival.Web.Hubs.InputProvider
 {
     using System;
     using System.Collections.Generic;
 
     using KingSurvival.Chess.Common;
-    using KingSurvival.Chess.Common.Console;
     using KingSurvival.Chess.InputProvider.Contracts;
-    using KingSurvival.Chess.Players;
     using KingSurvival.Chess.Players.Contracts;
-    using System.Threading;
 
     public class WebInputProvider : IInputProvider
     {
