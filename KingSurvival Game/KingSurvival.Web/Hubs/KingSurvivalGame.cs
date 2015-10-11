@@ -16,10 +16,14 @@
     using KingSurvival.Chess.InputProvider;
     using KingSurvival.Chess.Movements.Strategies;
     using KingSurvival.Chess.Engine;
+    using KingSurvival.Chess.Engine.Contracts;
+    using System.Collections.Generic;
 
     public class KingSurvivalGame : Hub, IRenderer
     {
         private readonly IKingSurvivalData data;
+
+        private IChessEngine gameEngine;
 
         public KingSurvivalGame()
             : this(new KingSurvivalData(new KingSurvivalDbContext()))
@@ -38,12 +42,13 @@
         {
             //TODO: board to fen
             var gameId = Game.Id.ToString();
+            var oldBord = Game.Board;
+            var newBoard = BoardHelper.BoardToFen(board);
 
-            Game.Board = BoardHelper.BoardToFen(board);
+            Game.Board = newBoard;
 
             Game.State = Game.State == KingSurvivalGameState.TurnKing ? KingSurvivalGameState.TurnPown : KingSurvivalGameState.TurnKing;
 
-            // just updating the state
             this.data.SaveChanges();
 
             // move 
@@ -58,7 +63,6 @@
             var gameId = Game.Id.ToString();
             var oldFen = Game.Board;
             this.Clients.Group(gameId).move(oldFen);
-            return;
         }
 
         public void RenderWinningScreen(string message)
@@ -87,6 +91,13 @@
         public void GameEngine(string gameId, string userId, string moveFrom, string moveTo)
         {
             this.Game = this.GetGame(gameId);
+            var playerID = userId;
+            var players = this.GetPlayers();
+            var firstPlayer = players
+                .FirstOrDefault(x => x.Id == this.Game.FirstPlayerId);
+            var secondPlayer = players
+                .FirstOrDefault(x => x.Id == this.Game.SecondPlayerId);
+            var oldFen = Game.Board;
 
             // if game doesn't exist
             if (Game == null)
@@ -94,11 +105,11 @@
                 return;
             }
 
-            var playerID = userId;
-            var oldFen = Game.Board;
-          //  var gameBoard = BoardHelper.FenToBoard(oldFen);
-            var figure = playerID == Game.FirstPlayerId ? KingSurvivalGameConstants.King : KingSurvivalGameConstants.Pawn;
-            
+            if (firstPlayer == null || secondPlayer == null)
+            {
+                return;
+            }
+          
             // nothing to move
             if (moveFrom == moveTo)
             {
@@ -127,21 +138,19 @@
                 return;
             }
 
-            var furstPlayer = new Player("pesho", ChessColor.White);
-            var secondPlayer = new Player("Gosho", Chess.Common.ChessColor.White);
-            var kingSurvivalInitilizeStrategy = new KingSurvivalGameWebInitializationStrategy(oldFen, furstPlayer, secondPlayer);
-            var move = new Move(new Position(moveFrom[1] - '0', moveFrom[0]), new Position(moveTo[1] - '0', moveTo[0]));
+            var furstPlayer = new Player(firstPlayer.UserName, ChessColor.White);
+            var scondPlayer = new Player(secondPlayer.UserName, Chess.Common.ChessColor.White);
+            var kingSurvivalInitilizeStrategy = new KingSurvivalGameWebInitializationStrategy(oldFen, furstPlayer, scondPlayer);
+            var from = new Position(moveFrom[1] - '0', moveFrom[0]);
+            var to = new Position(moveTo[1] - '0', moveTo[0]);
+            var move = new Move(from, to);
             var inputProvider = new WebInputProvider(move);
             var movementStrategy = new KingSurvivalMovementStrategy();
 
-            var kingSurvivalGameEngine = new KingSurvivalEngine(this, inputProvider, movementStrategy);
+            this.gameEngine = new KingSurvivalEngineWeb(this, inputProvider, movementStrategy);
 
-            kingSurvivalGameEngine.Initialize(kingSurvivalInitilizeStrategy);
-            kingSurvivalGameEngine.Play();
-
-            // everything is OK, save changes 
-            // gameBoard = this.SwapPosition(gameBoard, oldPosition, newPosition);
-
+            gameEngine.Initialize(kingSurvivalInitilizeStrategy);
+            gameEngine.Play();
         }
 
         private void UpdateState(string gameId)
@@ -160,6 +169,15 @@
             var game = this.data.Game.All().FirstOrDefault(x => x.Id.ToString() == gameId);
 
             return game;
+        }
+
+        private IEnumerable<KingSurvivalUser> GetPlayers()
+        {
+            var players = this.data.Users
+                .All()
+                .ToList();
+
+            return players;
         }
     }
 }

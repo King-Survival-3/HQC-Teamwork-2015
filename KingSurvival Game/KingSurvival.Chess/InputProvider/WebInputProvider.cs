@@ -8,6 +8,7 @@
     using KingSurvival.Chess.InputProvider.Contracts;
     using KingSurvival.Chess.Players;
     using KingSurvival.Chess.Players.Contracts;
+    using System.Threading;
 
     public class WebInputProvider : IInputProvider
     {

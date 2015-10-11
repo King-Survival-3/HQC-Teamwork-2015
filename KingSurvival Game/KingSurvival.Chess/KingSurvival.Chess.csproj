@@ -55,6 +55,7 @@
     <Compile Include="Engine\Contracts\IChessEngine.cs" />
     <Compile Include="Engine\Contracts\IGameInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\InitializationGameProvider.cs" />
+    <Compile Include="Engine\KingSurvivalEngineWeb.cs" />
     <Compile Include="Engine\Initializations\KingSurvivalGameInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\KingSurvivalGameWebInitializationStrategy.cs" />
     <Compile Include="Engine\Initializations\StandartStartGameInitializationStrategy.cs" />
