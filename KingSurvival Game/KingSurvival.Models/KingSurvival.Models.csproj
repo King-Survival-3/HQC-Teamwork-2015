@@ -54,10 +54,6 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="GameState.cs" />
-    <Compile Include="Patterns\IPositionFactory.cs" />
-    <Compile Include="Patterns\PositionFactory.cs" />
-    <Compile Include="Position.cs" />
     <Compile Include="KingSurvivalGameState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validator.cs" />

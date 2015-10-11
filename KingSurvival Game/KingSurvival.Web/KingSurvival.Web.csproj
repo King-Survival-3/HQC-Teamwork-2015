@@ -244,12 +244,7 @@
     <Compile Include="Hubs\InputProvider\WebInputProvider.cs" />
     <Compile Include="Hubs\KingSurvivalGameConstants.cs" />
     <Compile Include="Hubs\KingSurvivalGame.cs" />
-<<<<<<< HEAD
-    <Compile Include="Hubs\Patterns\IVisitor.cs" />
-    <Compile Include="Hubs\Patterns\Visitor.cs" />
-=======
     <Compile Include="Hubs\Renderer\WebRenderer.cs" />
->>>>>>> master
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\ExternalLoginViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
