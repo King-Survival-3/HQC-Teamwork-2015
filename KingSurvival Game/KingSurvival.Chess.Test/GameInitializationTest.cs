@@ -1,12 +1,13 @@
 ﻿namespace KingSurvival.Chess.Test
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using KingSurvival.Chess.Engine.Initializations;
     using System.Collections.Generic;
-    using KingSurvival.Chess.Players;
+
     using KingSurvival.Chess.Common;
+    using KingSurvival.Chess.Engine.Initializations;
+    using KingSurvival.Chess.Players;
     using KingSurvival.Chess.Players.Contracts;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class GameInitializationTest
@@ -68,6 +69,5 @@
 
             Assert.AreNotEqual(playerList[0], playerList[1]);
         }
-
     }
 }

@@ -6,7 +6,7 @@
 
     public interface IChessEngine
     {
-        IEnumerable<IPlayer> Players { get; }
+        IList<IPlayer> Players { get; }
 
         void Initialize(IGameInitializationStrategy gameInitializationStrategy);
 

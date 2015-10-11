@@ -18,11 +18,11 @@
 
         public override void WinnginConditions()
         {
-            for (int i = 0; i < this.board.TotalCols; i++)
+            for (int i = 0; i < this.Board.TotalCols; i++)
             {
                 try
                 {
-                    var figure = this.board.GetFigureAtPosition(new Position(this.board.TotalRows, (char)('a' + i)));
+                    var figure = this.Board.GetFigureAtPosition(new Position(this.Board.TotalRows, (char)('a' + i)));
                     if (figure is Figures.King)
                     {
                         this.GameState = GameState.WhiteWon;

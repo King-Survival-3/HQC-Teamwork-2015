@@ -14,7 +14,6 @@
     using KingSurvival.Web.Hubs.InputProvider;
     using KingSurvival.Web.Hubs.Renderer;
 
-
     using Microsoft.AspNet.SignalR;
 
     public class KingSurvivalGame : Hub

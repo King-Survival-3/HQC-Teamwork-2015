@@ -16,36 +16,41 @@
 
     public abstract class BaseChessEngine : IChessEngine
     {
-        protected readonly IMovementStrategy MovementStrategy;
-
-        protected readonly IRenderer Renderer;
-
-        protected readonly IInputProvider Input;
-
-        protected IBoard board;
-
-        protected IList<IPlayer> players;
-
-        protected int currentPlayerIndex;
-
-        protected GameState GameState;
+        private IList<IPlayer> players;
 
         protected BaseChessEngine(IRenderer renderer, IInputProvider inputProvider, IMovementStrategy movementStrategy)
         {
             this.Renderer = renderer;
             this.MovementStrategy = movementStrategy; 
             this.Input = inputProvider;
-            this.board = new Board();
+            this.Board = new Board();
             this.GameState = GameState.Playing;
         }
 
-        public IEnumerable<IPlayer> Players
+        public IList<IPlayer> Players
         {
             get
             {
                 return new List<IPlayer>(this.players);
             }
+
+            set
+            {
+                this.players = value;
+            }
         }
+
+        protected IMovementStrategy MovementStrategy { get; set; }
+
+        protected IRenderer Renderer { get; set; }
+
+        protected IInputProvider Input { get; set; }
+
+        protected IBoard Board { get; set; }
+
+        protected int CurrentPlayerIndex { get; set; }
+
+        protected GameState GameState { get; set; }
 
         public virtual void Initialize(IGameInitializationStrategy gameInitializationStrategy)
         {
@@ -64,8 +69,8 @@
 
             // Use this
             // var players = this.input.GetPlayers(GlobalConstants.StandartGameNumberOfPlayers);
-            gameInitializationStrategy.Initialize(this.players, this.board);
-            this.Renderer.RenderBoard(this.board);
+            gameInitializationStrategy.Initialize(this.players, this.Board);
+            this.Renderer.RenderBoard(this.Board);
         }
 
         public virtual void Play()
@@ -78,7 +83,7 @@
                     var move = this.Input.GetNextPlayerMove(player);
                     var from = move.From;
                     var to = move.To;
-                    var figure = this.board.GetFigureAtPosition(from);
+                    var figure = this.Board.GetFigureAtPosition(from);
                     this.CheckIfPlayerOwnsFigure(player, figure, from);
                     this.CheckIfToPositionIsEmpty(figure, to);
 
@@ -86,12 +91,12 @@
 
                     foreach (var movement in availableMovements)
                     {
-                        movement.ValidateMove(figure, this.board, move);
+                        movement.ValidateMove(figure, this.Board, move);
                     }
 
-                    this.board.MoveFigureAtPosition(figure, from, to);
+                    this.Board.MoveFigureAtPosition(figure, from, to);
 
-                    this.Renderer.RenderBoard(this.board);
+                    this.Renderer.RenderBoard(this.Board);
 
                     // TODO: On every move check if we are in check.
                     // TODO: Check pawn on last row
@@ -115,7 +120,7 @@
                 }
                 catch (Exception exception)
                 {
-                    this.currentPlayerIndex--;
+                    this.CurrentPlayerIndex--;
                     this.Renderer.PrintErrorMessage(exception.Message);
                 }
             }
@@ -129,7 +134,7 @@
             {
                 if (this.players[i].Color == ChessColor.White)
                 {
-                    this.currentPlayerIndex = i - 1;
+                    this.CurrentPlayerIndex = i - 1;
                     return;
                 }
             }
@@ -137,13 +142,13 @@
 
         protected IPlayer GetNextPlayer()
         {
-            this.currentPlayerIndex++;
-            if (this.currentPlayerIndex >= this.players.Count)
+            this.CurrentPlayerIndex++;
+            if (this.CurrentPlayerIndex >= this.players.Count)
             {
-                this.currentPlayerIndex = 0;
+                this.CurrentPlayerIndex = 0;
             }
 
-            return this.players[this.currentPlayerIndex];
+            return this.players[this.CurrentPlayerIndex];
         }
 
         protected void CheckIfPlayerOwnsFigure(IPlayer player, IFigure figure, Position from)
@@ -162,7 +167,7 @@
 
         protected void CheckIfToPositionIsEmpty(IFigure figure, Position to)
         {
-            var figureAtPosition = this.board.GetFigureAtPosition(to);
+            var figureAtPosition = this.Board.GetFigureAtPosition(to);
             if (figureAtPosition != null && figureAtPosition.Color == figure.Color)
             {
                 throw new InvalidOperationException(

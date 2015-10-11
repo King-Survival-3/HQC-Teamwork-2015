@@ -136,27 +136,27 @@
 
             for (int i = 0; i < boardTotalCols; i++)
             {
-                Console.SetCursorPosition(start + i * ConsoleConstants.CharactersPerColPerBoardSquare, startColPrint - 1);
+                Console.SetCursorPosition(start + (i * ConsoleConstants.CharactersPerColPerBoardSquare), startColPrint - 1);
                 Console.Write((char)('a' + i));
 
-                Console.SetCursorPosition(start + i * ConsoleConstants.CharactersPerColPerBoardSquare, startColPrint + boardTotalRows * ConsoleConstants.CharactersPerColPerBoardSquare);
+                Console.SetCursorPosition(start + (i * ConsoleConstants.CharactersPerColPerBoardSquare), startColPrint + (boardTotalRows * ConsoleConstants.CharactersPerColPerBoardSquare));
                 Console.Write((char)('a' + i));
             }
 
             // Print numbers
-            start = startColPrint + ConsoleConstants.CharactersPerColPerBoardSquare / 2;
+            start = startColPrint + (ConsoleConstants.CharactersPerColPerBoardSquare / 2);
             for (int i = 0; i < boardTotalRows; i++)
             {
-                Console.SetCursorPosition(startRowPrint - 1, start + i * ConsoleConstants.CharactersPerColPerBoardSquare);
+                Console.SetCursorPosition(startRowPrint - 1, start + (i * ConsoleConstants.CharactersPerColPerBoardSquare));
                 Console.WriteLine(boardTotalRows - i);
 
-                Console.SetCursorPosition(startRowPrint + boardTotalCols * ConsoleConstants.CharactersPerColPerBoardSquare, start + i * ConsoleConstants.CharactersPerColPerBoardSquare);
+                Console.SetCursorPosition(startRowPrint + (boardTotalCols * ConsoleConstants.CharactersPerColPerBoardSquare), start + (i * ConsoleConstants.CharactersPerColPerBoardSquare));
                 Console.WriteLine(boardTotalRows - i);
             }
 
             // Top Boarder Line
             for (int i = startRowPrint - 2;
-                 i <= startRowPrint + boardTotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 1;
+                 i <= (startRowPrint + (boardTotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare) + 1);
                  i++)
             {
                 Console.BackgroundColor = DarskSquareConsoleColor;
@@ -166,31 +166,31 @@
 
             // Bottom Boarder Line
             for (int i = startRowPrint - 2;
-                 i <= startRowPrint + boardTotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 1;
+                 i <= startRowPrint + (boardTotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare) + 1;
                  i++)
             {
                 Console.BackgroundColor = DarskSquareConsoleColor;
                 Console.SetCursorPosition(
                     i,
-                    startColPrint + boardTotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare + 1);
+                    startColPrint + (boardTotalRows * ConsoleConstants.CharactersPerRowPerBoardSquare) + 1);
                 Console.WriteLine(" ");
             }
 
             // Right Boarder Line
             for (int i = startColPrint - 2;
-                 i <= startColPrint + boardTotalCols * ConsoleConstants.CharactersPerColPerBoardSquare + 1;
+                 i <= (startColPrint + (boardTotalCols * ConsoleConstants.CharactersPerColPerBoardSquare) + 1);
                  i++)
             {
                 Console.BackgroundColor = DarskSquareConsoleColor;
                 Console.SetCursorPosition(
-                    startRowPrint + boardTotalCols * ConsoleConstants.CharactersPerColPerBoardSquare + 1, 
+                    startRowPrint + (boardTotalCols * ConsoleConstants.CharactersPerColPerBoardSquare) + 1, 
                     i);
                 Console.WriteLine(" ");
             }
 
             // Left Boarder Line
             for (int i = startColPrint - 2;
-                 i <= startColPrint + boardTotalCols * ConsoleConstants.CharactersPerColPerBoardSquare + 1;
+                 i <= startColPrint + (boardTotalCols * ConsoleConstants.CharactersPerColPerBoardSquare) + 1;
                  i++)
             {
                 Console.BackgroundColor = DarskSquareConsoleColor;
