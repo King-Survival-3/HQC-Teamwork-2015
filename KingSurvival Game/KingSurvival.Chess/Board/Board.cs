@@ -1,4 +1,7 @@
-﻿namespace KingSurvival.Chess.Board
+﻿using System;
+using System.Linq.Expressions;
+
+namespace KingSurvival.Chess.Board
 {
     using System.Collections.Generic;
 
@@ -32,6 +35,21 @@
             int arrRow = this.GetArrayRow(position.Row);
             int arrCol = this.GetArrayCol(position.Col);
             this.board[arrRow, arrCol] = figure;
+        }
+
+        public void CheckIfSquareIsFree(IFigure figure, Position position)
+        {
+            try
+            {
+                ObjectValidator.CheckIfObjectIsNull(figure, GlobalErrorMessages.NullFigureErrorMessage);
+
+                Position.ChechIfValid(position);
+
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException(GlobalErrorMessages.InvalidMove);
+            }
         }
 
         public void RemoveFigure(Position position)

@@ -17,6 +17,8 @@
 
         void MoveFigureAtPosition(IFigure figure, Position from, Position to);
 
+        void CheckIfSquareIsFree(IFigure figure, Position position);
+
         IFigure GetFigureAtPosition(Position position);
     }
 }

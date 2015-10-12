@@ -23,7 +23,7 @@
 
             this.AddPawnsToBoardRow(firstPlayer, board, 8);
 
-             this.AddKingToBoardRow(secondPlayer, board, 1, 'd');
+             this.AddKingToBoardRow(secondPlayer, board, 7, 'd');
             // TODO: remove below. Added only for testing purposes
             // this.AddKingToBoardRow(secondPlayer, board, 7, 'h');
         }
@@ -37,6 +37,28 @@
                 var position = new Position(chessRow, (char)(i + 'a'));
                 board.AddFigure(pawn, position);
             }
+
+            // TODO: Remove
+            //// For testing only
+            //var pawn = new Pawn(player.Color);
+            //player.AddFigure(pawn);
+            //var position = new Position(8, (char)(0 + 'a'));
+            //board.AddFigure(pawn, position);
+
+            //pawn = new Pawn(player.Color);
+            //player.AddFigure(pawn);
+            //position = new Position(8, (char)(2 + 'a'));
+            //board.AddFigure(pawn, position);
+
+            //pawn = new Pawn(player.Color);
+            //player.AddFigure(pawn);
+            //position = new Position(8, (char)(4 + 'a'));
+            //board.AddFigure(pawn, position);
+
+            //pawn = new Pawn(player.Color);
+            //player.AddFigure(pawn);
+            //position = new Position(6, (char)(4 + 'a'));
+            //board.AddFigure(pawn, position);
         }
 
         private void AddKingToBoardRow(IPlayer player, IBoard board, int chessRow, char chessCol)
