@@ -61,8 +61,8 @@
             // TODO: If players are changed - board is reversed
             this.players = new List<IPlayer>
                                {
-                                   new Player("[Black]Gosho", ChessColor.Black),
-                                   new Player("[White]Pesho", ChessColor.White),
+                                   new Player("[Black]", ChessColor.Black),
+                                   new Player("[White]", ChessColor.White),
                                };
 
             this.SetFirstPlayerIndex();

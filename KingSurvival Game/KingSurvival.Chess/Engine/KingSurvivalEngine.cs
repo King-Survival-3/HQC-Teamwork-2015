@@ -35,20 +35,20 @@
                 }
             }
 
-            for (int row = 0; row < this.Board.TotalCols; row++)
-            {
-                for (int col = 0; col < this.Board.TotalRows; col++)
-                {
-                    var currentRow = row;
-                    var currentCol = (char) ('a' + col);
-                    var position = new Position(currentRow, currentCol);
-                    var figureAtPosition = this.Board.GetFigureAtPosition(position);
-                    if (figureAtPosition is Figures.King)
-                    {
-                        CheckForAvailableMoves(currentRow, currentCol);
-                    }
-                }
-            }
+            //for (int row = 0; row < this.Board.TotalCols; row++)
+            //{
+            //    for (int col = 0; col < this.Board.TotalRows; col++)
+            //    {
+            //        var currentRow = row;
+            //        var currentCol = (char) ('a' + col);
+            //        var position = new Position(currentRow, currentCol);
+            //        var figureAtPosition = this.Board.GetFigureAtPosition(position);
+            //        if (figureAtPosition is Figures.King)
+            //        {
+            //            CheckForAvailableMoves(currentRow, currentCol);
+            //        }
+            //    }
+            //}
         }
 
         private void CheckForAvailableMoves(int row, char col)
