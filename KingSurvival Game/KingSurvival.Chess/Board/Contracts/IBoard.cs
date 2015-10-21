@@ -19,6 +19,8 @@
 
         void CheckIfSquareIsFree(IFigure figure, Position position);
 
+        Position GetKingPosition(ChessColor color);
+
         IFigure GetFigureAtPosition(Position position);
     }
 }

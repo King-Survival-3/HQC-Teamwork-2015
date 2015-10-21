@@ -1,10 +1,12 @@
 ﻿namespace KingSurvival.Chess.Engine
 {
     using System;
+    using System.CodeDom;
     using System.Linq;
 
     using KingSurvival.Chess.Common;
     using KingSurvival.Chess.Engine.Contracts;
+    using KingSurvival.Chess.Figures;
     using KingSurvival.Chess.InputProvider.Contracts;
     using KingSurvival.Chess.Movements.Contracts;
     using KingSurvival.Chess.Renderer.Contracts;
@@ -24,7 +26,7 @@
                 try
                 {
                     var figure = this.Board.GetFigureAtPosition(new Position(this.Board.TotalRows, (char)('a' + i)));
-                    if (figure is Figures.King)
+                    if (figure is King)
                     {
                         this.GameState = GameState.WhiteWon;
                         break;
@@ -35,55 +37,40 @@
                 }
             }
 
-            //for (int row = 0; row < this.Board.TotalCols; row++)
-            //{
-            //    for (int col = 0; col < this.Board.TotalRows; col++)
-            //    {
-            //        var currentRow = row;
-            //        var currentCol = (char) ('a' + col);
-            //        var position = new Position(currentRow, currentCol);
-            //        var figureAtPosition = this.Board.GetFigureAtPosition(position);
-            //        if (figureAtPosition is Figures.King)
-            //        {
-            //            CheckForAvailableMoves(currentRow, currentCol);
-            //        }
-            //    }
-            //}
+
+            var kingPosition = this.Board.GetKingPosition(ChessColor.White);
+
+            var toUpLeft = new Position(kingPosition.Row + 1, (char)(kingPosition.Col - 1));
+            var toUpRight = new Position(kingPosition.Row + 1, (char)(kingPosition.Col + 1));
+            var toDownLeft = new Position(kingPosition.Row - 1, (char)(kingPosition.Col - 1));
+            var toDownRight = new Position(kingPosition.Row - 1, (char)(kingPosition.Col + 1));
+
+            if (!(this.CheckKingToOptions(toUpLeft) ||
+                this.CheckKingToOptions(toUpRight) ||
+                this.CheckKingToOptions(toDownLeft) ||
+                this.CheckKingToOptions(toDownRight)))
+            {
+                this.GameState = GameState.BlackWon;
+            }
+
         }
 
-        private void CheckForAvailableMoves(int row, char col)
+        private bool CheckKingToOptions(Position to)
         {
-            var upAndLeft = new Position(row + 1, (char)(col - 1));
-            var upAndRight = new Position(row + 1, (char)(col + 1));
-            var downAndLeft = new Position(row - 1, (char)(col - 1));
-            var downAndRight = new Position(row - 1, (char)(col + 1));
+            var chessColor = ChessColor.White;
+            var king = new King(chessColor);
 
-            //if (!CheckMove(upAndLeft) && !CheckMove(upAndRight) && !CheckMove(downAndLeft) && !CheckMove(downAndRight))
-            //{
-            //    this.GameState = GameState.BlackWon;
-            //}
-        }
+            try
+            {
+                this.CheckIfToPositionIsEmpty(king, to);
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
 
-        private bool CheckMove(Position upAndLeft)
-        {
             return true;
-
-            //try
-            //{
-            //    Position.ChechIfValid(upAndLeft);
-
-            //    var figure = this.Board.GetFigureAtPosition(upAndLeft);
-            //    if (figure != null)
-            //    {
-            //        return false;
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    return false;
-            //}
-
-            //return true;
         }
     }
 }

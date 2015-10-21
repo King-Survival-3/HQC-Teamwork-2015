@@ -80,6 +80,30 @@ namespace KingSurvival.Chess.Board
             this.board[arrToRow, arrToCol] = figure;
         }
 
+        public Position GetKingPosition(ChessColor color)
+        {
+            var currentRow = 0;
+            var currentCol = (char)('a');
+
+            for (int row = 0; row < this.TotalCols; row++)
+            {
+                for (int col = 0; col < this.TotalRows; col++)
+                {
+                    currentRow = row;
+                    currentCol = (char)('a' + col);
+                    var position = new Position(currentRow, currentCol);
+                    var figureAtPosition = this.GetFigureAtPosition(position);
+                    if (figureAtPosition is Figures.King && figureAtPosition.Color == color)
+                    {
+                        return new Position(currentRow, currentCol);
+                    }
+                }
+            }
+
+            return new Position(currentRow, currentCol);
+        }
+        
+
         private int GetArrayRow(int chessRow)
         {
             return this.TotalRows - chessRow;
